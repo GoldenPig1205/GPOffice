@@ -13,15 +13,15 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Exiled.Events.Handlers.Player.VoiceChatting += OnVoiceChatting;
+            Exiled.Events.Handlers.Player.Jumping += OnJumping;
         }
 
         public void OnDisabled()
         {
-            Exiled.Events.Handlers.Player.VoiceChatting -= OnVoiceChatting;
+            Exiled.Events.Handlers.Player.Jumping -= OnJumping;
         }
-
-        public void OnVoiceChatting(Exiled.Events.EventArgs.Player.VoiceChattingEventArgs ev)
+        
+        public void OnJumping(Exiled.Events.EventArgs.Player.JumpingEventArgs ev)
         {
             Server.ExecuteCommand($"/speak {ev.Player.Id} enable");
         }

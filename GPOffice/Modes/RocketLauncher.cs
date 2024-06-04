@@ -23,7 +23,8 @@ namespace GPOffice.Modes
 
         public void OnHurt(Exiled.Events.EventArgs.Player.HurtEventArgs ev)
         {
-            Server.ExecuteCommand($"/rocket {ev.Player.Id} 0.3");
+            if (!ev.DamageHandler.IsFriendlyFire)
+                Server.ExecuteCommand($"/rocket {ev.Player.Id} 0.3");
         }
     }
 }
