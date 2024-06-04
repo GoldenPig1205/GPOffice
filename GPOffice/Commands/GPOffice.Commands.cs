@@ -12,17 +12,17 @@ namespace GPOffice.Commands
 		{
 			bool result;
 
-			string args = $"{arguments.At(0)} {arguments.At(1)} {arguments.At(2)} {arguments.At(3)}".Trim();
+			string args = string.Join(" ", arguments).Trim();
 
 			if (args != null)
             {
-				GPOffice.Instance.mod = args.ToString();
+				GPOffice.Instance.mod = args;
 				response = $"Random Mode pins [{args}]!\n";
 				result = true;
 			}
             else
             {
-				GPOffice.Instance.mod = args.ToString();
+				GPOffice.Instance.mod = args;
 				response = $"There is no name for Random Mode!\n";
 				result = false;
 			}
