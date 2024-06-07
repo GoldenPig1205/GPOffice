@@ -25,7 +25,8 @@ namespace GPOffice.Modes
 
         public async void OnModeStarted()
         {
-            List<object> normal = new List<object>() { "unlock **", "lock **", "open **", "close **", "server_event detonation_start", "server_event detonation_cancel" };
+            List<object> normal = new List<object>() { "unlock **", "lock **", "open **", "close **", "server_event detonation_start", "server_event detonation_cancel",
+                                                       "el u all", "el l all", "el s all", "overcharge 0 1" };
             List<object> hard = new List<object>() { "server_event detonation_instant" };
 
             while (true)
@@ -40,14 +41,30 @@ namespace GPOffice.Modes
 
                 else
                 {
-                    int r2 = UnityEngine.Random.Range(1, 2);
-                    Exiled.API.Features.Doors.Door RandomDoor = Exiled.API.Features.Doors.Door.Random();
+                    int r2 = UnityEngine.Random.Range(1, 6);
+                    Exiled.API.Features.Doors.Door door = Exiled.API.Features.Doors.Door.Random();
 
                     if (r2 == 1)
-                        RandomDoor.IsOpen = true;
-
+                        door.IsOpen = true;
                     else if (r2 == 2)
-                        RandomDoor.IsOpen = false;
+                        door.IsOpen = false;
+                    else if (r2 == 3)
+                        door.Lock(3, Exiled.API.Enums.DoorLockType.AdminCommand);
+                    else if (r2 == 4)
+                        door.Unlock();
+                    else if (r2 == 5)
+                    {
+                        if (!door.IsElevator && !door.IsGate)
+                            door.As<Exiled.API.Features.Doors.BreakableDoor>().Break();
+                    }
+                    else
+                    {
+                        if (UnityEngine.Random.Range(1, 100) == 1)
+                        {
+                            Cassie.Message(message: $".G{UnityEngine.Random.Range(1, 7)}", isNoisy: false);
+                        }
+                    }
+
                 }
 
                 await Task.Delay(10);
