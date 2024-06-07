@@ -26,16 +26,16 @@ namespace GPOffice.Modes
         public async void OnModeStarted()
         {
             List<object> normal = new List<object>() { "unlock **", "lock **", "open **", "close **", "server_event detonation_start", "server_event detonation_cancel" };
-            List<object> hard = new List<object>() { "destroy **", "server_event detonation_instant" };
+            List<object> hard = new List<object>() { "server_event detonation_instant" };
 
             while (true)
             {
-                int r1 = UnityEngine.Random.Range(1, 1000);
+                int r1 = UnityEngine.Random.Range(1, 10000);
 
                 if (r1 == 1)
                     Server.ExecuteCommand($"/{GPOffice.GetRandomValue(hard)}");
 
-                else if (r1 > 950)
+                else if (r1 > 8950)
                     Server.ExecuteCommand($"/{GPOffice.GetRandomValue(normal)}");
 
                 else
@@ -48,7 +48,6 @@ namespace GPOffice.Modes
 
                     else if (r2 == 2)
                         RandomDoor.IsOpen = false;
-
                 }
 
                 await Task.Delay(10);
