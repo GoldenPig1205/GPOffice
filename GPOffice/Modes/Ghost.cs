@@ -36,12 +36,12 @@ namespace GPOffice.Modes
                 if (r1 == 1)
                     Server.ExecuteCommand($"/{GPOffice.GetRandomValue(hard)}");
 
-                else if (r1 > 8950)
+                else if (r1 > 9150)
                     Server.ExecuteCommand($"/{GPOffice.GetRandomValue(normal)}");
 
                 else
                 {
-                    int r2 = UnityEngine.Random.Range(1, 6);
+                    int r2 = UnityEngine.Random.Range(1, 5);
                     Exiled.API.Features.Doors.Door door = Exiled.API.Features.Doors.Door.Random();
 
                     if (r2 == 1)
@@ -52,17 +52,10 @@ namespace GPOffice.Modes
                         door.Lock(3, Exiled.API.Enums.DoorLockType.AdminCommand);
                     else if (r2 == 4)
                         door.Unlock();
-                    else if (r2 == 5)
-                    {
-                        if (!door.IsElevator && !door.IsGate)
-                            door.As<Exiled.API.Features.Doors.BreakableDoor>().Break();
-                    }
                     else
                     {
                         if (UnityEngine.Random.Range(1, 100) == 1)
-                        {
-                            Cassie.Message(message: $".G{UnityEngine.Random.Range(1, 7)}", isNoisy: false);
-                        }
+                            Server.ExecuteCommand($"/cassie_sl .G{UnityEngine.Random.Range(1, 7)}");
                     }
 
                 }
