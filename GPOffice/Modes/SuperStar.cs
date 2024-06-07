@@ -11,19 +11,22 @@ namespace GPOffice.Modes
     {
         public static SuperStar Instance;
 
+        Task TaskA = new Task(() => SuperStar.Instance.OnModeStarted());
+
         public void OnEnabled()
         {
-            Exiled.Events.Handlers.Player.Jumping += OnJumping;
+            TaskA.Start();
         }
 
         public void OnDisabled()
         {
-            Exiled.Events.Handlers.Player.Jumping -= OnJumping;
+            TaskA.Dispose();
         }
-        
-        public void OnJumping(Exiled.Events.EventArgs.Player.JumpingEventArgs ev)
+
+        public void OnModeStarted()
         {
-            Server.ExecuteCommand($"/speak {ev.Player.Id} enable");
+            foreach (var player in Player.List)
+                Server.ExecuteCommand($"/speak {player.Id} enable");
         }
     }
 }

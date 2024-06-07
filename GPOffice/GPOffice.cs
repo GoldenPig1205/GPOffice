@@ -19,8 +19,8 @@ namespace GPOffice
 
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
         {
-            {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/말 그대로 제한이 사라집니다!"}, {"슈퍼 스타", "FE2EF7/점프하면 마이크가 공유됩니다!"},
-            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}
+            {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/말 그대로 제한이 사라집니다!"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
+            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"고스트", "D8D8D8/그 누구도 시설 통제를 할 수 없었습니다.."}
         };
         public Dictionary<object, object> Maps = new Dictionary<object, object>()
         {
@@ -77,6 +77,11 @@ namespace GPOffice
 
         public void OnWaitingForPlayers()
         {
+            Server.FriendlyFire = false;
+            Server.ExecuteCommand($"/close **");
+            Server.ExecuteCommand($"/unlock **");
+            Server.ExecuteCommand($"/el u all");
+            Server.ExecuteCommand($"/decontamination enable");
         }
 
         public void OnRoundStarted()
@@ -105,6 +110,11 @@ namespace GPOffice
                 FriendlyFire.Instance = new FriendlyFire();
                 FriendlyFire.Instance.OnEnabled();
             }
+            else if (mod == "고스트")
+            {
+                Ghost.Instance = new Ghost();
+                Ghost.Instance.OnEnabled();
+            }
         }
 
         public void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
@@ -128,6 +138,10 @@ namespace GPOffice
             else if (mod == "뒤통수 얼얼")
             {
                 FriendlyFire.Instance.OnDisabled();
+            }
+            else if (mod == "고스트")
+            {
+                Ghost.Instance.OnDisabled();
             }
         }
 

@@ -111,6 +111,7 @@
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\GPOffice.cs" />
     <Compile Include="GPOffice\Modes\FriendlyFire.cs" />
+    <Compile Include="GPOffice\Modes\Ghost.cs" />
     <Compile Include="GPOffice\Modes\RocketLauncher.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="GPOffice\Modes\SuperStar.cs" />
