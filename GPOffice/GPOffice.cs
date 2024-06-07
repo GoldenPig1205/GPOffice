@@ -131,10 +131,24 @@ namespace GPOffice
             }
         }
 
-        public void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
+        public async void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
         {
             if (Round.IsStarted)
                 ev.Player.Broadcast(5, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>");
+
+            else
+            {
+                string modes = string.Join(", ", Mods.Keys).Trim();
+
+                ev.Player.ShowHint($"\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{modes}</size></align>", 999999);
+
+                while (!Round.IsStarted)
+                {
+                    await Task.Delay(10);
+                }
+
+                ev.Player.ShowHint($"", 1);
+            }
         }
 
         public void OnFlippingCoin(Exiled.Events.EventArgs.Player.FlippingCoinEventArgs ev)
