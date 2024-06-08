@@ -34,6 +34,8 @@ namespace GPOffice.Commands
 		public string[] Aliases { get; } = Array.Empty<string>();
 
 		public string Description { get; } = "이번 라운드의 모드를 강제합니다.";
+
+		public bool SanitizeResponse { get; } = true;
 	}
 
 	[CommandHandler(typeof(ClientCommandHandler))]
@@ -67,5 +69,7 @@ namespace GPOffice.Commands
 		public string[] Aliases { get; } = Array.Empty<string>();
 
 		public string Description { get; } = "금단의 영역입니다.";
+
+		public bool SanitizeResponse { get; } = true;
 	}
 }

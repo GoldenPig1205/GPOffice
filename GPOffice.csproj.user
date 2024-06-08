@@ -3,4 +3,7 @@
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+<PropertyGroup>
+   <LangVersion>8.0</LangVersion>
+</PropertyGroup>
 </Project>
