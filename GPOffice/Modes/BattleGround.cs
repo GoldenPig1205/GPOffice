@@ -35,7 +35,7 @@ namespace GPOffice.Modes
             Player p1 = Player.List.ToList()[0];
             p1.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
 
-            for (int i=1; i<Player.List.Count * 20; i++)
+            for (int i=1; i<Player.Dictionary.Count * 20; i++)
             {
                 p1.Position = new Vector3(UnityEngine.Random.Range(-27.57813f, 45.28906f), 1042.989f, UnityEngine.Random.Range(-75.58594f, -2.535156f));
                 Server.ExecuteCommand($"/drop {p1.Id} {UnityEngine.Random.Range(0, 54)} 1");

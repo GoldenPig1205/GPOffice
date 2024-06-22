@@ -55,7 +55,6 @@ namespace GPOffice
         {
             Instance = this;
 
-            Exiled.Events.Handlers.Player.FlippingCoin += OnFlippingCoin;
             Exiled.Events.Handlers.Player.Verified += OnVerified;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
@@ -65,7 +64,6 @@ namespace GPOffice
 
         public override void OnDisabled()
         {
-            Exiled.Events.Handlers.Player.FlippingCoin -= OnFlippingCoin;
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
@@ -161,11 +159,6 @@ namespace GPOffice
 
                 ev.Player.ShowHint($"", 1);
             }
-        }
-
-        public void OnFlippingCoin(Exiled.Events.EventArgs.Player.FlippingCoinEventArgs ev)
-        {
-            ServerConsole.AddLog($"{ev.Player.Nickname}의 위치 : {ev.Player.Position.x} {ev.Player.Position.y} {ev.Player.Position.z}", ConsoleColor.DarkMagenta);
         }
 
     }
