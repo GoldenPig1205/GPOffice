@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -11,47 +13,35 @@ namespace GPOffice.Modes
     {
         public static FastBoy Instance;
 
-        public List<string> pl = new List<string>();
-
-        Task TaskA = new Task(() => FastBoy.Instance.OnModeStarted());
-
         public void OnEnabled()
         {
-            TaskA.Start();
+            Timing.RunCoroutine(OnModeStarted());
 
-            Exiled.Events.Handlers.Player.Left += OnLeft;
+            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
         }
 
         public void OnDisabled()
         {
-            TaskA.Dispose();
-
-            Exiled.Events.Handlers.Player.Left -= OnLeft;
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
         }
 
-        public async void OnModeStarted()
+        public IEnumerator<float> OnModeStarted()
         {
-            while (true)
+            Timing.CallDelayed(0.1f, () =>
             {
                 foreach (var player in Player.List)
-                {
-                    if (!pl.Contains(player.UserId))
-                    {
-                        player.EnableEffect(Exiled.API.Enums.EffectType.MovementBoost, 255);
-                        player.EnableEffect(Exiled.API.Enums.EffectType.Scp1853, 4);
-                        player.MaxHealth = player.MaxHealth / 2;
-                        pl.Add(player.UserId);
-                    }
-                }    
+                    player.Role.Set(player.Role);
+            });
 
-                await Task.Delay(1000);
-            }
+            yield return 0f;
         }
 
-        public void OnLeft(Exiled.Events.EventArgs.Player.LeftEventArgs ev)
+        public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            if (pl.Contains(ev.Player.UserId))
-                pl.Remove(ev.Player.UserId);
+            ev.Player.EnableEffect(Exiled.API.Enums.EffectType.MovementBoost, 255);
+            ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Scp1853, 4);
+            ev.Player.MaxHealth = ev.Player.Health / 2;
+            ev.Player.Health = ev.Player.Health / 2;
         }
     }
 }
