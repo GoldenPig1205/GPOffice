@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\modes\\fastboy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\fastboy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|c:\\users\\goldenpig1205\\desktop\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\gpoffice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\gpoffice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\modes\\superstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\superstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\modes\\fastboy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\fastboy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\configs\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\configs\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\configs\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\configs\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\modes\\superstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\superstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +30,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "GPOffice.cs",
               "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\GPOffice.cs",
               "RelativeDocumentMoniker": "GPOffice\\GPOffice.cs",
-              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\GPOffice.cs",
-              "RelativeToolTip": "GPOffice\\GPOffice.cs",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAQwEsAAAAJAAAA",
+              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\GPOffice.cs*",
+              "RelativeToolTip": "GPOffice\\GPOffice.cs*",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAQwGQAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-14T10:15:36.735Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Config.cs",
               "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Configs\\Config.cs",
               "RelativeDocumentMoniker": "GPOffice\\Configs\\Config.cs",
@@ -55,7 +55,8 @@
               "RelativeToolTip": "GPOffice\\Configs\\Config.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T03:31:14.453Z"
+              "WhenOpened": "2024-06-21T03:31:14.453Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -67,11 +68,12 @@
               "RelativeToolTip": "GPOffice\\Commands\\GPOffice.Commands.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAUwA4AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T03:03:07.646Z"
+              "WhenOpened": "2024-06-21T03:03:07.646Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "SuperStar.cs",
               "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\SuperStar.cs",
               "RelativeDocumentMoniker": "GPOffice\\Modes\\SuperStar.cs",
@@ -79,17 +81,18 @@
               "RelativeToolTip": "GPOffice\\Modes\\SuperStar.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAADwvxoAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T13:09:15.689Z"
+              "WhenOpened": "2024-06-24T13:09:15.689Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "FastBoy.cs",
               "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\FastBoy.cs",
               "RelativeDocumentMoniker": "GPOffice\\Modes\\FastBoy.cs",
-              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\FastBoy.cs*",
-              "RelativeToolTip": "GPOffice\\Modes\\FastBoy.cs*",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAwwCkAAABAAAAA",
+              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\FastBoy.cs",
+              "RelativeToolTip": "GPOffice\\Modes\\FastBoy.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAUwBUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-24T13:09:31.943Z",
               "EditorCaption": ""

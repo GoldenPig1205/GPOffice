@@ -20,7 +20,7 @@ namespace GPOffice
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
         {
             {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/말 그대로 제한이 사라집니다!"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
-            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"고스트", "D8D8D8/그 누구도 시설 통제를 할 수 없었습니다.."}, {"페스트 보이", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
+            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"고스트", "D8D8D8/그 누구도 시설 통제를 할 수 없었습니다.."}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
 
         };
         public Dictionary<object, object> Maps = new Dictionary<object, object>()
@@ -102,7 +102,7 @@ namespace GPOffice
                 Ghost.Instance = new Ghost();
                 Ghost.Instance.OnEnabled();
             }
-            else if (mod == "페스트 보이")
+            else if (mod == "스피드왜건")
             {
                 FastBoy.Instance = new FastBoy();
                 FastBoy.Instance.OnEnabled();
