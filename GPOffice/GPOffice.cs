@@ -58,7 +58,6 @@ namespace GPOffice
 
             Exiled.Events.Handlers.Player.Verified += OnVerified;
 
-            Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
         }
@@ -67,21 +66,10 @@ namespace GPOffice
         {
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
 
-            Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded -= OnRoundEnded;
 
             Instance = null;
-        }
-
-        public void OnWaitingForPlayers()
-        {
-            Server.FriendlyFire = false;
-            Round.IsLocked = false;
-            Server.ExecuteCommand($"/close **");
-            Server.ExecuteCommand($"/unlock **");
-            Server.ExecuteCommand($"/el u all");
-            Server.ExecuteCommand($"/decontamination enable");
         }
 
         public void OnRoundStarted()
