@@ -20,7 +20,8 @@ namespace GPOffice
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
         {
             {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/말 그대로 제한이 사라집니다!"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
-            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"고스트", "D8D8D8/그 누구도 시설 통제를 할 수 없었습니다.."}, /*{"배틀그라운드", "DF3A01/최후의 1인이 되세요!"}*/
+            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"고스트", "D8D8D8/그 누구도 시설 통제를 할 수 없었습니다.."}, {"페스트 보이", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
+
         };
         public Dictionary<object, object> Maps = new Dictionary<object, object>()
         {
@@ -114,31 +115,17 @@ namespace GPOffice
                 Ghost.Instance = new Ghost();
                 Ghost.Instance.OnEnabled();
             }
-            else if (mod == "배틀그라운드")
+            else if (mod == "페스트 보이")
             {
-                BattleGround.Instance = new BattleGround();
-                BattleGround.Instance.OnEnabled();
+                FastBoy.Instance = new FastBoy();
+                FastBoy.Instance.OnEnabled();
             }
         }
 
-        public void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
+        public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
         {
-            // 라운드 모드를 새롭게 정합니다.
-            Mode = GetRandomValue(Mods.Keys.ToList());
-            mod = Mode.ToString();
-
-            if (mod == "로켓 런처")
-                RocketLauncher.Instance.OnDisabled();
-            else if (mod == "무제한")
-                Unlimited.Instance.OnDisabled();
-            else if (mod == "슈퍼 스타")
-                SuperStar.Instance.OnDisabled();
-            else if (mod == "뒤통수 얼얼")
-                FriendlyFire.Instance.OnDisabled();
-            else if (mod == "고스트")
-                Ghost.Instance.OnDisabled();
-            else if (mod == "배틀그라운드")
-                BattleGround.Instance.OnDisabled();
+            await Task.Delay(8000);
+            Server.ExecuteCommand($"sr");
         }
 
         public async void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)

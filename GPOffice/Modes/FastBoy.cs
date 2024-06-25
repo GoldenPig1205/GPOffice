@@ -7,13 +7,13 @@ using Exiled.API.Features;
 
 namespace GPOffice.Modes
 {
-    class SuperStar
+    class FastBoy
     {
-        public static SuperStar Instance;
+        public static FastBoy Instance;
 
         public List<string> pl = new List<string>();
 
-        Task TaskA = new Task(() => SuperStar.Instance.OnModeStarted());
+        Task TaskA = new Task(() => FastBoy.Instance.OnModeStarted());
 
         public void OnEnabled()
         {
@@ -34,8 +34,15 @@ namespace GPOffice.Modes
             while (true)
             {
                 foreach (var player in Player.List)
+                {
                     if (!pl.Contains(player.UserId))
-                        Server.ExecuteCommand($"/speak {player} enable");
+                    {
+                        player.EnableEffect(Exiled.API.Enums.EffectType.MovementBoost, 255);
+                        player.EnableEffect(Exiled.API.Enums.EffectType.Scp1853, 4);
+                        player.MaxHealth = player.MaxHealth / 2;
+                        pl.Add(player.UserId);
+                    }
+                }    
 
                 await Task.Delay(1000);
             }
