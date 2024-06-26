@@ -9,31 +9,13 @@ using MEC;
 
 namespace GPOffice.Modes
 {
-    class FastBoy
+    class SpeedWagon
     {
-        public static FastBoy Instance;
+        public static SpeedWagon Instance;
 
         public void OnEnabled()
         {
-            Timing.RunCoroutine(OnModeStarted());
-
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
-        }
-
-        public void OnDisabled()
-        {
-            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
-        }
-
-        public IEnumerator<float> OnModeStarted()
-        {
-            Timing.CallDelayed(0.1f, () =>
-            {
-                foreach (var player in Player.List)
-                    player.Role.Set(player.Role);
-            });
-
-            yield return 0f;
         }
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)

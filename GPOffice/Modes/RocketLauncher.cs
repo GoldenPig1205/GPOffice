@@ -16,11 +16,6 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.Hurt += OnHurt;
         }
 
-        public void OnDisabled()
-        {
-            Exiled.Events.Handlers.Player.Hurt -= OnHurt;
-        }
-
         public void OnHurt(Exiled.Events.EventArgs.Player.HurtEventArgs ev)
         {
             if (!ev.DamageHandler.IsFriendlyFire)

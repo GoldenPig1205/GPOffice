@@ -18,11 +18,6 @@ namespace GPOffice.Modes
             TaskA.Start();
         }
 
-        public void OnDisabled()
-        {
-            TaskA.Dispose();
-        }
-
         public async void OnModeStarted()
         {
             List<object> normal = new List<object>() { "unlock **", "lock **", "open **", "close **", "server_event detonation_start", "server_event detonation_cancel",

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -39,30 +40,9 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Item.ChargingJailbird += OnChargingJailbird;
         }
 
-        public void OnDisabled()
+        public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            Exiled.Events.Handlers.Scp106.Teleporting -= OnTeleporting;
-            Exiled.Events.Handlers.Scp106.Stalking -= OnStalking;
-            Exiled.Events.Handlers.Scp106.Attacking -= OnScp106Attacking;
-
-            Exiled.Events.Handlers.Scp939.PlayingSound -= OnPlayingSound;
-
-            Exiled.Events.Handlers.Scp079.ChangingCamera -= OnChangingCamera;
-
-            Exiled.Events.Handlers.Scp049.StartingRecall -= OnStartingRecall;
-            Exiled.Events.Handlers.Scp049.Attacking -= OnScp049Attacking;
-
-            Exiled.Events.Handlers.Scp096.Enraging -= OnEnraging;
-
-            Exiled.Events.Handlers.Scp173.PlacingTantrum -= OnPlacingTantrum;
-            Exiled.Events.Handlers.Scp173.UsingBreakneckSpeeds -= OnUsingBreakneckSpeeds;
-
-            Exiled.Events.Handlers.Player.SearchingPickup -= OnSearchingPickup;
-            Exiled.Events.Handlers.Player.Shooting -= OnShooting;
-            Exiled.Events.Handlers.Player.ChangingMicroHIDState -= OnChangingMicroHIDState;
-            Exiled.Events.Handlers.Player.UsingMicroHIDEnergy -= OnUsingMicroHIDEnergy;
-
-            Exiled.Events.Handlers.Item.ChargingJailbird -= OnChargingJailbird;
+            ev.Player.MaxHealth = 99999;
         }
 
         public async void OnTeleporting(Exiled.Events.EventArgs.Scp106.TeleportingEventArgs ev)

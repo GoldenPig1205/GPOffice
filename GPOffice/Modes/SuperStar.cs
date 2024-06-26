@@ -22,13 +22,6 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.Left += OnLeft;
         }
 
-        public void OnDisabled()
-        {
-            TaskA.Dispose();
-
-            Exiled.Events.Handlers.Player.Left -= OnLeft;
-        }
-
         public async void OnModeStarted()
         {
             while (true)

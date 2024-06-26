@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Exiled.API.Features;
 using UnityEngine;
 using GPOffice.Modes;
+using MEC;
 
 namespace GPOffice
 {
@@ -104,9 +105,16 @@ namespace GPOffice
             }
             else if (mod == "스피드왜건")
             {
-                FastBoy.Instance = new FastBoy();
-                FastBoy.Instance.OnEnabled();
+                SpeedWagon.Instance = new SpeedWagon();
+                SpeedWagon.Instance.OnEnabled();
             }
+
+            // OnSpawned or OnChangingRole 이벤트 핸들
+            Timing.CallDelayed(0.1f, () =>
+            {
+                foreach (var player in Player.List)
+                    player.Role.Set(player.Role);
+            });
         }
 
         public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)

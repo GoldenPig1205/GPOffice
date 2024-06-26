@@ -84,15 +84,6 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.Verified += OnVerified;
         }
 
-        public void OnDisabled()
-        {
-            Server.FriendlyFire = false;
-
-            Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
-
-            Exiled.Events.Handlers.Player.Verified -= OnVerified;
-        }
-
         public void OnMelee(Player player)
         {
             if (player.IsDead || player.IsCuffed)
