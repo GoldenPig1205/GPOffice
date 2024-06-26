@@ -12,10 +12,13 @@ namespace GPOffice.Modes
     {
         public static Unlimited Instance;
 
-        public int Tantrum = 0; 
+        public int Tantrum = 0;
 
         public void OnEnabled()
         {
+            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+            Exiled.Events.Handlers.Player.DroppingItem += OnDroppingItem;
+
             Exiled.Events.Handlers.Scp106.Teleporting += OnTeleporting;
             Exiled.Events.Handlers.Scp106.Stalking += OnStalking;
             Exiled.Events.Handlers.Scp106.Attacking += OnScp106Attacking;
@@ -42,7 +45,18 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            ev.Player.MaxHealth = 99999;
+            ev.Player.MaxHealth = 30000;
+        }
+
+        public void OnDroppingItem(Exiled.Events.EventArgs.Player.DroppingItemEventArgs ev)
+        {
+            if (ev.Item.Type == ItemType.GrenadeHE)
+            {
+                if (UnityEngine.Random.Range(1, 5) == 1)
+                    Server.ExecuteCommand($"/rocket {ev.Player.Id} 0.1");
+                else
+                    ev.Player.ShowHint($"<color=red><i><size=20>\"불길한 느낌이 들어..\"</size></i></color>", 2);
+            }
         }
 
         public async void OnTeleporting(Exiled.Events.EventArgs.Scp106.TeleportingEventArgs ev)

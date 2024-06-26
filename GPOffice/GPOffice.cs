@@ -21,25 +21,8 @@ namespace GPOffice
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
         {
             {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/말 그대로 제한이 사라집니다!"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
-            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"고스트", "D8D8D8/그 누구도 시설 통제를 할 수 없었습니다.."}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
-
-        };
-        public Dictionary<object, object> Maps = new Dictionary<object, object>()
-        {
-            {
-                "dust", new Dictionary<object, object>
-                {
-                    { "name", "CSGO Dust Ⅱ" },
-                    { "description", "모래와 먼지들을 뚫어내십시오!" },
-                    { "positions", new Dictionary<string, List<string>>()
-                        {
-                            { "Free", new List<string> {""} },
-                            { "Red", new List<string> { "29.11342 1035.389 -95.30878", "30.34081 1035.389 -95.24684", "31.51876 1035.389 -95.23829", "32.80176 1035.389 -95.23047", "34.45815 1035.389 -95.21875" } },
-                            { "Blue", new List<string> { "53.72266 1040.629 -30.94867", "52.36105 1040.629 -30.96875", "50.75775 1040.629 -30.97266", "49.36899 1040.629 -30.97266", "48.05707 1040.631 -30.97656" } }
-                        }
-                    }
-                }
-            }
+            {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
+            {"무덤", "000000/살아남으려면 뭐든지 해야 합니다."}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!"}, {"종이 인간", "FFFFFF/종이가 되어라!"}
         };
         public Dictionary<object, object> Players = new Dictionary<object, object>();
 
@@ -98,23 +81,30 @@ namespace GPOffice
                 FriendlyFire.Instance = new FriendlyFire();
                 FriendlyFire.Instance.OnEnabled();
             }
-            else if (mod == "고스트")
-            {
-                Ghost.Instance = new Ghost();
-                Ghost.Instance.OnEnabled();
-            }
             else if (mod == "스피드왜건")
             {
                 SpeedWagon.Instance = new SpeedWagon();
                 SpeedWagon.Instance.OnEnabled();
             }
+            else if (mod == "무덤")
+            {
+                Tomb.Instance = new Tomb();
+                Tomb.Instance.OnEnabled();
+            }
+            else if (mod == "랜덤박스")
+            {
+                RandomItem.Instance = new RandomItem();
+                RandomItem.Instance.OnEnabled();
+            }
+            else if (mod == "종이 인간")
+            {
+                PaperHuman.Instance = new PaperHuman();
+                PaperHuman.Instance.OnEnabled();
+            }
 
             // OnSpawned or OnChangingRole 이벤트 핸들
-            Timing.CallDelayed(0.1f, () =>
-            {
-                foreach (var player in Player.List)
-                    player.Role.Set(player.Role);
-            });
+            foreach (var player in Player.List)
+                player.Role.Set(player.Role);
         }
 
         public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
@@ -131,12 +121,33 @@ namespace GPOffice
             else
             {
                 string modes = string.Join(", ", Mods.Keys).Trim();
-
-                ev.Player.ShowHint($"\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{modes}</size></align>", 999999);
+                int colorIndex = 0;
 
                 while (!Round.IsStarted)
                 {
-                    await Task.Delay(10);
+                    string[] modeList = modes.Split(',');
+                    StringBuilder coloredModes = new StringBuilder();
+
+                    for (int i = 0; i < modeList.Length; i++)
+                    {
+                        if (i % 2 == colorIndex)
+                        {
+                            coloredModes.Append($"<color=yellow>{modeList[i]}</color>");
+                        }
+                        else
+                        {
+                            coloredModes.Append(modeList[i]);
+                        }
+
+                        if (i != modeList.Length - 1)
+                        {
+                            coloredModes.Append(", ");
+                        }
+                    }
+
+                    ev.Player.ShowHint($"\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>", 3);
+                    await Task.Delay(1000);
+                    colorIndex = (colorIndex + 1) % 2;
                 }
 
                 ev.Player.ShowHint($"", 1);

@@ -28,7 +28,10 @@ namespace GPOffice.Modes
             {
                 foreach (var player in Player.List)
                     if (!pl.Contains(player.UserId))
+                    {
                         Server.ExecuteCommand($"/speak {player} enable");
+                        pl.Add(player.UserId);
+                    }
 
                 await Task.Delay(1000);
             }

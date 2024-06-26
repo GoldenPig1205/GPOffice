@@ -110,12 +110,15 @@
     <Compile Include="GPOffice\Commands\GPOffice.Commands.cs" />
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\GPOffice.cs" />
+    <Compile Include="GPOffice\Modes\PaperHuman.cs" />
+    <Compile Include="GPOffice\Modes\RandomItem.cs" />
     <Compile Include="GPOffice\Modes\SpeedWagon.cs" />
     <Compile Include="GPOffice\Modes\FriendlyFire.cs" />
     <Compile Include="GPOffice\Modes\Ghost.cs" />
     <Compile Include="GPOffice\Modes\RocketLauncher.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="GPOffice\Modes\SuperStar.cs" />
+    <Compile Include="GPOffice\Modes\Tomb.cs" />
     <Compile Include="GPOffice\Modes\Unlimited.cs" />
   </ItemGroup>
   <ItemGroup>
