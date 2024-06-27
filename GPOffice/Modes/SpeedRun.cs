@@ -40,14 +40,17 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            if (ev.Player.Role.Type == PlayerRoles.RoleTypeId.ChaosConscript)
+            if (pl.Contains(ev.Player))
             {
-                
-            }
-            else
-            {
-                if (ev.Player.Role.Type != PlayerRoles.RoleTypeId.ClassD)
-                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.ClassD);
+                if (ev.Player.Role.Type == PlayerRoles.RoleTypeId.ChaosConscript)
+                {
+
+                }
+                else
+                {
+                    if (ev.Player.Role.Type != PlayerRoles.RoleTypeId.ClassD)
+                        ev.Player.Role.Set(PlayerRoles.RoleTypeId.ClassD);
+                }
             }
         }
 

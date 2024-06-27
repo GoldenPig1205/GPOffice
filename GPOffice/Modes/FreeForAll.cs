@@ -26,8 +26,8 @@ namespace GPOffice.Modes
 
             Timing.RunCoroutine(OnModeStarted());
 
+            Exiled.Events.Handlers.Player.Dying += OnDying;
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
-            Exiled.Events.Handlers.Player.Died += OnDied;
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -39,7 +39,7 @@ namespace GPOffice.Modes
             yield return 0f;
         }
 
-        public void OnDied(Exiled.Events.EventArgs.Player.DiedEventArgs ev)
+        public void OnDying(Exiled.Events.EventArgs.Player.DyingEventArgs ev)
         {
             if (pl.Contains(ev.Player))
             {
@@ -52,9 +52,12 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            if (ev.Player.Role.Type != PlayerRoles.RoleTypeId.NtfPrivate && pl.Contains(ev.Player))
+            Player.List.ToList().ForEach(x => x.DisableEffect(Exiled.API.Enums.EffectType.FogControl));
+            Timing.CallDelayed(0.1f, () => Player.List.ToList().ForEach(x => x.EnableEffect(Exiled.API.Enums.EffectType.FogControl)));
+
+            if (ev.Player.Role.Type != PlayerRoles.RoleTypeId.NtfSpecialist && pl.Contains(ev.Player))
             {
-                ev.Player.Role.Set(PlayerRoles.RoleTypeId.NtfPrivate);
+                ev.Player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
                 ev.Player.Position = GPOffice.GetRandomValue(GPOffice.Instance.Maps[ModeName]);
             }
         }

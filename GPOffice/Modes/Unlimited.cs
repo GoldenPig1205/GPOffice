@@ -46,6 +46,7 @@ namespace GPOffice.Modes
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
             ev.Player.MaxHealth = 30000;
+            ev.Player.IsUsingStamina = false;
         }
 
         public void OnDroppingItem(Exiled.Events.EventArgs.Player.DroppingItemEventArgs ev)
