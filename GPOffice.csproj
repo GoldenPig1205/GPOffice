@@ -110,8 +110,11 @@
     <Compile Include="GPOffice\Commands\GPOffice.Commands.cs" />
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\GPOffice.cs" />
+    <Compile Include="GPOffice\Modes\FreeForAll.cs" />
+    <Compile Include="GPOffice\Modes\NoSCP.cs" />
     <Compile Include="GPOffice\Modes\PaperHuman.cs" />
     <Compile Include="GPOffice\Modes\RandomItem.cs" />
+    <Compile Include="GPOffice\Modes\SpeedRun.cs" />
     <Compile Include="GPOffice\Modes\SpeedWagon.cs" />
     <Compile Include="GPOffice\Modes\FriendlyFire.cs" />
     <Compile Include="GPOffice\Modes\Ghost.cs" />

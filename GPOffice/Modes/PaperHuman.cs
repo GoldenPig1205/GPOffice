@@ -24,7 +24,7 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            ev.Player.Scale = new Vector3(1, 1, 0.01f);
+            ev.Player.Scale = new Vector3(0.01f, 1, 1f);
         }
     }
 }
