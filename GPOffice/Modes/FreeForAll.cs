@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using CustomRendering;
 using Exiled.API.Features;
+using HarmonyLib;
 using MEC;
 using Mirror;
 using UnityEngine;
@@ -17,6 +19,7 @@ namespace GPOffice.Modes
 
         public List<Player> pl = new List<Player>();
         public string ModeName = GPOffice.GetRandomValue(GPOffice.Instance.Maps.Keys.ToList()).ToString();
+        public List<ItemType> StartupItems = null;
 
         public void OnEnabled()
         {
@@ -30,8 +33,37 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
         }
 
+        public List<ItemType> Items()
+        {
+            List<ItemType> Guns = new List<ItemType>() { ItemType.GunA7, ItemType.GunE11SR, ItemType.GunShotgun, ItemType.GunCom45, ItemType.GunFSP9, ItemType.GunRevolver, 
+                ItemType.GunCOM18, ItemType.GunCrossvec, ItemType.GunLogicer, ItemType.GunFRMG0, ItemType.GunAK, ItemType.Jailbird, ItemType.ParticleDisruptor };
+            List<ItemType> Ammos = new List<ItemType>() { ItemType.Ammo12gauge, ItemType.Ammo44cal, ItemType.Ammo556x45, ItemType.Ammo762x39, ItemType.Ammo9x19 };
+            List<ItemType> CDItems = new List<ItemType>() { ItemType.Medkit, ItemType.Painkillers, ItemType.Radio, ItemType.GrenadeFlash, ItemType.GrenadeHE };
+            List<ItemType> Items = new List<ItemType>();
+
+            Items.Add(GPOffice.GetRandomValue(Guns));
+            
+            foreach (var ammo in Ammos)
+            {
+                for (int i= 0; i < 10; i++)
+                    Items.Add(ammo);    
+            }
+
+            foreach (var item in CDItems)
+            {
+               if (UnityEngine.Random.Range(1, 2) == 1)
+                {
+                    Items.Add(item);
+                }
+            }
+
+            return Items;
+        }
+
         public IEnumerator<float> OnModeStarted()
         {
+            StartupItems = Items();
+
             Server.ExecuteCommand($"/mp load {ModeName}");
 
             Player.List.ToList().CopyTo(pl);
@@ -59,6 +91,11 @@ namespace GPOffice.Modes
             {
                 ev.Player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
                 ev.Player.Position = GPOffice.GetRandomValue(GPOffice.Instance.Maps[ModeName]);
+
+                ev.Player.ClearInventory();
+                
+                foreach (var item in StartupItems)
+                    ev.Player.AddItem(item);
             }
         }
     }
