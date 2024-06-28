@@ -25,8 +25,14 @@ namespace GPOffice.Modes
         {
             Timing.CallDelayed(0.1f, () =>
             {
-                Vector3 DoorTP = Exiled.API.Features.Doors.Door.Random().Position;
-                Player.List.ToList().ForEach(x => x.Position = DoorTP);
+                Vector3 pos = Exiled.API.Features.Doors.Door.Random().Position;
+                pos.y += 1;
+
+                foreach (var player in Player.List)
+                {
+                    player.Position = pos;
+                    Player.List.ToList().ForEach(x => x.Position = pos);
+                }
             });
 
             yield return 0f;

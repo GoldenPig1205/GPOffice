@@ -26,7 +26,7 @@ namespace GPOffice.Modes
                 foreach (var player in Player.List)
                 {
                     player.AddItem(ItemType.Jailbird);
-                    Server.ExecuteCommand($"/forceeq {player.Id} jailbird");
+                    Server.ExecuteCommand($"/forceeq {player.Id} 50");
                 }
             });
 
