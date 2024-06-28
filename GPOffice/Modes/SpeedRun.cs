@@ -25,7 +25,7 @@ namespace GPOffice.Modes
             Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
-            Exiled.Events.Handlers.Player.Died += OnDied;
+            Exiled.Events.Handlers.Player.Dying += OnDying;
             Exiled.Events.Handlers.Player.Escaping += OnEscaping;
         }
 
@@ -54,7 +54,7 @@ namespace GPOffice.Modes
             }
         }
 
-        public void OnDied(Exiled.Events.EventArgs.Player.DiedEventArgs ev)
+        public void OnDying(Exiled.Events.EventArgs.Player.DyingEventArgs ev)
         {
             if (pl.Contains(ev.Player))
             {
