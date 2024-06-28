@@ -22,7 +22,7 @@ namespace GPOffice.Modes
 
         public void OnInteractingDoor(Exiled.Events.EventArgs.Player.InteractingDoorEventArgs ev)
         {
-            if (UnityEngine.Random.Range(1, 20) == 1)
+            if (UnityEngine.Random.Range(1, 20) != 1)
                 ev.Player.Position = Exiled.API.Features.Doors.Door.Random().Position;
 
             else
