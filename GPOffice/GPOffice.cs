@@ -23,7 +23,8 @@ namespace GPOffice
             {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/말 그대로 제한이 사라집니다!"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
             {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
             {"무덤", "000000/살아남으려면 뭐든지 해야 합니다."}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!"}, {"종이 인간", "FFFFFF/종이가 되어라!"},
-            {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다.."}, {"개인전", "FA58F4/최후의 1인이 되세요!"}
+            {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다.."}, {"개인전", "FA58F4/최후의 1인이 되세요!"},
+            {"스즈메의 문단속", "2ECCFA/문 너머 다른 세상을 마주하세요."}, {"HIDE", "D8D8D8/숨 죽이는 그를 잡으십시오."}
         };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
         {
@@ -71,60 +72,36 @@ namespace GPOffice
             // 선택된 모드의 설명을 모두에게 띄워줍니다.
             Player.List.ToList().ForEach(x => x.Broadcast(5, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>"));
 
-            if (mod == "로켓 런처")
+            switch (mod)
             {
-                RocketLauncher.Instance = new RocketLauncher();
-                RocketLauncher.Instance.OnEnabled();
-            }
-            else if (mod == "무제한")
-            {
-                Unlimited.Instance = new Unlimited();
-                Unlimited.Instance.OnEnabled();
-            }
-            else if (mod == "슈퍼 스타")
-            {
-                SuperStar.Instance = new SuperStar();
-                SuperStar.Instance.OnEnabled();
-            }
-            else if (mod == "뒤통수 얼얼")
-            {
-                FriendlyFire.Instance = new FriendlyFire();
-                FriendlyFire.Instance.OnEnabled();
-            }
-            else if (mod == "스피드왜건")
-            {
-                SpeedWagon.Instance = new SpeedWagon();
-                SpeedWagon.Instance.OnEnabled();
-            }
-            else if (mod == "무덤")
-            {
-                Tomb.Instance = new Tomb();
-                Tomb.Instance.OnEnabled();
-            }
-            else if (mod == "랜덤박스")
-            {
-                RandomItem.Instance = new RandomItem();
-                RandomItem.Instance.OnEnabled();
-            }
-            else if (mod == "종이 인간")
-            {
-                PaperHuman.Instance = new PaperHuman();
-                PaperHuman.Instance.OnEnabled();
-            }
-            else if (mod == "스피드런")
-            {
-                SpeedRun.Instance = new SpeedRun();
-                SpeedRun.Instance.OnEnabled();
-            }
-            else if (mod == "평화로운 재단")
-            {
-                NoSCP.Instance = new NoSCP();
-                NoSCP.Instance.OnEnabled();
-            }
-            else if (mod == "개인전")
-            {
-                FreeForAll.Instance = new FreeForAll();
-                FreeForAll.Instance.OnEnabled();
+                case "로켓 런처":
+                    RocketLauncher.Instance = new RocketLauncher(); RocketLauncher.Instance.OnEnabled(); break;
+                case "무제한":
+                    Unlimited.Instance = new Unlimited(); Unlimited.Instance.OnEnabled(); break;
+                case "슈퍼 스타":
+                    SuperStar.Instance = new SuperStar(); SuperStar.Instance.OnEnabled(); break;
+                case "뒤통수 얼얼":
+                    FriendlyFire.Instance = new FriendlyFire(); FriendlyFire.Instance.OnEnabled(); break;
+                case "스피드왜건":
+                    SpeedWagon.Instance = new SpeedWagon(); SpeedWagon.Instance.OnEnabled(); break;
+                case "무덤":
+                    Tomb.Instance = new Tomb(); Tomb.Instance.OnEnabled(); break;
+                case "랜덤박스":
+                    RandomItem.Instance = new RandomItem(); RandomItem.Instance.OnEnabled(); break;
+                case "종이 인간":
+                    PaperHuman.Instance = new PaperHuman(); PaperHuman.Instance.OnEnabled(); break;
+                case "스피드런":
+                    SpeedRun.Instance = new SpeedRun(); SpeedRun.Instance.OnEnabled(); break;
+                case "평화로운 재단":
+                    NoSCP.Instance = new NoSCP(); NoSCP.Instance.OnEnabled(); break;
+                case "개인전":
+                    FreeForAll.Instance = new FreeForAll(); FreeForAll.Instance.OnEnabled(); break;
+                case "스즈메의 문단속":
+                    DoorLock.Instance = new DoorLock(); DoorLock.Instance.OnEnabled(); break;
+                case "HIDE":
+                    HIDE.Instance = new HIDE(); HIDE.Instance.OnEnabled(); break;
+                default:
+                    break;
             }
 
             // OnSpawned or OnChangingRole 이벤트 핸들
