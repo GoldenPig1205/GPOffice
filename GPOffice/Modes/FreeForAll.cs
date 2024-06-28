@@ -52,9 +52,7 @@ namespace GPOffice.Modes
             foreach (var item in CDItems)
             {
                if (UnityEngine.Random.Range(1, 2) == 1)
-                {
                     Items.Add(item);
-                }
             }
 
             return Items;
