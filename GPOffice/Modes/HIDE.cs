@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using CustomPlayerEffects;
 using CustomRendering;
 using Exiled.API.Features;
+using Exiled.API.Features.Roles;
 using MEC;
 using Mirror;
+using PlayerRoles;
 using UnityEngine;
 
 namespace GPOffice.Modes
@@ -40,12 +42,17 @@ namespace GPOffice.Modes
             {
                 if (player == monster)
                 {
-                    player.Role.Set(PlayerRoles.RoleTypeId.Scp3114);
+                    player.Role.Set(RoleTypeId.Scp3114);
+
+                    float Health = 150 * Player.List.Count + 50 * Player.List.Count;
+                    player.MaxHealth = Health;
+                    player.Health = Health;
+                    player.HumeShield = 0;
                     Server.ExecuteCommand($"/dtp {player} ESCAPE_PRIMARY");
                     Server.ExecuteCommand($"/open {player} ESCAPE_PRIMARY");
                 }
                 else
-                    player.Role.Set(PlayerRoles.RoleTypeId.NtfCaptain);
+                    player.Role.Set(RoleTypeId.NtfCaptain);
             }
 
             while (true)
@@ -69,6 +76,6 @@ namespace GPOffice.Modes
         {
             if (ev.Player == monster || ev.Attacker == monster)
                 invisible = 1.5f;
-        }   
+        }
     }
 }
