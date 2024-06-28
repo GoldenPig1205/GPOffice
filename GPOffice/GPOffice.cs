@@ -25,7 +25,8 @@ namespace GPOffice
             {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
             {"무덤", "000000/살아남으려면 뭐든지 해야 합니다."}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!"}, {"종이 인간", "FFFFFF/종이가 되어라!"},
             {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다.."}, {"개인전", "FA58F4/최후의 1인이 되세요!"},
-            {"스즈메의 문단속", "2ECCFA/문 너머 다른 세상을 마주하세요."}, {"HIDE", "D8D8D8/숨 죽이는 그를 잡으십시오."}, {"밀집", "FF00FF/모두가 같은 장소에서 시작합니다!"}
+            {"스즈메의 문단속", "2ECCFA/문 너머 다른 세상을 마주하세요."}, {"HIDE", "D8D8D8/숨 죽이는 그를 잡으십시오."}, {"밀집", "FF00FF/모두가 같은 장소에서 시작합니다!"},
+            {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다."}
         };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
         {
@@ -104,6 +105,9 @@ namespace GPOffice
                     HIDE.Instance = new HIDE(); HIDE.Instance.OnEnabled(); break;
                 case "밀집":
                     Dense.Instance = new Dense(); Dense.Instance.OnEnabled(); break;
+                case "상습범":
+                    Jailbird.Instance = new Jailbird(); Jailbird.Instance.OnEnabled(); break;
+
                 default:
                     break;
             }
