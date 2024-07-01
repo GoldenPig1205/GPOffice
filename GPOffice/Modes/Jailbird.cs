@@ -16,22 +16,13 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Timing.RunCoroutine(OnModeStarted());
+            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
         }
 
-        public IEnumerator<float> OnModeStarted()
+        public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            Timing.CallDelayed(0.1f, () =>
-            {
-                foreach (var player in Player.List)
-                {
-                    player.AddItem(ItemType.Jailbird);
-                    Server.ExecuteCommand($"/forceeq {player.Id} 50");
-                }
-            });
-
-            yield return 0f;
+            ev.Player.AddItem(ItemType.Jailbird);
+            Server.ExecuteCommand($"/forceeq {Player.UserIdsCache} 50");
         }
-
     }
 }

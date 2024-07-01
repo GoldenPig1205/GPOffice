@@ -22,7 +22,7 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            if (ev.Player.IsScp)
+            if (ev.Player.IsScp || ev.Player.IsCHI || ev.Player.IsNTF)
             {
                 int rn = UnityEngine.Random.Range(1, 4);
 

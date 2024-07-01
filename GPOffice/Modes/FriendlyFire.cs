@@ -101,6 +101,12 @@ namespace GPOffice.Modes
         {
             GameObject gameobject = GameObject.Instantiate(new GameObject());
             gtool = gameobject.AddComponent<Gtool>();
+
+            while (true)
+            {
+                foreach (var player in Player.List)
+                    player.AddItem(ItemType.GunCOM18);
+            }
         }
 
         public void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)

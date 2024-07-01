@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -13,6 +14,8 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
+            Timing.RunCoroutine(OnModeStarted());
+
             Exiled.Events.Handlers.Player.Hurt += OnHurt;
         }
 
@@ -20,6 +23,11 @@ namespace GPOffice.Modes
         {
             if (!ev.DamageHandler.IsFriendlyFire)
                 Server.ExecuteCommand($"/rocket {ev.Player.Id} 0.3");
+        }
+
+        public IEnumerator<float> OnModeStarted()
+        {
+            yield return 0f;
         }
     }
 }

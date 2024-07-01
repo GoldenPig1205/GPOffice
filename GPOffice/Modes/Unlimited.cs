@@ -53,7 +53,7 @@ namespace GPOffice.Modes
         {
             if (ev.Item.Type == ItemType.GrenadeHE)
             {
-                if (UnityEngine.Random.Range(1, 5) == 1)
+                if (UnityEngine.Random.Range(1, 50) == 1)
                     Server.ExecuteCommand($"/rocket {ev.Player.Id} 0.1");
                 else
                     ev.Player.ShowHint($"<color=red><i><size=20>\"불길한 느낌이 들어..\"</size></i></color>", 2);
@@ -137,6 +137,11 @@ namespace GPOffice.Modes
         {
             ev.IsAllowed = false;
             ev.Player.AddItem(ev.Pickup);
+
+            if (UnityEngine.Random.Range(1, 50) == 1)
+                Server.ExecuteCommand($"/rocket {ev.Player.Id} 0.1");
+            else
+                ev.Player.ShowHint($"<color=red><i><size=20>\"불길한 느낌이 들어..\"</size></i></color>", 2);
         }
 
         public void OnShooting(Exiled.Events.EventArgs.Player.ShootingEventArgs ev)

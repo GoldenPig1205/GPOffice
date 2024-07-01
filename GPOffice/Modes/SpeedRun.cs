@@ -27,6 +27,7 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
             Exiled.Events.Handlers.Player.Dying += OnDying;
             Exiled.Events.Handlers.Player.Escaping += OnEscaping;
+            Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -70,6 +71,11 @@ namespace GPOffice.Modes
             Round.IsLocked = false;
 
             Player.List.ToList().ForEach(x => x.Broadcast(15, $"<b><size=30><탈출자 : {ev.Player.DisplayNickname}></size></b>"));
+        }
+
+        public void OnStopping(Exiled.Events.EventArgs.Warhead.StoppingEventArgs ev)
+        {
+            Warhead.Detonate();
         }
     }
 }

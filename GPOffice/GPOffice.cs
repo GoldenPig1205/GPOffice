@@ -18,15 +18,16 @@ namespace GPOffice
         public static GPOffice Instance;
 
         public List<string> Owner = new List<string>() { "76561198447505804@steam" };
+        public bool AutoNuke = false;
+        public Dictionary<string, float> OnGround = new Dictionary<string, float>();
 
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
         {
-            {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/말 그대로 제한이 사라집니다!"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
+            {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/무제한을 악용하지 않는 것을 추천합니다."}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
             {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
-            {"무덤", "000000/살아남으려면 뭐든지 해야 합니다."}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!"}, {"종이 인간", "FFFFFF/종이가 되어라!"},
+            {"무덤", "000000/살아남으려면 뭐라도 해야 합니다."}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!"}, {"종이 인간", "FFFFFF/종이가 되어라!"},
             {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다.."}, {"개인전", "FA58F4/최후의 1인이 되세요!"},
-            {"스즈메의 문단속", "2ECCFA/문 너머 다른 세상을 마주하세요."}, {"HIDE", "D8D8D8/숨 죽이는 그를 잡으십시오."}, {"밀집", "FF00FF/모두가 같은 장소에서 시작합니다!"},
-            {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다."}
+            {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다." }, {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오."}
         };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
         {
@@ -35,7 +36,15 @@ namespace GPOffice
                                            new Vector3(13.26172f, 1040.617f, -108.5156f), new Vector3(29.76563f, 1039.965f, -102.4492f), new Vector3(28f, 1037.996f, -83.48438f), new Vector3(51.28906f, 1037.996f, -56.47656f),
                                            new Vector3(31.28125f, 1035.387f, -97.19922f), new Vector3(47.57813f, 1037.999f, -42.97266f), new Vector3(57.39844f, 1035.696f, -75.83594f), new Vector3(72.95975f, 1038.644f, -76.43791f),
                                            new Vector3(68.43631f, 1040.629f, -43.37151f), new Vector3(67.52615f, 1038.644f, -61.91447f), new Vector3(71.90897f, 1037.996f, -82.12541f), new Vector3(75.31912f, 1038.668f, -104.3949f),
-                                           new Vector3(58.19333f, 1037.013f, -91.25609f)}}
+                                           new Vector3(58.19333f, 1037.013f, -91.25609f)}},
+            {"pl", new List<Vector3>() { new Vector3(73.09416f, 906.5809f, -420.5794f), new Vector3(84.474f, 906.5807f, -421.0674f), new Vector3(79.13398f, 901.457f, -450.8738f),
+                                         new Vector3(55.44602f, 901.4601f, -468.0944f), new Vector3(68.73533f, 901.457f, -473.2781f), new Vector3(94.03555f, 901.457f, -473.6239f),
+                                         new Vector3(94.20408f, 901.457f, -500.6101f), new Vector3(64.25095f, 901.457f, -501.7078f), new Vector3(60.31037f, 901.457f, -500.6549f),
+                                         new Vector3(99.79726f, 901.457f, -467.5458f), new Vector3(112.787f, 901.457f, -460.8142f), new Vector3(62.97807f, 901.457f, -451.8979f),
+                                         new Vector3(95.4621f, 902.2148f, -452.7215f)} },
+            {"ru", new List<Vector3>() { new Vector3(-2.371094f, 1003.158f, 36.24609f), new Vector3(-7.160156f, 1003.158f, 36.24609f), new Vector3(-7.546875f, 1003.158f, 31.12109f),
+                                         new Vector3(-7.005299f, 1003.158f, 27.98828f), new Vector3(-2.363281f, 1003.158f, 31.08814f), new Vector3(4.617188f, 1003.158f, 27.06641f),
+                                         new Vector3(4.667969f, 1003.158f, 35.59375f), new Vector3(-0.5195313f, 1003.158f, 36.27344f), new Vector3(-2.15625f, 1003.158f, 28.17188f)} }
         };
         public Dictionary<object, object> Players = new Dictionary<object, object>();
 
@@ -54,17 +63,21 @@ namespace GPOffice
             Instance = this;
 
             Exiled.Events.Handlers.Player.Verified += OnVerified;
+            Exiled.Events.Handlers.Player.Left += OnLeft;
 
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
+            Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
         }
 
         public override void OnDisabled()
         {
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
+            Exiled.Events.Handlers.Player.Left -= OnLeft;
 
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded -= OnRoundEnded;
+            Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
 
             Instance = null;
         }
@@ -72,7 +85,7 @@ namespace GPOffice
         public void OnRoundStarted()
         {
             // 선택된 모드의 설명을 모두에게 띄워줍니다.
-            Player.List.ToList().ForEach(x => x.Broadcast(5, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>"));
+            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>"));
             ServerConsole.AddLog($"다음 모드가 선택되었습니다. [{mod}]", color:ConsoleColor.Blue);
 
             switch (mod)
@@ -99,14 +112,10 @@ namespace GPOffice
                     NoSCP.Instance = new NoSCP(); NoSCP.Instance.OnEnabled(); break;
                 case "개인전":
                     FreeForAll.Instance = new FreeForAll(); FreeForAll.Instance.OnEnabled(); break;
-                case "스즈메의 문단속":
-                    DoorLock.Instance = new DoorLock(); DoorLock.Instance.OnEnabled(); break;
-                case "HIDE":
-                    HIDE.Instance = new HIDE(); HIDE.Instance.OnEnabled(); break;
-                case "밀집":
-                    Dense.Instance = new Dense(); Dense.Instance.OnEnabled(); break;
                 case "상습범":
                     Jailbird.Instance = new Jailbird(); Jailbird.Instance.OnEnabled(); break;
+                case "HIDE":
+                    HIDE.Instance = new HIDE(); HIDE.Instance.OnEnabled(); break;
 
                 default:
                     break;
@@ -115,18 +124,31 @@ namespace GPOffice
             // OnSpawned or OnChangingRole 이벤트 핸들
             foreach (var player in Player.List)
                 player.Role.Set(player.Role);
-        }
 
+            Task.WhenAll(
+                IsFallDown()
+                );
+            Timing.CallDelayed(15 * 60f, () =>
+            {
+                AutoNuke = true;
+                Warhead.Start();
+                Cassie.Message("<color=red>예정된 시설 자폭 프로세스가 시작되었습니다.</color> <b>대피하십시오.</b>", isNoisy:false);
+            });
+        }
         public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
         {
-            await Task.Delay(8000);
+            Server.FriendlyFire = true;
+
+            await Task.Delay(9000);
             Server.ExecuteCommand($"sr");
         }
 
         public async void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
         {
+            OnGround.Add(ev.Player.UserId, 5);
+
             if (Round.IsStarted)
-                ev.Player.Broadcast(5, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>");
+                ev.Player.Broadcast(15, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>");
 
             else
             {
@@ -161,6 +183,42 @@ namespace GPOffice
                 }
 
                 ev.Player.ShowHint($"", 1);
+            }
+        }
+
+        public void OnLeft(Exiled.Events.EventArgs.Player.LeftEventArgs ev)
+        {
+            if (OnGround.ContainsKey(ev.Player.UserId))
+                OnGround.Remove(ev.Player.UserId);
+        }
+
+        public void OnStopping(Exiled.Events.EventArgs.Warhead.StoppingEventArgs ev)
+        {
+            if (AutoNuke)
+                ev.IsAllowed = false;
+        }
+
+        public async Task IsFallDown()
+        {
+            while (true)
+            {
+                foreach (var player in Player.List)
+                {
+                    if (player.IsAlive && OnGround.ContainsKey(player.UserId) && !player.IsNoclipPermitted)
+                    {
+                        if (Physics.Raycast(player.Position, Vector3.down, out RaycastHit hit, 10, (LayerMask)1))
+                            OnGround[player.UserId] = 5;
+                        else
+                        {
+                            OnGround[player.UserId] -= 1;
+
+                            if (OnGround[player.UserId] <= 0)
+                                player.Kill("공허에 빨려들어갔습니다.");
+                        }
+                    }
+                }
+
+                await Task.Delay(1000);
             }
         }
     }
