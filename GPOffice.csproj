@@ -110,6 +110,7 @@
     <Compile Include="GPOffice\Commands\GPOffice.Commands.cs" />
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\GPOffice.cs" />
+    <Compile Include="GPOffice\Modes\ABattle.cs" />
     <Compile Include="GPOffice\Modes\Dense.cs" />
     <Compile Include="GPOffice\Modes\DoorLock.cs" />
     <Compile Include="GPOffice\Modes\DoubleUp.cs" />
