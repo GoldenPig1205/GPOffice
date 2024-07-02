@@ -22,11 +22,12 @@ namespace GPOffice
 
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
             {
-                {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!"}, {"무제한", "3F13AB/무제한을 악용하지 않는 것을 추천합니다."}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!"},
-                {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!"},
-                {"무덤", "000000/살아남으려면 뭐라도 해야 합니다."}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!"}, {"종이 인간", "FFFFFF/종이가 되어라!"},
-                {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다.."}, {"개인전", "FA58F4/최후의 1인이 되세요!"},
-                {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다." }, {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오."}
+                {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!/RocketLauncher"}, {"무제한", "3F13AB/무제한을 악용하지 않는 것을 추천합니다./Unlimited"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!/SuperStar"},
+                {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!/FriendlyFire"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!/SpeedWagon"},
+                {"무덤", "000000/살아남으려면 뭐라도 해야 합니다./Tomb"}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!/RandomItem"}, {"종이 인간", "FFFFFF/종이가 되어라!/PaperHuman"},
+                {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!/SpeedRun"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다../NoSCP"}, {"개인전", "FA58F4/최후의 1인이 되세요!/FreeForAll"},
+                {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird" }, {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"더블업", "F781F3/모드 2개가 합쳐집니다!/DoubleUp"},
+                {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp" }
             };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
             {
@@ -84,10 +85,10 @@ namespace GPOffice
         public void OnRoundStarted()
         {
             // 선택된 모드의 설명을 모두에게 띄워줍니다.
-            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>"));
+            Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>"));
             ServerConsole.AddLog($"다음 모드가 선택되었습니다. [{mod}]", color: ConsoleColor.Blue);
 
-            var modeType = Type.GetType($"GPOffice.Modes.{mod.Replace(" ", "")}");
+            var modeType = Type.GetType($"GPOffice.Modes.{Mods[mod].ToString().Split('/')[2].Replace(" ", "")}");
             if (modeType != null)
             {
                 var modeInstance = Activator.CreateInstance(modeType);
@@ -122,7 +123,7 @@ namespace GPOffice
             OnGround.Add(ev.Player.UserId, 5);
 
             if (Round.IsStarted)
-                ev.Player.Broadcast(15, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>");
+                ev.Player.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>");
 
             else
             {

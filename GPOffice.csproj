@@ -112,6 +112,7 @@
     <Compile Include="GPOffice\GPOffice.cs" />
     <Compile Include="GPOffice\Modes\Dense.cs" />
     <Compile Include="GPOffice\Modes\DoorLock.cs" />
+    <Compile Include="GPOffice\Modes\DoubleUp.cs" />
     <Compile Include="GPOffice\Modes\FreeForAll.cs" />
     <Compile Include="GPOffice\Modes\HIDE.cs" />
     <Compile Include="GPOffice\Modes\Jailbird.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="GPOffice\Modes\SuperStar.cs" />
     <Compile Include="GPOffice\Modes\Tomb.cs" />
+    <Compile Include="GPOffice\Modes\TripleUp.cs" />
     <Compile Include="GPOffice\Modes\Unlimited.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -13,16 +13,16 @@ namespace GPOffice.Modes
 
         public List<string> pl = new List<string>();
 
-        Task TaskA = new Task(() => SuperStar.Instance.OnModeStarted());
-
         public void OnEnabled()
         {
-            TaskA.Start();
+            Task.WhenAll(
+                OnModeStarted()
+                );
 
             Exiled.Events.Handlers.Player.Left += OnLeft;
         }
 
-        public async void OnModeStarted()
+        public async Task OnModeStarted()
         {
             while (true)
             {
