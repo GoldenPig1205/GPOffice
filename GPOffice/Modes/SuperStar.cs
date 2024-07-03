@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -15,14 +16,14 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Task.WhenAll(
+            Timing.RunCoroutine(
                 OnModeStarted()
                 );
 
             Exiled.Events.Handlers.Player.Left += OnLeft;
         }
 
-        public async Task OnModeStarted()
+        public IEnumerator<float> OnModeStarted()
         {
             while (true)
             {
@@ -33,7 +34,7 @@ namespace GPOffice.Modes
                         pl.Add(player.UserId);
                     }
 
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(1f);
             }
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using CustomPlayerEffects;
 using CustomRendering;
 using Exiled.API.Features;
@@ -31,20 +31,19 @@ namespace GPOffice.Modes
             Server.ExecuteCommand($"/lock **");
 
             Timing.RunCoroutine(OnModeStarted());
-            Task.WhenAll(
-                Timer()
-                );
+
+            Timing.RunCoroutine(Timer());
 
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
         }
 
 
-        public async Task Timer()
+        public IEnumerator<float> Timer()
         {
             for (int i=1; i<180; i++)
             {
                 Player.List.ToList().ForEach(x => x.Broadcast(2, $"<size=25><color=#2ECCFA>NTF 승리</color>까지</color> {180 - i}초</size>", shouldClearPrevious: true));
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(1f);
             }
 
             foreach (var player in Player.List)

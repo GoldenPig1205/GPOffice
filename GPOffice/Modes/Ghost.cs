@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -11,14 +12,12 @@ namespace GPOffice.Modes
     {
         public static Ghost Instance;
 
-        Task TaskA = new Task(() => Ghost.Instance.OnModeStarted());
-
         public void OnEnabled()
         {
-            TaskA.Start();
+            Timing.RunCoroutine(OnModeStarted());
         }
 
-        public async void OnModeStarted()
+        public IEnumerator<float> OnModeStarted()
         {
             List<object> normal = new List<object>() { "unlock **", "lock **", "open **", "close **", "server_event detonation_start", "server_event detonation_cancel",
                                                        "el u all", "el l all", "el s all", "overcharge 0 1" };
@@ -55,7 +54,7 @@ namespace GPOffice.Modes
 
                 }
 
-                await Task.Delay(10);
+                yield return Timing.WaitForSeconds(0.01f);
             }
         }
     }

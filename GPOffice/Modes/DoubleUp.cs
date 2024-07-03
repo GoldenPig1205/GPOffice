@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -23,16 +24,14 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Task.WhenAll(
-                OnModeStarted()
-                );
+            OnModeStarted();
         }
 
-        public async Task OnModeStarted()
+        public void OnModeStarted()
         {
             for (int i=0; i<2; i++)
             {
-                while (new List<string>() { "더블업", "트리플업" }.Contains(Modes[i])) 
+                while (new List<string>() { "더블업", "트리플업" }.Contains(Modes[i]))
                     Modes[i] = GPOffice.GetRandomValue(GPOffice.Mods.Keys.ToList()).ToString();
 
                 var modeType = Type.GetType($"GPOffice.Modes.{GPOffice.Mods[Modes[i]].ToString().Split('/')[2].Replace(" ", "")}");

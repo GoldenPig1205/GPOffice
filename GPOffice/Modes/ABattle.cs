@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
 using Exiled.API.Features;
+using MEC;
 using UnityEngine;
 
 namespace GPOffice.Modes
@@ -49,7 +45,7 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Task.WhenAll(
+            Timing.RunCoroutine(
                 OnModeStarted()
                 );
 
@@ -57,7 +53,7 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.Dying += OnDying;
         }
 
-        public async Task OnModeStarted()
+        public IEnumerator<float> OnModeStarted()
         {
             while (true)
             {
@@ -89,7 +85,7 @@ namespace GPOffice.Modes
 
                 }
 
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(1f);
             }
         }
 
