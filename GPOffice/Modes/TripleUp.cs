@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -26,12 +27,10 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Task.WhenAll(
-                OnModeStarted()
-                );
+            OnModeStarted();
         }
 
-        public async Task OnModeStarted()
+        public void OnModeStarted()
         {
             for (int i = 0; i < 3; i++)
             {

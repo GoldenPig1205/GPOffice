@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Exiled.API.Features;
+using Exiled.Events.EventArgs.Scp173;
 using MEC;
 
 namespace GPOffice.Modes
@@ -62,26 +59,34 @@ namespace GPOffice.Modes
 
         public async void OnTeleporting(Exiled.Events.EventArgs.Scp106.TeleportingEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp106.RemainingSinkholeCooldown = 0;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp106.RemainingSinkholeCooldown = 0;
+            });
         }
 
         public async void OnStalking(Exiled.Events.EventArgs.Scp106.StalkingEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp106.RemainingSinkholeCooldown = 0;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp106.RemainingSinkholeCooldown = 0;
+            });
         }
 
         public async void OnScp106Attacking(Exiled.Events.EventArgs.Scp106.AttackingEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp106.CaptureCooldown = 0;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp106.CaptureCooldown = 0;
+            });
         }
 
         public async void OnPlayingSound(Exiled.Events.EventArgs.Scp939.PlayingSoundEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp939.MimicryCooldown = 0;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp939.MimicryCooldown = 0;
+            });
         }
 
         public void OnChangingCamera(Exiled.Events.EventArgs.Scp079.ChangingCameraEventArgs ev)
@@ -89,28 +94,39 @@ namespace GPOffice.Modes
             ev.Scp079.Energy = 100000;
         }
 
-        public async void OnStartingRecall(Exiled.Events.EventArgs.Scp049.StartingRecallEventArgs ev)
+        public void OnStartingRecall(Exiled.Events.EventArgs.Scp049.StartingRecallEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp049.CallCooldown = 0;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp049.CallCooldown = 0;
+            });
         }
 
-        public async void OnScp049Attacking(Exiled.Events.EventArgs.Scp049.AttackingEventArgs ev)
+        public void OnScp049Attacking(Exiled.Events.EventArgs.Scp049.AttackingEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp049.RemainingAttackCooldown = 0;
-            ev.Scp049.GoodSenseCooldown = 0;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp049.RemainingAttackCooldown = 0;
+                ev.Scp049.GoodSenseCooldown = 0;
+            });
         }
 
-        public async void OnEnraging(Exiled.Events.EventArgs.Scp096.EnragingEventArgs ev)
+        public void OnEnraging(Exiled.Events.EventArgs.Scp096.EnragingEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp096.EnrageCooldown = 0;
-            ev.Scp096.EnragedTimeLeft = 99999;
-            ev.Scp096.SprintingSpeed = 500;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp096.EnrageCooldown = 0;
+                ev.Scp096.EnragedTimeLeft = 99999;
+                ev.Scp096.SprintingSpeed = 500;
+            });
         }
 
-        public async void OnPlacingTantrum(Exiled.Events.EventArgs.Scp173.PlacingTantrumEventArgs ev)
+        public void OnPlacingTantrum(Exiled.Events.EventArgs.Scp173.PlacingTantrumEventArgs ev)
+        {
+            Timing.RunCoroutine(TantrumCooldown(ev));
+        }
+
+        private IEnumerator<float> TantrumCooldown(PlacingTantrumEventArgs ev)
         {
             if (Tantrum >= 10)
             {
@@ -120,17 +136,19 @@ namespace GPOffice.Modes
             else
             {
                 Tantrum += 1;
-                await Task.Delay(100);
+                yield return Timing.WaitForSeconds(0.1f);
                 ev.Cooldown.Remaining = 0;
-                await Task.Delay(180 * 1000);
+                yield return Timing.WaitForSeconds(180f);
                 Tantrum -= 1;
             }
         }
 
         public async void OnUsingBreakneckSpeeds(Exiled.Events.EventArgs.Scp173.UsingBreakneckSpeedsEventArgs ev)
         {
-            await Task.Delay(100);
-            ev.Scp173.RemainingBreakneckCooldown = 0;
+            Timing.CallDelayed(0.1f, () =>
+            {
+                ev.Scp173.RemainingBreakneckCooldown = 0;
+            });
         }
 
         public void OnSearchingPickup(Exiled.Events.EventArgs.Player.SearchingPickupEventArgs ev)

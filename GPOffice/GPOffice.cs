@@ -4,10 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Exiled.API.Features;
+using Exiled.Events.EventArgs.Player;
 using UnityEngine;
-using GPOffice.Modes;
 using MEC;
 
 namespace GPOffice
@@ -48,7 +47,7 @@ namespace GPOffice
             };
         public Dictionary<object, object> Players = new Dictionary<object, object>();
 
-        public static object Mode = GetRandomValue(Mods.Keys.ToList());
+        public static string Mode = (string)GetRandomValue(Mods.Keys.ToList());
         public string mod = Mode.ToString();
 
         public static T GetRandomValue<T>(List<T> list)
@@ -105,9 +104,8 @@ namespace GPOffice
             foreach (var player in Player.List)
                 player.Role.Set(player.Role);
 
-            Task.WhenAll(
-                IsFallDown()
-                );
+            Timing.RunCoroutine(IsFallDown());
+
             Timing.CallDelayed(15 * 60f, () =>
             {
                 AutoNuke = true;
@@ -115,15 +113,22 @@ namespace GPOffice
                 Cassie.Message("<color=red>예정된 시설 자폭 프로세스가 시작되었습니다.</color> <b>대피하십시오.</b>", isNoisy: false);
             });
         }
-        public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
+        public void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
         {
             Server.FriendlyFire = true;
 
-            await Task.Delay(9000);
-            Server.ExecuteCommand($"sr");
+            Timing.CallDelayed(9f, () =>
+            {
+                Server.ExecuteCommand("sr");
+            });
         }
 
-        public async void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
+        public void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
+        {
+            Timing.RunCoroutine(VerifiedCoroutine(ev));
+        }
+
+        private IEnumerator<float> VerifiedCoroutine(VerifiedEventArgs ev)
         {
             OnGround.Add(ev.Player.UserId, 5);
 
@@ -158,7 +163,7 @@ namespace GPOffice
                     }
 
                     ev.Player.ShowHint($"\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>", 3);
-                    await Task.Delay(500);
+                    yield return Timing.WaitForSeconds(0.5f);
                     colorIndex = (colorIndex + 1) % modeList.Length;
                 }
 
@@ -178,7 +183,7 @@ namespace GPOffice
                 ev.IsAllowed = false;
         }
 
-        public async Task IsFallDown()
+        public IEnumerator<float> IsFallDown()
         {
             while (true)
             {
@@ -198,7 +203,7 @@ namespace GPOffice
                     }
                 }
 
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(1f);
             }
         }
     }

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
-using CommandSystem.Commands.RemoteAdmin;
-using Exiled.API.Extensions;
 using Exiled.API.Features;
-using Exiled.Loader.Models;
-using InventorySystem;
-using InventorySystem.Items.Usables.Scp330;
-using MapEditorReborn.API.Features.Objects;
 using UnityEngine;
 
 namespace GPOffice.Modes
@@ -58,9 +50,7 @@ namespace GPOffice.Modes
         public void OnEnabled()
         {
             Task.WhenAll(
-                OnModeStarted(),
-                UpgradeBody(),
-                UpgradeStamina()
+                OnModeStarted()
                 );
 
             Exiled.Events.Handlers.Player.Jumping += OnJumping;
@@ -70,7 +60,7 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.Hurting += Hurting;
         }
 
-        public async Task OnModeStarted()
+        public IEnumerator<float> OnModeStarted()
         {
             Server.ExecuteCommand($"/mp load ABattle");
 
@@ -104,7 +94,7 @@ namespace GPOffice.Modes
 
                 }
 
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(1f);
             }
         }
 
@@ -169,7 +159,7 @@ namespace GPOffice.Modes
                         else
                             return LegendAbilities;
                     }
-                     
+
                     void ApplyGiveAbility(string abilityName)
                     {
                         PlayerAbilities[ev.Player.UserId].Add(abilityName);
