@@ -4,6 +4,9 @@ using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
+using Exiled.Events.EventArgs.Player;
+using InventorySystem.Items.Usables.Scp330;
+using MEC;
 using UnityEngine;
 
 namespace GPOffice.Modes
@@ -49,7 +52,7 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Task.WhenAll(
+            Timing.RunCoroutine(
                 OnModeStarted()
                 );
 
@@ -98,7 +101,7 @@ namespace GPOffice.Modes
             }
         }
 
-        public async Task UpgradeBody()
+        public IEnumerator<float> UpgradeBody()
         {
             while (true)
             {
@@ -108,11 +111,11 @@ namespace GPOffice.Modes
                         if (player.MaxHealth > player.Health)
                             player.Health += 1;
                 }
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(1f);
             }
         }
 
-        public async Task UpgradeStamina()
+        public IEnumerator<float> UpgradeStamina()
         {
             while (true)
             {
@@ -122,11 +125,16 @@ namespace GPOffice.Modes
                         if (player.IsUsingStamina)
                             player.Stamina += 0.1f;
                 }
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(1f);
             }
         }
 
-        public async void OnJumping(Exiled.Events.EventArgs.Player.JumpingEventArgs ev)
+        public void OnJumping(Exiled.Events.EventArgs.Player.JumpingEventArgs ev)
+        {
+            Timing.RunCoroutine(JumpingCoroutine(ev));
+        }
+
+        private IEnumerator<float> JumpingCoroutine(JumpingEventArgs ev)
         {
             if (Physics.Raycast(ev.Player.Position, Vector3.down, out RaycastHit hit, 5, (LayerMask)1))
             {
@@ -184,7 +192,7 @@ namespace GPOffice.Modes
                         case "테러리스트의 유품": ev.Player.TryAddCandy(CandyKindID.Pink); break;
                         case "랜덤상자": ev.Player.AddItem(GPOffice.GetRandomValue(new List<ItemType>() { ItemType.KeycardO5, ItemType.SCP330, ItemType.SCP2176, ItemType.SCP018, ItemType.ParticleDisruptor, ItemType.Jailbird, ItemType.MicroHID })); break;
                         case "핵 리모컨": Warhead.Start(); break;
-                        case "수리 기사": Server.ExecuteCommand("/el l all"); await Task.Delay(15000); Server.ExecuteCommand("/el u all"); break;
+                        case "수리 기사": Server.ExecuteCommand("/el l all"); yield return Timing.WaitForSeconds(15); Server.ExecuteCommand("/el u all"); break;
                         case "슈퍼 스타": Server.ExecuteCommand($"/speak {ev.Player.Id} enable"); break;
                         case "해킹": Warhead.Detonate(); break;
                         case "스피드왜건": ev.Player.GetEffect(Exiled.API.Enums.EffectType.MovementBoost).Intensity += 100; break;
@@ -198,7 +206,7 @@ namespace GPOffice.Modes
                 {
                     BlackOutCooldown.Add(ev.Player.UserId);
                     ev.Player.CurrentRoom.TurnOffLights(3);
-                    await Task.Delay(20000);
+                    yield return Timing.WaitForSeconds(2f);
                     BlackOutCooldown.Remove(ev.Player.UserId);
                 }
             }

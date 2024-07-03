@@ -57,7 +57,7 @@ namespace GPOffice.Modes
             }
         }
 
-        public async void OnTeleporting(Exiled.Events.EventArgs.Scp106.TeleportingEventArgs ev)
+        public void OnTeleporting(Exiled.Events.EventArgs.Scp106.TeleportingEventArgs ev)
         {
             Timing.CallDelayed(0.1f, () =>
             {
@@ -65,7 +65,7 @@ namespace GPOffice.Modes
             });
         }
 
-        public async void OnStalking(Exiled.Events.EventArgs.Scp106.StalkingEventArgs ev)
+        public void OnStalking(Exiled.Events.EventArgs.Scp106.StalkingEventArgs ev)
         {
             Timing.CallDelayed(0.1f, () =>
             {
@@ -73,7 +73,7 @@ namespace GPOffice.Modes
             });
         }
 
-        public async void OnScp106Attacking(Exiled.Events.EventArgs.Scp106.AttackingEventArgs ev)
+        public void OnScp106Attacking(Exiled.Events.EventArgs.Scp106.AttackingEventArgs ev)
         {
             Timing.CallDelayed(0.1f, () =>
             {
@@ -81,7 +81,7 @@ namespace GPOffice.Modes
             });
         }
 
-        public async void OnPlayingSound(Exiled.Events.EventArgs.Scp939.PlayingSoundEventArgs ev)
+        public void OnPlayingSound(Exiled.Events.EventArgs.Scp939.PlayingSoundEventArgs ev)
         {
             Timing.CallDelayed(0.1f, () =>
             {
@@ -143,7 +143,7 @@ namespace GPOffice.Modes
             }
         }
 
-        public async void OnUsingBreakneckSpeeds(Exiled.Events.EventArgs.Scp173.UsingBreakneckSpeedsEventArgs ev)
+        public void OnUsingBreakneckSpeeds(Exiled.Events.EventArgs.Scp173.UsingBreakneckSpeedsEventArgs ev)
         {
             Timing.CallDelayed(0.1f, () =>
             {
