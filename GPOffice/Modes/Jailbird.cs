@@ -22,7 +22,7 @@ namespace GPOffice.Modes
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
             ev.Player.AddItem(ItemType.Jailbird);
-            Server.ExecuteCommand($"/forceeq {Player.UserIdsCache} 50");
+            Server.ExecuteCommand($"/forceeq {ev.Player.Id} 50");
         }
     }
 }

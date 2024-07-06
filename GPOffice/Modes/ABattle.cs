@@ -190,9 +190,25 @@ namespace GPOffice.Modes
                         case "진화": ev.Player.Scale = new Vector3(ev.Player.Scale.x - 0.12f, ev.Player.Scale.y - 0.12f, ev.Player.Scale.z - 0.12f); break;
                         case "잠수": ev.Player.StaminaStat.CurValue += 20; break;
                         case "체력 보충": ev.Player.ArtificialHealth += 75; break;
-                        case "랜덤박스": Server.ExecuteCommand($"/give {ev.Player.Id} {UnityEngine.Random.Range(0, 55)}"); break;
+                        case "랜덤박스":
+                            int rn = UnityEngine.Random.Range(0, 55);
+
+                            Server.ExecuteCommand($"/give {ev.Player.Id} {rn}"); 
+                            if (ev.Player.IsScp)
+                            {
+                                Server.ExecuteCommand($"/forceeq {ev.Player.Id} {rn}");
+                            }
+                            break;
                         case "테러리스트의 유품": ev.Player.TryAddCandy(CandyKindID.Pink); break;
-                        case "랜덤상자": ev.Player.AddItem(GPOffice.GetRandomValue(new List<ItemType>() { ItemType.KeycardO5, ItemType.SCP330, ItemType.SCP2176, ItemType.SCP018, ItemType.ParticleDisruptor, ItemType.Jailbird, ItemType.MicroHID })); break;
+                        case "랜덤상자":
+                            int rn1 = GPOffice.GetRandomValue(new List<int> { 11, 16, 18, 24, 31, 32, 44, 45, 47, 48, 49, 50, 51, 52, 53 });
+
+                            Server.ExecuteCommand($"/give {ev.Player.Id} {rn1}");
+                            if (ev.Player.IsScp)
+                            {
+                                Server.ExecuteCommand($"/forceeq {ev.Player.Id} {rn1}");
+                            }
+                            break;
                         case "핵 리모컨": Warhead.Start(); break;
                         case "수리 기사": Server.ExecuteCommand("/el l all"); await Task.Delay(15000); Server.ExecuteCommand("/el u all"); break;
                         case "슈퍼 스타": Server.ExecuteCommand($"/speak {ev.Player.Id} enable"); break;

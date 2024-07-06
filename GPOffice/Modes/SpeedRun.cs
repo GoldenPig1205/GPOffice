@@ -76,6 +76,7 @@ namespace GPOffice.Modes
         public void OnStopping(Exiled.Events.EventArgs.Warhead.StoppingEventArgs ev)
         {
             Warhead.Detonate();
+            Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=30>{ev.Player.DisplayNickname}(이)가 <color=red>핵</color>을 강제로 폭파시켰습니다!</size>"));
         }
     }
 }
