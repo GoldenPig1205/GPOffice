@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Exiled.API.Features;
 using UnityEngine;
 using PlayerRoles.FirstPersonControl;
+using MEC;
 
 namespace GPOffice.Modes
 {
@@ -79,7 +80,7 @@ namespace GPOffice.Modes
         {
             Server.FriendlyFire = true;
 
-            Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
+            Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Verified += OnVerified;
         }
@@ -97,7 +98,7 @@ namespace GPOffice.Modes
             }
         }
 
-        public void OnRoundStarted()
+        public IEnumerator<float> OnModeStarted()
         {
             GameObject gameobject = GameObject.Instantiate(new GameObject());
             gtool = gameobject.AddComponent<Gtool>();
@@ -105,7 +106,7 @@ namespace GPOffice.Modes
             while (true)
             {
                 foreach (var player in Player.List)
-                    player.AddItem(ItemType.GunCOM18);
+                    player.AddItem(ItemType.GunCOM15);
             }
         }
 
