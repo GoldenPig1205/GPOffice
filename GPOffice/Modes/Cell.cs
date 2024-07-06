@@ -18,6 +18,7 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
+            Round.IsLocked = true;
             Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
@@ -36,7 +37,7 @@ namespace GPOffice.Modes
                 player.Position = new Vector3(118.7332f, 1000.379f, -41.59417f);
 
                 if (player == BadLucky)
-                    Server.ExecuteCommand($"/drop {player.Id} 31");
+                    Server.ExecuteCommand($"/drop {player.Id} 31 1");
             }
         }
 
