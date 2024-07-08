@@ -21,17 +21,18 @@ namespace GPOffice.Modes
             Round.IsLocked = true;
             Respawn.TimeUntilNextPhase = 10000;
 
-            Timing.WaitForSeconds(1f);
+            Timing.CallDelayed(1f, () =>
+            {
+                Timing.RunCoroutine(OnModeStarted());
 
-            Timing.RunCoroutine(OnModeStarted());
+                site02.site02 site02 = new site02.site02();
 
-            site02.site02 site02 = new site02.site02();
+                site02.OnEnabled();
+                site02.OnRoundStarted();
 
-            site02.OnEnabled();
-            site02.OnRoundStarted();
-
-            foreach (var player in Player.List)
-                site02.Verified(player);
+                foreach (var player in Player.List)
+                    site02.Verified(player);
+            });
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -44,7 +45,7 @@ namespace GPOffice.Modes
                     {
                         if (hit.transform.name == "Stage 7")
                         {
-                            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=25><color=yellow>{player.DisplayNickname}</color>(이)가 스테이지 7에 도달했습니다!</size>"));
+                            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=25><color=yellow>{player.DisplayNickname}</color>(이)가 Stage 7에 도달했습니다!</size>"));
                             Round.IsLocked = false;
                             break;
                         }

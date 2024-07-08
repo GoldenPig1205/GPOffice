@@ -112,9 +112,7 @@ namespace GPOffice
                     player.Role.Set(player.Role);
             }
 
-            Task.WhenAll(
-                IsFallDown()
-                );
+            Timing.RunCoroutine(IsFallDown());
             Timing.CallDelayed(15 * 60f, async () =>
             {
                 if (Warhead.IsDetonated)
@@ -199,7 +197,7 @@ namespace GPOffice
                 ev.IsAllowed = false;
         }
 
-        public async Task IsFallDown()
+        public IEnumerator<float> IsFallDown()
         {
             while (true)
             {
@@ -219,7 +217,7 @@ namespace GPOffice
                     }
                 }
 
-                await Task.Delay(1000);
+                yield return Timing.WaitForSeconds(0.1f);
             }
         }
     }
