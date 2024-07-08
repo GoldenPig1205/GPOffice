@@ -17,7 +17,7 @@ namespace GPOffice.Commands
 			if (args != null)
             {
 				GPOffice.Instance.mod = args;
-				response = $"Random Mode pins [{args}]!\n";
+				response = $"Random Mode pins [{args}]!\n* Please check if this mode exists";
 				result = true;
 			}
             else

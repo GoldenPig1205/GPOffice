@@ -209,7 +209,7 @@ namespace GPOffice
                             OnGround[player.UserId] = 5;
                         else
                         {
-                            OnGround[player.UserId] -= 1;
+                            OnGround[player.UserId] -= 0.1f;
 
                             if (OnGround[player.UserId] <= 0)
                                 player.Kill("공허에 빨려들어갔습니다.");
