@@ -16,6 +16,8 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
+            Timing.RunCoroutine(OnModeStarted());
+
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
             Exiled.Events.Handlers.Player.DroppingItem += OnDroppingItem;
 
@@ -41,6 +43,25 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.UsingMicroHIDEnergy += OnUsingMicroHIDEnergy;
 
             Exiled.Events.Handlers.Item.ChargingJailbird += OnChargingJailbird;
+        }
+
+        public IEnumerator<float> OnModeStarted()
+        {
+            while (true)
+            {
+                if (GPOffice.Instance.AutoNuke)
+                    break;
+
+                yield return Timing.WaitForSeconds(1f);
+            }
+
+            while (true)
+            {
+                foreach (var player in Player.List)
+                    Server.ExecuteCommand($"/drop {player.Id} 31 5");
+
+                yield return Timing.WaitForSeconds(1f);
+            }
         }
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)

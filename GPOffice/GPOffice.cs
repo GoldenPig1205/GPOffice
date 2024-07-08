@@ -9,6 +9,7 @@ using Exiled.API.Features;
 using UnityEngine;
 using GPOffice.Modes;
 using MEC;
+using Exiled.API.Features.Items;
 
 namespace GPOffice
 {
@@ -27,7 +28,9 @@ namespace GPOffice
                 {"무덤", "000000/살아남으려면 뭐라도 해야 합니다./Tomb"}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!/RandomItem"}, {"고문", "9A2EFE/공을 피해 가장 오래 살아남으세요!/Cell"},
                 {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!/SpeedRun"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다../NoSCP"}, {"개인전", "FA58F4/최후의 1인이 되세요!/FreeForAll"},
                 {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird"}, {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"더블업", "F781F3/모드 2개가 합쳐집니다!/DoubleUp"},
-                {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"}, {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"}
+                {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"}, {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"},
+                {"나홀로집에", "FA5882/SCP가 점령한 재단 속 한명의 죄수만 남았습니다./OnlyOneHuman"}, {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, {"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"},
+                {"점프맵 라운지", "2EFEF7/먼저 Stage 7에 도달한 유저가 승리합니다!/JumpMap"}
             };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
             {
@@ -84,11 +87,6 @@ namespace GPOffice
 
         public async void OnRoundStarted()
         {
-            foreach (var SCP330 in Exiled.API.Features.Items.Scp330.AvailableCandies)
-            {
-                ServerConsole.AddLog($"{SCP330}");
-            }
-
             // 선택된 모드의 설명을 모두에게 띄워줍니다.
             Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>"));
             ServerConsole.AddLog($"다음 모드가 선택되었습니다. [{mod}]", color: ConsoleColor.Blue);
@@ -117,11 +115,25 @@ namespace GPOffice
             Task.WhenAll(
                 IsFallDown()
                 );
-            Timing.CallDelayed(15 * 60f, () =>
+            Timing.CallDelayed(15 * 60f, async () =>
             {
-                AutoNuke = true;
-                Warhead.Start();
-                Cassie.Message("<color=red>예정된 시설 자폭 프로세스가 시작되었습니다.</color> <b>대피하십시오.</b>", isNoisy: false);
+                if (Warhead.IsDetonated)
+                {
+                    AutoNuke = true;
+                    Server.ExecuteCommand("/cassie_sl 시간이 너무 오래 걸립니다! 모두의 체력이 초당 1%씩 줄어듭니다!");
+
+                    while (true)
+                    {
+                        Player.List.ToList().ForEach(x => x.Health -= (x.MaxHealth / 100));
+                        await Task.Delay(1000);
+                    }
+                }
+                else
+                {
+                    AutoNuke = true;
+                    Warhead.Start();
+                    Server.ExecuteCommand("/cassie_sl <color=red>예정된 시설 자폭 프로세스가 시작되었습니다.</color> <b>대피하십시오.</b>");
+                }
             });
         }
         public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)

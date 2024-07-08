@@ -31,7 +31,7 @@ namespace GPOffice.Commands
 
 		public string Command { get; } = "forcemode";
 
-		public string[] Aliases { get; } = Array.Empty<string>();
+		public string[] Aliases { get; } = { "fm" };
 
 		public string Description { get; } = "이번 라운드의 모드를 강제합니다.";
 

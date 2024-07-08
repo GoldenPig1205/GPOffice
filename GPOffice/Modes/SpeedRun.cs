@@ -50,7 +50,11 @@ namespace GPOffice.Modes
                 else
                 {
                     if (ev.Player.Role.Type != PlayerRoles.RoleTypeId.ClassD)
+                    {
                         ev.Player.Role.Set(PlayerRoles.RoleTypeId.ClassD);
+                        foreach (var item in new List<ItemType>() { ItemType.KeycardO5, ItemType.Flashlight, ItemType.Adrenaline, ItemType.GrenadeFlash, ItemType.Coin, ItemType.SCP330 })
+                            ev.Player.AddItem(item);
+                    }
                 }
             }
         }

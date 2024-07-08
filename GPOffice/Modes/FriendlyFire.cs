@@ -29,7 +29,7 @@ namespace GPOffice.Modes
                 {
                     FriendlyFire.Instance.OnMelee(player);
                     CanHit = false;
-                    MEC.Timing.CallDelayed(1, () => { CanHit = true; });
+                    Timing.CallDelayed(1, () => { CanHit = true; });
                 }
             }
         }
@@ -81,8 +81,6 @@ namespace GPOffice.Modes
             Server.FriendlyFire = true;
 
             Timing.RunCoroutine(OnModeStarted());
-
-            Exiled.Events.Handlers.Player.Verified += OnVerified;
         }
 
         public void OnMelee(Player player)
@@ -100,19 +98,24 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
+            yield return Timing.WaitForSeconds(1f);
+
             GameObject gameobject = GameObject.Instantiate(new GameObject());
             gtool = gameobject.AddComponent<Gtool>();
+
+            foreach (var player in Player.List)
+                player.AddItem(ItemType.GunCOM15);
 
             while (true)
             {
                 foreach (var player in Player.List)
-                    player.AddItem(ItemType.GunCOM15);
-            }
-        }
+                {
+                    if (!gtool.hits.Contains(new Hit { player = player }))
+                        gtool.hits.Add(new Hit { player = player });
+                }
 
-        public void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
-        {
-            gtool.hits.Add(new Hit { player = ev.Player });
+                yield return Timing.WaitForSeconds(1f);
+            }
         }
     }
 }

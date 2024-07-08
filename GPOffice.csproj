@@ -67,6 +67,9 @@
     <Reference Include="Exiled.Permissions">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\Exiled.Permissions.dll</HintPath>
     </Reference>
+    <Reference Include="GGUtils">
+      <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\GGUtils.dll</HintPath>
+    </Reference>
     <Reference Include="MapEditorReborn">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\MapEditorReborn.dll</HintPath>
     </Reference>
@@ -81,6 +84,9 @@
     </Reference>
     <Reference Include="Pooling">
       <HintPath>..\..\SCPSL\SCPSL_Data\Managed\Pooling.dll</HintPath>
+    </Reference>
+    <Reference Include="Site02">
+      <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\Site02.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -111,6 +117,8 @@
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\GPOffice.cs" />
     <Compile Include="GPOffice\Modes\ABattle.cs" />
+    <Compile Include="GPOffice\Modes\BomberMan.cs" />
+    <Compile Include="GPOffice\Modes\BombParty.cs" />
     <Compile Include="GPOffice\Modes\Cell.cs" />
     <Compile Include="GPOffice\Modes\Dense.cs" />
     <Compile Include="GPOffice\Modes\DoorLock.cs" />
@@ -118,7 +126,9 @@
     <Compile Include="GPOffice\Modes\FreeForAll.cs" />
     <Compile Include="GPOffice\Modes\HIDE.cs" />
     <Compile Include="GPOffice\Modes\Jailbird.cs" />
+    <Compile Include="GPOffice\Modes\JumpMap.cs" />
     <Compile Include="GPOffice\Modes\NoSCP.cs" />
+    <Compile Include="GPOffice\Modes\OnlyOneHuman.cs" />
     <Compile Include="GPOffice\Modes\PaperHuman.cs" />
     <Compile Include="GPOffice\Modes\RandomItem.cs" />
     <Compile Include="GPOffice\Modes\SpeedRun.cs" />
@@ -127,6 +137,7 @@
     <Compile Include="GPOffice\Modes\Ghost.cs" />
     <Compile Include="GPOffice\Modes\RocketLauncher.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="GPOffice\Modes\Spirit.cs" />
     <Compile Include="GPOffice\Modes\SuperStar.cs" />
     <Compile Include="GPOffice\Modes\Tomb.cs" />
     <Compile Include="GPOffice\Modes\TripleUp.cs" />

@@ -41,7 +41,7 @@ namespace GPOffice.Modes
             Player Dummy = Player.List.ToList()[0];
             Player.List.ToList().CopyTo(pl);
 
-            for (int i=1; i<(Player.List.Count * 50); i++)
+            for (int i=1; i<250; i++)
             {
                 Dummy.Position = RandomPosition();
                 Server.ExecuteCommand($"/drop {Dummy.Id} {UnityEngine.Random.Range(0, 55)} {UnityEngine.Random.Range(1, 3)}");

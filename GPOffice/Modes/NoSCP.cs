@@ -22,14 +22,15 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            if (ev.Player.IsScp || ev.Player.IsCHI || ev.Player.IsNTF)
+            if (ev.Player.IsScp || new List<PlayerRoles.RoleTypeId>() { PlayerRoles.RoleTypeId.ChaosRifleman, PlayerRoles.RoleTypeId.ChaosRepressor, PlayerRoles.RoleTypeId.ChaosMarauder,
+            PlayerRoles.RoleTypeId.NtfSergeant, PlayerRoles.RoleTypeId.NtfCaptain, PlayerRoles.RoleTypeId.NtfPrivate, PlayerRoles.RoleTypeId.FacilityGuard}.Contains(ev.Player.Role.Type))
             {
                 int rn = UnityEngine.Random.Range(1, 4);
 
                 if (rn == 1)
-                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.ChaosRifleman);
+                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.ChaosConscript);
                 else if (rn == 2)
-                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.NtfPrivate);
+                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
                 else if (rn == 3)
                 {
                     ev.Player.Role.Set(PlayerRoles.RoleTypeId.Tutorial);

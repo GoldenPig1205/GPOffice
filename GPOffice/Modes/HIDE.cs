@@ -73,6 +73,7 @@ namespace GPOffice.Modes
                     float health = 150 * Player.List.Count + 50 * Player.List.Count;
                     monster.MaxHealth = health;
                     monster.Health = health;
+                    monster.IsUsingStamina = false;
 
                     foreach (var player in Player.List)
                     {
@@ -114,6 +115,8 @@ namespace GPOffice.Modes
                 invisible = 1f;
                 monster.HumeShield = 0;
             }
+            if (ev.Attacker.IsScp && ev.DamageHandler.Type != Exiled.API.Enums.DamageType.Strangled)
+                ev.DamageHandler.Damage += 20;
         }
     }
 }

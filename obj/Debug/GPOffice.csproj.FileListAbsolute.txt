@@ -194,3 +194,5 @@ C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Deb
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Unity.Timeline.dll
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Unity.Burst.Unsafe.dll
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\obj\Debug\GPOffice.csproj.Up2Date
+C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\GGUtils.dll
+C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Site02.dll

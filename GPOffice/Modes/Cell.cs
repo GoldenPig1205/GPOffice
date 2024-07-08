@@ -28,6 +28,7 @@ namespace GPOffice.Modes
         {
             Server.ExecuteCommand("/mp load cell");
             Player BadLucky = GPOffice.GetRandomValue(Player.List.ToList());
+            Player.List.ToList().CopyTo(pl);
 
             yield return Timing.WaitForSeconds(1f);
 
