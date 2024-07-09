@@ -30,7 +30,7 @@ namespace GPOffice
                 {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird"}, {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"더블업", "F781F3/모드 2개가 합쳐집니다!/DoubleUp"},
                 {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"}, {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"},
                 {"나홀로집에", "FA5882/SCP가 점령한 재단 속 한명의 죄수만 남았습니다./OnlyOneHuman"}, {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, {"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"},
-                {"점프맵 라운지", "2EFEF7/먼저 Stage 7에 도달한 유저가 승리합니다!/JumpMap"}
+                {"점프맵 라운지", "2EFEF7/먼저 Stage 8에 도달한 유저가 승리합니다!/JumpMap"}
             };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
             {
@@ -67,9 +67,11 @@ namespace GPOffice
 
             Exiled.Events.Handlers.Player.Verified += OnVerified;
             Exiled.Events.Handlers.Player.Left += OnLeft;
+            Exiled.Events.Handlers.Player.ChangingSpectatedPlayer += OnChangingSpectatedPlayer;
 
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
+
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
         }
 
@@ -77,9 +79,11 @@ namespace GPOffice
         {
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
             Exiled.Events.Handlers.Player.Left -= OnLeft;
+            Exiled.Events.Handlers.Player.ChangingSpectatedPlayer -= OnChangingSpectatedPlayer;
 
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded -= OnRoundEnded;
+
             Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
 
             Instance = null;
@@ -176,7 +180,7 @@ namespace GPOffice
                         }
                     }
 
-                    ev.Player.ShowHint($"\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>", 3);
+                    ev.Player.ShowHint($"<align=left><b>——————————————</b>\n<i>Welcome, {ev.Player.DisplayNickname}!</i>\nGP: 0\n<u>Score: 0</u>\n<b>——————————————</b></align>\n\n\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>\n\n\n\n\n", 3);
                     await Task.Delay(500);
                     colorIndex = (colorIndex + 1) % modeList.Length;
                 }
@@ -189,6 +193,19 @@ namespace GPOffice
         {
             if (OnGround.ContainsKey(ev.Player.UserId))
                 OnGround.Remove(ev.Player.UserId);
+        }
+
+        public void OnChangingSpectatedPlayer(Exiled.Events.EventArgs.Player.ChangingSpectatedPlayerEventArgs ev)
+        {
+            List<ItemType> ItemTypes = new List<ItemType>();
+
+            if (ev.Player.CurrentHint == null)
+            {
+                foreach (var item in ev.NewTarget.Items)
+                    ItemTypes.Add(item.Type);
+
+                ev.Player.ShowHint(string.Join(", ", ItemTypes));
+            }
         }
 
         public void OnStopping(Exiled.Events.EventArgs.Warhead.StoppingEventArgs ev)

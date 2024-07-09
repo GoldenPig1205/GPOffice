@@ -43,9 +43,9 @@ namespace GPOffice.Modes
                 {
                     if (Physics.Raycast(player.Position, Vector3.down, out RaycastHit hit, 5, (LayerMask)1))
                     {
-                        if (hit.transform.name == "Stage 7")
+                        if (hit.transform.name == "Stage 8")
                         {
-                            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=25><color=yellow>{player.DisplayNickname}</color>(이)가 Stage 7에 도달했습니다!</size>"));
+                            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=25><color=yellow>{player.DisplayNickname}</color>(이)가 Stage 8에 도달했습니다!</size>"));
                             Round.IsLocked = false;
                             break;
                         }

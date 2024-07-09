@@ -22,7 +22,9 @@ namespace GPOffice.Modes
 
         public Dictionary<string, List<Vector3>> PlayerWorkstation = new Dictionary<string, List<Vector3>>();
         public Dictionary<string, List<string>> PlayerAbilities = new Dictionary<string, List<string>>();
+
         public List<string> BlackOutCooldown = new List<string>();
+        public List<string> BloodSuckingCooldown = new List<string>();
 
         public Dictionary<string, string> CommonAbilities = new Dictionary<string, string>()
                     {
@@ -38,7 +40,11 @@ namespace GPOffice.Modes
         public Dictionary<string, string> RareAbilities = new Dictionary<string, string>()
                     {
                         {"[희귀] 육체 강화", "1초당 1HP를 받습니다."},
-                        {"[희귀] 블랙아웃", "점프하면 해당 장소를 3초동안 정전시킵니다. [쿨타임 20초]"}
+                        {"[희귀] 블랙아웃", "점프하면 해당 장소를 3초동안 정전시킵니다. [쿨타임 20초]"},
+                        {"[희귀] 강철 껍질", "데미지 경감 효과를 1 받습니다."},
+                        {"[희귀] 투명 망토", "25초 간 투명 효과를 받습니다."},
+                        {"[희귀] 흡혈귀", "상대에게 입힌 피해량의 20%만큼 AHP를 받습니다."},
+                        {"[희귀] 순간이동", "랜덤한 유저의 위치로 순간이동합니다."}
                     };
         public Dictionary<string, string> EpicAbilities = new Dictionary<string, string>()
                     {
@@ -165,9 +171,17 @@ namespace GPOffice.Modes
                         else if (abilityGrade == "[희귀]")
                             return RareAbilities;
                         else if (abilityGrade == "[영웅]")
+                        {
+                            Cassie.Clear();
+                            Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 <color=#FF00FF>[영웅]</color> 업그레이드를 입수하였습니다.");
                             return EpicAbilities;
+                        }
                         else
+                        {
+                            Cassie.Clear();
+                            Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 <color=#ffd700>[전설]</color> 업그레이드를 입수하였습니다.");
                             return LegendAbilities;
+                        }
                     }
                      
                     void ApplyGiveAbility(string abilityName)
@@ -190,6 +204,13 @@ namespace GPOffice.Modes
                         case "진화": ev.Player.Scale = new Vector3(ev.Player.Scale.x - 0.12f, ev.Player.Scale.y - 0.12f, ev.Player.Scale.z - 0.12f); break;
                         case "잠수": ev.Player.StaminaStat.CurValue += 20; break;
                         case "체력 보충": ev.Player.ArtificialHealth += 75; break;
+                        case "강철 껍질": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.DamageReduction, 1); break;
+                        case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 25); break;
+                        case "흡혈귀": ; BloodSuckingCooldown.Add(ev.Player.UserId); break;
+                        case "순간이동":
+                            Player target = GPOffice.GetRandomValue(Player.List.ToList());
+                            ev.Player.Position = target.Position;
+                            break;
                         case "랜덤박스":
                             int rn = UnityEngine.Random.Range(0, 55);
 
@@ -209,10 +230,10 @@ namespace GPOffice.Modes
                                 Server.ExecuteCommand($"/forceeq {ev.Player.Id} {rn1}");
                             }
                             break;
-                        case "핵 리모컨": Warhead.Start(); break;
+                        case "핵 리모컨": Warhead.Start(); Cassie.Clear(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 원격으로 활성화했습니다!"); break;
                         case "수리 기사": Server.ExecuteCommand("/el l all"); await Task.Delay(15000); Server.ExecuteCommand("/el u all"); break;
                         case "슈퍼 스타": Server.ExecuteCommand($"/speak {ev.Player.Id} enable"); break;
-                        case "해킹": Warhead.Detonate(); break;
+                        case "해킹": Warhead.Detonate(); Cassie.Clear(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 원격으로 터트렸습니다!"); break;
                         case "스피드왜건": ev.Player.GetEffect(Exiled.API.Enums.EffectType.MovementBoost).Intensity += 100; break;
                     }
                 }
@@ -238,6 +259,11 @@ namespace GPOffice.Modes
                 PlayerWorkstation[ev.Player.UserId].Clear();
                 ev.Player.Scale = new Vector3(1, 1, 1);
                 Server.ExecuteCommand($"/speak {ev.Player.Id} disable");
+
+                if (BlackOutCooldown.Contains(ev.Player.UserId))
+                    BlackOutCooldown.Remove(ev.Player.UserId);
+                if (BloodSuckingCooldown.Contains(ev.Player.UserId))
+                    BloodSuckingCooldown.Remove(ev.Player.UserId);
             }
         }
 

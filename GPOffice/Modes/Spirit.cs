@@ -22,6 +22,7 @@ namespace GPOffice.Modes
             Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
+            Exiled.Events.Handlers.Player.Shooting += OnShooting;
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -36,7 +37,7 @@ namespace GPOffice.Modes
                         player.EnableEffect(Exiled.API.Enums.EffectType.Invisible);
                 }
 
-                yield return Timing.WaitForSeconds(0.1f);
+                yield return Timing.WaitForSeconds(1f);
             }
         }
 
@@ -61,6 +62,11 @@ namespace GPOffice.Modes
 
                 Server.ExecuteCommand($"/fc {ev.Player.Id} Tutorial 1");
             }
+        }
+
+        public void OnShooting(Exiled.Events.EventArgs.Player.ShootingEventArgs ev)
+        {
+            ev.Player.DisableEffect(Exiled.API.Enums.EffectType.Invisible);
         }
     }
 }
