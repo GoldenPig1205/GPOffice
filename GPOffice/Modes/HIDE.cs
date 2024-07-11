@@ -116,7 +116,7 @@ namespace GPOffice.Modes
                 monster.HumeShield = 0;
             }
             if (ev.Attacker.IsScp && ev.DamageHandler.Type != Exiled.API.Enums.DamageType.Strangled)
-                ev.DamageHandler.Damage += 20;
+                ev.DamageHandler.Damage += 15;
         }
     }
 }

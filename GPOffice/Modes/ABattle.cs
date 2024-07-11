@@ -24,7 +24,6 @@ namespace GPOffice.Modes
         public Dictionary<string, List<string>> PlayerAbilities = new Dictionary<string, List<string>>();
 
         public List<string> BlackOutCooldown = new List<string>();
-        public List<string> BloodSuckingCooldown = new List<string>();
 
         public Dictionary<string, string> CommonAbilities = new Dictionary<string, string>()
                     {
@@ -32,7 +31,7 @@ namespace GPOffice.Modes
                         {"[일반] 경공", "이동 속도가 25% 증가합니다."},
                         {"[일반] 진화", "몸의 크기가 12% 작아집니다."},
                         {"[일반] 단련", "공격력이 20% 추가됩니다."},
-                        {"[일반] 잠수", "스태미나가 1초마다 0.1씩 추가됩니다."},
+                        {"[일반] 잠수", "스태미나가 줄어들지 않습니다."},
                         {"[일반] 행운", "5% 확률로 잠긴 문을 엽니다."},
                         {"[일반] 체력 보충", "75AHP를 받습니다."},
                         {"[일반] 랜덤박스", "랜덤한 아이템을 지급받습니다."}
@@ -188,7 +187,8 @@ namespace GPOffice.Modes
                     {
                         PlayerAbilities[ev.Player.UserId].Add(abilityName);
                         string styleName = abilityName.Replace("[전설]", "<color=#ffd700>[전설]</color>").Replace("[영웅]", "<color=#FF00FF>[영웅]</color>").Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>").Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
-                        ev.Player.Broadcast(8, $"<size=20><b>다음 능력이 추가되었습니다.</b></size>\n<size=30>{styleName}</size>\n<size=25>{AbilityList()[abilityName]}</size>", shouldClearPrevious:true);
+                        ev.Player.ClearBroadcasts();
+                        ev.Player.Broadcast(8, $"<size=20><b>다음 능력이 추가되었습니다.</b></size>\n<size=30>{styleName}</size>\n<size=25>{AbilityList()[abilityName]}</size>");
                     }
 
                     string abilityName = GetRandomValue(AbilityList().Keys.ToList());
@@ -206,7 +206,6 @@ namespace GPOffice.Modes
                         case "체력 보충": ev.Player.ArtificialHealth += 75; break;
                         case "강철 껍질": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.DamageReduction, 1); break;
                         case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 25); break;
-                        case "흡혈귀": ; BloodSuckingCooldown.Add(ev.Player.UserId); break;
                         case "순간이동":
                             Player target = GPOffice.GetRandomValue(Player.List.ToList());
                             ev.Player.Position = target.Position;
@@ -262,8 +261,6 @@ namespace GPOffice.Modes
 
                 if (BlackOutCooldown.Contains(ev.Player.UserId))
                     BlackOutCooldown.Remove(ev.Player.UserId);
-                if (BloodSuckingCooldown.Contains(ev.Player.UserId))
-                    BloodSuckingCooldown.Remove(ev.Player.UserId);
             }
         }
 
@@ -302,6 +299,9 @@ namespace GPOffice.Modes
 
                 ev.DamageHandler.Damage = (int)(ev.DamageHandler.Damage * (1 + (0.2 * count)));
             }
+
+            if (PlayerAbilities[ev.Attacker.UserId].Contains("[희귀] 흡혈귀"))
+                ev.Attacker.AddAhp(20 * (ev.DamageHandler.Damage / 100));
         }
     }
 }

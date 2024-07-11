@@ -23,7 +23,9 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
-            Timing.CallDelayed(0.1f, () =>
+            yield return Timing.WaitForSeconds(10f);
+
+            while (true)
             {
                 Vector3 pos = Exiled.API.Features.Doors.Door.Random().Position;
                 pos.y += 1;
@@ -33,9 +35,18 @@ namespace GPOffice.Modes
                     player.Position = pos;
                     Player.List.ToList().ForEach(x => x.Position = pos);
                 }
-            });
 
-            yield return 0f;
+                int r = UnityEngine.Random.Range(1, 180);
+                for (int i=1; i<r; i++)
+                {
+                    foreach (var player in Player.List)
+                    {
+                        player.ClearBroadcasts();
+                        player.Broadcast(2, $"<size=25><b>{r - i}초 뒤에 순간이동합니다.</b></size>");
+                    }
+                    yield return Timing.WaitForSeconds(1f);
+                }
+            }
         }
 
     }

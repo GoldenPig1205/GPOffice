@@ -50,26 +50,26 @@ namespace GPOffice.Modes
             {
                 t += 3;
 
-                var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, null);
+                var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, Server.Host);
                 g.FuseTime = 3f;
-                g.SpawnActive(new Vector3(UnityEngine.Random.Range(-9.941405f, 10.92998f), 1004.188f, UnityEngine.Random.Range(-15.76172f, 2.550781f)), null);
+                g.SpawnActive(new Vector3(UnityEngine.Random.Range(-9.941405f, 10.92998f), 1004.188f, UnityEngine.Random.Range(-15.76172f, 2.550781f)), Server.Host);
 
                 if (t > 30)
                 {
                     if (UnityEngine.Random.Range(1, 3) == 1)
                     {
-                        var g1 = (FlashGrenade)Item.Create(ItemType.GrenadeFlash, null);
+                        var g1 = (FlashGrenade)Item.Create(ItemType.GrenadeFlash, Server.Host);
                         g1.FuseTime = 2f;
-                        g1.SpawnActive(new Vector3(UnityEngine.Random.Range(-9.941405f, 10.92998f), 1004.188f, UnityEngine.Random.Range(-15.76172f, 2.550781f)), null);
+                        g1.SpawnActive(new Vector3(UnityEngine.Random.Range(-9.941405f, 10.92998f), 1004.188f, UnityEngine.Random.Range(-15.76172f, 2.550781f)), Server.Host);
                     }
                 }
                 if (t > 60)
                 {
                     if (UnityEngine.Random.Range(1, 3) == 1)
                     {
-                        var g1 = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, null);
+                        var g1 = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, Server.Host);
                         g1.FuseTime = 5f;
-                        g1.SpawnActive(new Vector3(UnityEngine.Random.Range(-9.941405f, 10.92998f), 1004.188f, UnityEngine.Random.Range(-15.76172f, 2.550781f)), null);
+                        g1.SpawnActive(new Vector3(UnityEngine.Random.Range(-9.941405f, 10.92998f), 1004.188f, UnityEngine.Random.Range(-15.76172f, 2.550781f)), Server.Host);
                     }
                 }
                 if (t > 90)

@@ -32,15 +32,15 @@ namespace GPOffice.Modes
 
                     if (r == 1)
                     {
-                        var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, null);
+                        var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, Server.Host);
                         g.FuseTime = 3f;
-                        g.SpawnActive(player.Position + new Vector3(0f, 0.1f, 0f), null);
+                        g.SpawnActive(player.Position + new Vector3(0f, 0.1f, 0f), Server.Host);
                     }
                     else if (r == 2)
                     {
-                        var g = (FlashGrenade)Item.Create(ItemType.GrenadeFlash, null);
+                        var g = (FlashGrenade)Item.Create(ItemType.GrenadeFlash, Server.Host);
                         g.FuseTime = 3f;
-                        g.SpawnActive(player.Position + new Vector3(0f, 0.1f, 0f), null);
+                        g.SpawnActive(player.Position + new Vector3(0f, 0.1f, 0f), Server.Host);
                     }
                     else if (r == 3)
                     {

@@ -25,13 +25,14 @@ namespace GPOffice
             {
                 {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!/RocketLauncher"}, {"무제한", "3F13AB/무제한을 악용하지 않는 것을 추천합니다./Unlimited"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!/SuperStar"},
                 {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!/FriendlyFire"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!/SpeedWagon"},
-                {"무덤", "000000/살아남으려면 뭐라도 해야 합니다./Tomb"}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!/RandomItem"}, {"고문", "9A2EFE/공을 피해 가장 오래 살아남으세요!/Cell"},
+                {"무덤", "000000/살아남으려면 뭐라도 해야 합니다./Tomb"}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!/RandomItem"},
                 {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!/SpeedRun"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다../NoSCP"}, {"개인전", "FA58F4/최후의 1인이 되세요!/FreeForAll"},
-                {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird"}, {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"더블업", "F781F3/모드 2개가 합쳐집니다!/DoubleUp"},
-                {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"}, {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"},
-                {"나홀로집에", "FA5882/SCP가 점령한 재단 속 한명의 죄수만 남았습니다./OnlyOneHuman"}, {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, {"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"},
-                {"점프맵 라운지", "2EFEF7/먼저 Stage 8에 도달한 유저가 승리합니다!/JumpMap"}
-            };
+                {"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird"}, {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"},
+                {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, {"고문", "9A2EFE/공을 피해 가장 오래 살아남으세요!/Cell"}, {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"}, {"나 홀로 집에", "FA5882/SCP가 점령한 재단 속 한명의 죄수만 남았습니다./OnlyOneHuman"},
+                {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, {"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"}, {"점프맵 라운지", "2EFEF7/5분 동안 더 높은 스테이지에 도달한 유저가 승리합니다!/JumpMap"},
+                /*{"지갑 전사", "DBA901/동전을 많이 모을수록 강력해집니다./WalletWarrier"},*/ {"표적", "F7BE81/현상금 수배자를 죽이면 승리합니다!/BountyHunter"}, {"밀집", "04B45F/모두가 한 곳에 스폰됩니다./Dense"},
+                {"스즈메의 문단속", "00FFFF/문 너머 다른 차원./DoorLock"}, {"프리즌 라이프", "FFBF00/5분 동안 교도소 생활을 즐겨보세요,/PrisonLife"}
+        };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
             {
                 {"dust", new List<Vector3>() { new Vector3(53.26172f, 1040.629f, -31.19531f), new Vector3(23.61328f, 1037.999f, -43.21484f), new Vector3(22.21875f, 1037.996f, -58.96875f),
@@ -47,7 +48,12 @@ namespace GPOffice
                                              new Vector3(95.4621f, 902.2148f, -452.7215f)} },
                 {"ru", new List<Vector3>() { new Vector3(-2.371094f, 1003.158f, 36.24609f), new Vector3(-7.160156f, 1003.158f, 36.24609f), new Vector3(-7.546875f, 1003.158f, 31.12109f),
                                              new Vector3(-7.005299f, 1003.158f, 27.98828f), new Vector3(-2.363281f, 1003.158f, 31.08814f), new Vector3(4.617188f, 1003.158f, 27.06641f),
-                                             new Vector3(4.667969f, 1003.158f, 35.59375f), new Vector3(-0.5195313f, 1003.158f, 36.27344f), new Vector3(-2.15625f, 1003.158f, 28.17188f)} }
+                                             new Vector3(4.667969f, 1003.158f, 35.59375f), new Vector3(-0.5195313f, 1003.158f, 36.27344f), new Vector3(-2.15625f, 1003.158f, 28.17188f)} },
+                {"wh", new List<Vector3>() { new Vector3(48.96993f, 977.7834f, -73.72765f), new Vector3(37.21875f, 977.7835f, -88.23047f), new Vector3(42.61328f, 978.1492f, -83.76953f),
+                                             new Vector3(24.28516f, 977.7845f, -93.21094f), new Vector3(34.28125f, 977.7834f, -87.48047f), new Vector3(18.08304f, 977.7834f, -73.70633f),
+                                             new Vector3(-4.113281f, 977.7835f, -69.28125f), new Vector3(47.94922f, 977.7834f, -69.15234f),new Vector3(11.375f, 980.7399f, -92.83203f),
+                                             new Vector3(-0.9101563f, 977.7834f, -92.57813f), new Vector3(16.17963f, 977.7834f, -81.57955f), new Vector3(14.59375f, 977.7834f, -73.18359f),
+                                             new Vector3(-5.0625f, 977.7834f, -72.53906f)} }
             };
         public Dictionary<object, object> Players = new Dictionary<object, object>();
 
@@ -67,7 +73,6 @@ namespace GPOffice
 
             Exiled.Events.Handlers.Player.Verified += OnVerified;
             Exiled.Events.Handlers.Player.Left += OnLeft;
-            Exiled.Events.Handlers.Player.ChangingSpectatedPlayer += OnChangingSpectatedPlayer;
 
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
@@ -79,7 +84,6 @@ namespace GPOffice
         {
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
             Exiled.Events.Handlers.Player.Left -= OnLeft;
-            Exiled.Events.Handlers.Player.ChangingSpectatedPlayer -= OnChangingSpectatedPlayer;
 
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded -= OnRoundEnded;
@@ -193,19 +197,6 @@ namespace GPOffice
         {
             if (OnGround.ContainsKey(ev.Player.UserId))
                 OnGround.Remove(ev.Player.UserId);
-        }
-
-        public void OnChangingSpectatedPlayer(Exiled.Events.EventArgs.Player.ChangingSpectatedPlayerEventArgs ev)
-        {
-            List<ItemType> ItemTypes = new List<ItemType>();
-
-            if (ev.Player.CurrentHint == null)
-            {
-                foreach (var item in ev.NewTarget.Items)
-                    ItemTypes.Add(item.Type);
-
-                ev.Player.ShowHint(string.Join(", ", ItemTypes));
-            }
         }
 
         public void OnStopping(Exiled.Events.EventArgs.Warhead.StoppingEventArgs ev)

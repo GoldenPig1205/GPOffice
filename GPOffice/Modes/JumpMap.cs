@@ -15,6 +15,8 @@ namespace GPOffice.Modes
 {
     class JumpMap
     {
+        site02.site02 site02 = new site02.site02();
+
         public void OnEnabled()
         {
             Server.FriendlyFire = true;
@@ -24,8 +26,6 @@ namespace GPOffice.Modes
             Timing.CallDelayed(1f, () =>
             {
                 Timing.RunCoroutine(OnModeStarted());
-
-                site02.site02 site02 = new site02.site02();
 
                 site02.OnEnabled();
                 site02.OnRoundStarted();
@@ -37,23 +37,19 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
-            while (true)
-            {
-                foreach (var player in Player.List)
-                {
-                    if (Physics.Raycast(player.Position, Vector3.down, out RaycastHit hit, 5, (LayerMask)1))
-                    {
-                        if (hit.transform.name == "Stage 8")
-                        {
-                            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=25><color=yellow>{player.DisplayNickname}</color>(이)가 Stage 8에 도달했습니다!</size>"));
-                            Round.IsLocked = false;
-                            break;
-                        }
-                    }
-                }
+            yield return Timing.WaitForSeconds(10f);
 
+            for (int i = 0; i < 300; i++)
+            {
+                Player.List.ToList().ForEach(x => x.ClearBroadcasts());
+                Player.List.ToList().ForEach(x => x.Broadcast(2, $"<b><size=25><color=green>{300 - i}초 후</color> 게임이 종료됩니다.</size></b>"));
                 yield return Timing.WaitForSeconds(1f);
             }
+
+            Player first = Player.List.OrderByDescending(x => int.Parse(site02.Stage[x.UserId])).ToList()[0];
+
+            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<b><size=35>가장 멀리 간 유저는 <color=#ffd700>{first.DisplayNickname}</color>입니다!</size></b>"));
+            Round.IsLocked = false;
         }
     }
 }
