@@ -21,14 +21,12 @@ namespace GPOffice.Modes
         {
             Timing.RunCoroutine(OnModeStarted());
 
-            Timing.WaitForSeconds(10f);
-
-            Server.FriendlyFire = true;
-            Round.IsLocked = true;
-            Respawn.TimeUntilNextPhase = 10000;
-
-            Timing.CallDelayed(1f, () =>
+            Timing.CallDelayed(10f, () =>
             {
+                Server.FriendlyFire = true;
+                Round.IsLocked = true;
+                Respawn.TimeUntilNextPhase = 10000;
+
 
                 pl.OnEnabled();
                 pl.OnWaitingForPlayers();

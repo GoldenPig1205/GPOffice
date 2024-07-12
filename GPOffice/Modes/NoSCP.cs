@@ -18,26 +18,41 @@ namespace GPOffice.Modes
         public void OnEnabled()
         {
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+
+            Timing.RunCoroutine(OnModeStarted());
         }
+
+        public IEnumerator<float> OnModeStarted()
+        {
+            Player.List.ToList().ForEach(x => Spawned(x));
+
+            yield return 0f;
+        }
+
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            if (ev.Player.IsScp || new List<PlayerRoles.RoleTypeId>() { PlayerRoles.RoleTypeId.ChaosRifleman, PlayerRoles.RoleTypeId.ChaosRepressor, PlayerRoles.RoleTypeId.ChaosMarauder,
-            PlayerRoles.RoleTypeId.NtfSergeant, PlayerRoles.RoleTypeId.NtfCaptain, PlayerRoles.RoleTypeId.NtfPrivate, PlayerRoles.RoleTypeId.FacilityGuard}.Contains(ev.Player.Role.Type))
+            Spawned(ev.Player);
+        }
+
+        public void Spawned(Player player)
+        {
+            if (player.IsScp || new List<PlayerRoles.RoleTypeId>() { PlayerRoles.RoleTypeId.ChaosRifleman, PlayerRoles.RoleTypeId.ChaosRepressor, PlayerRoles.RoleTypeId.ChaosMarauder,
+            PlayerRoles.RoleTypeId.NtfSergeant, PlayerRoles.RoleTypeId.NtfCaptain, PlayerRoles.RoleTypeId.NtfPrivate, PlayerRoles.RoleTypeId.FacilityGuard}.Contains(player.Role.Type))
             {
                 int rn = UnityEngine.Random.Range(1, 4);
 
                 if (rn == 1)
-                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.ChaosConscript);
+                    player.Role.Set(PlayerRoles.RoleTypeId.ChaosConscript);
                 else if (rn == 2)
-                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
+                    player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
                 else if (rn == 3)
                 {
-                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
-                    ev.Player.Position = new Vector3(-0.08203125f, 1000.96f, 6.828125f);
-                    
-                    foreach (ItemType Item in new List<ItemType>{ ItemType.KeycardFacilityManager, ItemType.GunFSP9, ItemType.GunRevolver, ItemType.Adrenaline, ItemType.AntiSCP207, ItemType.Ammo9x19, ItemType.Ammo44cal })
-                        ev.Player.AddItem(Item);
+                    player.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
+                    player.Position = new Vector3(-0.08203125f, 1000.96f, 6.828125f);
+
+                    foreach (ItemType Item in new List<ItemType> { ItemType.KeycardFacilityManager, ItemType.GunFSP9, ItemType.GunRevolver, ItemType.Adrenaline, ItemType.AntiSCP207, ItemType.Ammo9x19, ItemType.Ammo44cal })
+                        player.AddItem(Item);
                 }
             }
         }

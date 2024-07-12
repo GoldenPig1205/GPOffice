@@ -23,7 +23,7 @@ namespace GPOffice.Modes
 
         public void OnInteractingDoor(Exiled.Events.EventArgs.Player.InteractingDoorEventArgs ev)
         {
-            if (UnityEngine.Random.Range(1, 20) != 1)
+            if (UnityEngine.Random.Range(1, 100) != 1)
             {
                 Vector3 pos = Exiled.API.Features.Doors.Door.Random().Position;
                 pos.y += 1;
@@ -33,7 +33,7 @@ namespace GPOffice.Modes
             else
             {
                 ev.Player.ShowHint("<i><color=orange><size=25>\"잘못된 문을 열어버렸어..\"</size></color></i>", 3);
-                ev.Player.Kill("5% 확률로 안타까운 죽음을 맞았습니다.");
+                ev.Player.Kill("1% 확률로 안타까운 죽음을 맞았습니다.");
             }
         }
 

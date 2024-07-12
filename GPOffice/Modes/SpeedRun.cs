@@ -36,24 +36,31 @@ namespace GPOffice.Modes
 
             Warhead.Start();
 
+            Player.List.ToList().ForEach(x => Spawned(x));
+
             yield return 0f;
         }
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            if (pl.Contains(ev.Player))
+            Spawned(ev.Player);
+        }
+
+        public void Spawned(Player player)
+        {
+            if (pl.Contains(player))
             {
-                if (ev.Player.Role.Type == PlayerRoles.RoleTypeId.ChaosConscript)
+                if (player.Role.Type == PlayerRoles.RoleTypeId.ChaosConscript)
                 {
 
                 }
                 else
                 {
-                    if (ev.Player.Role.Type != PlayerRoles.RoleTypeId.ClassD)
+                    if (player.Role.Type != PlayerRoles.RoleTypeId.ClassD)
                     {
-                        ev.Player.Role.Set(PlayerRoles.RoleTypeId.ClassD);
+                        player.Role.Set(PlayerRoles.RoleTypeId.ClassD);
                         foreach (var item in new List<ItemType>() { ItemType.KeycardO5, ItemType.Flashlight, ItemType.Adrenaline, ItemType.GrenadeFlash, ItemType.Coin, ItemType.SCP330 })
-                            ev.Player.AddItem(item);
+                            player.AddItem(item);
                     }
                 }
             }

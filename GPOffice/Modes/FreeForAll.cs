@@ -66,6 +66,8 @@ namespace GPOffice.Modes
 
             Player.List.ToList().CopyTo(pl);
 
+            Player.List.ToList().ForEach(x => Spawned(x));
+
             yield return 0f;
         }
 
@@ -82,18 +84,23 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
+            Spawned(ev.Player);
+        }
+
+        public void Spawned(Player player)
+        {
             Player.List.ToList().ForEach(x => x.DisableEffect(Exiled.API.Enums.EffectType.FogControl));
             Timing.CallDelayed(0.1f, () => Player.List.ToList().ForEach(x => x.EnableEffect(Exiled.API.Enums.EffectType.FogControl)));
 
-            if (ev.Player.Role.Type != PlayerRoles.RoleTypeId.NtfSpecialist && pl.Contains(ev.Player))
+            if (player.Role.Type != PlayerRoles.RoleTypeId.NtfSpecialist && pl.Contains(player))
             {
-                ev.Player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
-                ev.Player.Position = GPOffice.GetRandomValue(GPOffice.Instance.Maps[ModeName]);
+                player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
+                player.Position = GPOffice.GetRandomValue(GPOffice.Instance.Maps[ModeName]);
 
-                ev.Player.ClearInventory();
-                
+                player.ClearInventory();
+
                 foreach (var item in StartupItems)
-                    ev.Player.AddItem(item);
+                    player.AddItem(item);
             }
         }
     }

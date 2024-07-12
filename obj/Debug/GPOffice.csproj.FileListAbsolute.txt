@@ -197,3 +197,5 @@ C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\obj\Deb
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\GGUtils.dll
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Site02.dll
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Prison Life.dll
+C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\AutoEvent-Exiled.dll
+C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Newtonsoft.Json.dll

@@ -47,6 +47,8 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
+            Player.List.ToList().ForEach(x => Spawned(x));
+
             while (true)
             {
                 if (GPOffice.Instance.AutoNuke)
@@ -66,8 +68,13 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            ev.Player.MaxHealth = 30000;
-            ev.Player.IsUsingStamina = false;
+            Spawned(ev.Player);
+        }
+
+        public void Spawned(Player player)
+        {
+            player.MaxHealth = 30000;
+            player.IsUsingStamina = false;
         }
 
         public void OnDroppingItem(Exiled.Events.EventArgs.Player.DroppingItemEventArgs ev)
