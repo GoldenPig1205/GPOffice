@@ -4,15 +4,56 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using Exiled.API.Features;
 using UnityEngine;
-using GPOffice.Modes;
 using MEC;
-using Exiled.API.Features.Items;
+using MapEditorReborn.Events.Handlers;
+using Discord;
 
 namespace GPOffice
 {
+    public static class UsersManager
+    {
+        public static string UsersFileName = "C:/Users/GoldenPig1205/AppData/Roaming/EXILED/Configs/GPOffice/Users.txt";
+        public static Dictionary<string, List<string>> UsersCache = new Dictionary<string, List<string>>();
+
+        public static bool AddUser(string UserId, List<string> UserInfo) // gp, exp
+        {
+            UsersCache[UserId] = UserInfo;
+
+            return true;
+        }
+
+        public static void SaveUsers()
+        {
+            var text = string.Join("\n", UsersCache.Select(x => $"{x.Key};{x.Value[0]};{x.Value[1]}"));
+
+            FileManager.WriteStringToFile(UsersFileName, text);
+        }
+
+        public static void LoadUsers()
+        {
+            var text = FileManager.ReadAllText(UsersFileName);
+
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+
+            UsersCache.Clear();
+
+            foreach (var line in text.Split('\n'))
+            {
+                var parts = line.Split(';');
+
+                if (parts.Length != 3)
+                    continue;
+
+                UsersCache.Add(parts[0], new List<string>() { parts[1], parts[2] });
+            }
+        }
+    }
+
     public class GPOffice : Plugin<Config>
     {
         public static GPOffice Instance;
@@ -79,6 +120,8 @@ namespace GPOffice
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
 
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
+
+            UsersManager.LoadUsers();
         }
 
         public override void OnDisabled()
@@ -132,6 +175,12 @@ namespace GPOffice
         }
         public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
         {
+            // 라운드 종료 시 경험치(exp) 1 지급
+            foreach (var player in Player.List)
+                UsersManager.UsersCache[player.UserId][1] = UsersManager.UsersCache[player.UserId][1] + 1;
+
+            UsersManager.SaveUsers();
+
             Server.FriendlyFire = true;
 
             await Task.Delay(9000);
@@ -140,6 +189,9 @@ namespace GPOffice
 
         public async void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
         {
+            if (!UsersManager.UsersCache.ContainsKey(ev.Player.UserId))
+                UsersManager.AddUser(ev.Player.UserId, new List<string>() { "0", "0" });
+
             OnGround.Add(ev.Player.UserId, 5);
 
             if (Round.IsStarted)
@@ -172,7 +224,9 @@ namespace GPOffice
                         }
                     }
 
-                    ev.Player.ShowHint($"<align=left><b>——————————————</b>\n<i>Welcome, {ev.Player.DisplayNickname}!</i>\nGP: 0\n<u>Score: 0</u>\n<b>——————————————</b></align>\n\n\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>\n\n\n\n\n", 3);
+                    ev.Player.ShowHint($"<align=left><b>——————————————</b>\n<i>Welcome, {ev.Player.DisplayNickname}!</i>\n" +
+                        $"GP: {UsersManager.UsersCache[ev.Player.UserId][0]}\n<u>Exp: {UsersManager.UsersCache[ev.Player.UserId][1]}</u>\n" +
+                        $"<b>——————————————</b></align>\n\n\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>\n\n\n\n\n", 3);
                     await Task.Delay(500);
                     colorIndex = (colorIndex + 1) % modeList.Length;
                 }

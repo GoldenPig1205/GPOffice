@@ -12,6 +12,7 @@ using Exiled.Loader.Models;
 using InventorySystem;
 using InventorySystem.Items.Usables.Scp330;
 using MapEditorReborn.API.Features.Objects;
+using MEC;
 using UnityEngine;
 
 namespace GPOffice.Modes
@@ -52,7 +53,8 @@ namespace GPOffice.Modes
                         {"[영웅] 랜덤상자", "랜덤하지만 좋은 아이템을 지급받습니다."},
                         {"[영웅] 핵 리모컨", "핵 프로세스를 시작합니다."},
                         {"[영웅] 수리 기사", "모든 엘레베이터를 15초 간 고장냅니다."},
-                        {"[영웅] 슈퍼 스타", "자신의 마이크가 모두에게 공유됩니다."}
+                        {"[영웅] 슈퍼 스타", "자신의 마이크가 모두에게 공유됩니다."},
+                        {"[영웅] 럭키비키", "이전에 방문했던 워크스테이션에서 다시 한번 더 능력을 획득할 수 있습니다."}
                     };
         public Dictionary<string, string> LegendAbilities = new Dictionary<string, string>()
                     {
@@ -73,6 +75,7 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.InteractingDoor += InteractingDoor;
             Exiled.Events.Handlers.Player.DroppedItem += DroppedItem;
             Exiled.Events.Handlers.Player.Hurting += Hurting;
+            Exiled.Events.Handlers.Player.ChangingSpectatedPlayer += ChangingSpectatedPlayer;
         }
 
         public async Task OnModeStarted()
@@ -182,7 +185,7 @@ namespace GPOffice.Modes
                             return LegendAbilities;
                         }
                     }
-                     
+
                     void ApplyGiveAbility(string abilityName)
                     {
                         PlayerAbilities[ev.Player.UserId].Add(abilityName);
@@ -204,16 +207,16 @@ namespace GPOffice.Modes
                         case "진화": ev.Player.Scale = new Vector3(ev.Player.Scale.x - 0.12f, ev.Player.Scale.y - 0.12f, ev.Player.Scale.z - 0.12f); break;
                         case "잠수": ev.Player.StaminaStat.CurValue += 20; break;
                         case "체력 보충": ev.Player.ArtificialHealth += 75; break;
-                        case "강철 껍질": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.DamageReduction, 1); break;
-                        case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 25); break;
+                        case "강철 껍질": ev.Player.GetEffect(Exiled.API.Enums.EffectType.DamageReduction).Intensity += 1; break;
+                        case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 1, 25); break;
                         case "순간이동":
-                            Player target = GPOffice.GetRandomValue(Player.List.ToList());
+                            Player target = GPOffice.GetRandomValue(Player.List.Where(x => x != ev.Player).ToList());
                             ev.Player.Position = target.Position;
                             break;
                         case "랜덤박스":
                             int rn = UnityEngine.Random.Range(0, 55);
 
-                            Server.ExecuteCommand($"/give {ev.Player.Id} {rn}"); 
+                            Server.ExecuteCommand($"/give {ev.Player.Id} {rn}");
                             if (ev.Player.IsScp)
                             {
                                 Server.ExecuteCommand($"/forceeq {ev.Player.Id} {rn}");
@@ -229,10 +232,11 @@ namespace GPOffice.Modes
                                 Server.ExecuteCommand($"/forceeq {ev.Player.Id} {rn1}");
                             }
                             break;
+                        case "럭키비키": PlayerWorkstation[ev.Player.UserId].Clear(); break;
                         case "핵 리모컨": Warhead.Start(); Cassie.Clear(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 원격으로 활성화했습니다!"); break;
                         case "수리 기사": Server.ExecuteCommand("/el l all"); await Task.Delay(15000); Server.ExecuteCommand("/el u all"); break;
                         case "슈퍼 스타": Server.ExecuteCommand($"/speak {ev.Player.Id} enable"); break;
-                        case "해킹": Warhead.Detonate(); Cassie.Clear(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 원격으로 터트렸습니다!"); break;
+                        case "해킹": Warhead.Start(); Warhead.Detonate(); Cassie.Clear(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 원격으로 터트렸습니다!"); break;
                         case "스피드왜건": ev.Player.GetEffect(Exiled.API.Enums.EffectType.MovementBoost).Intensity += 100; break;
                     }
                 }
@@ -303,5 +307,25 @@ namespace GPOffice.Modes
             if (PlayerAbilities[ev.Attacker.UserId].Contains("[희귀] 흡혈귀"))
                 ev.Attacker.AddAhp(20 * (ev.DamageHandler.Damage / 100));
         }
+
+        public void ChangingSpectatedPlayer(Exiled.Events.EventArgs.Player.ChangingSpectatedPlayerEventArgs ev)
+        {
+            if (ev.NewTarget != null)
+            {
+                if (PlayerAbilities[ev.NewTarget.UserId].Count <= 0)
+                    ev.Player.ShowHint($"<align=left><b><size=22>워크스테이션 위에서 점프하면 능력을 획득할 수 있습니다.</size></b></align>", 250f);
+                else
+                {
+                    string abilitiesText = string.Join(", ", PlayerAbilities[ev.NewTarget.UserId]);
+                    abilitiesText = abilitiesText.Replace("[전설]", "<color=#ffd700>[전설]</color>");
+                    abilitiesText = abilitiesText.Replace("[영웅]", "<color=#FF00FF>[영웅]</color>");
+                    abilitiesText = abilitiesText.Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>");
+                    abilitiesText = abilitiesText.Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
+
+                    ev.Player.ShowHint($"<align=left><b><size=25>보유 능력</size></b>\n<size=20>{abilitiesText}</size></align>", 250f);
+                }
+            }
+        }
+
     }
 }

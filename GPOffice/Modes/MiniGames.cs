@@ -17,8 +17,8 @@ namespace GPOffice.Modes
         public static MiniGames Instance;
 
         public int RoundCount = 0;
-        public List<string> Games = new List<string>() { "airstrike", "dm", "escape", "battle", "versus2", "versus", "cs", "glass", "line", "dodge", "fall", 
-            "football", "gungame", "knives", "chair", "puzzle", "race", "light", "jail", "spleef", "tag", "tdm", "lava", "zombie3", "zombie2", "zombie", "vote", "lobby" };
+        public List<string> Games = new List<string>() { "airstrike", "dm", "escape", "battle", "versus", "cs", "glass", "line", "dodge", "fall", 
+            "football", "gungame", "knives", "chair", "puzzle", "race", "light", "jail", "spleef", "tag", "tdm", "lava", "zombie3", "zombie2", "zombie" };
 
         public void OnEnabled()
         {
@@ -49,7 +49,6 @@ namespace GPOffice.Modes
                     {
                         if (Physics.Raycast(player.Position, Vector3.down, out RaycastHit hit, 10, (LayerMask)1))
                         {
-                            ServerConsole.AddLog(hit.transform.name);
                             if (hit.transform.name == "classname=brush.003")
                             {
                                 end = false;

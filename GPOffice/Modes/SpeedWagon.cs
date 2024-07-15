@@ -16,14 +16,22 @@ namespace GPOffice.Modes
         public void OnEnabled()
         {
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+
+            foreach (var player in Player.List)
+                Spawned(player);
         }
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            ev.Player.EnableEffect(Exiled.API.Enums.EffectType.MovementBoost, 255);
-            ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Scp1853, 4);
-            ev.Player.MaxHealth = ev.Player.Health / 2;
-            ev.Player.Health = ev.Player.Health / 2;
+            Spawned(ev.Player);
+        }
+
+        public void Spawned(Player player)
+        {
+            player.EnableEffect(Exiled.API.Enums.EffectType.MovementBoost, 255);
+            player.EnableEffect(Exiled.API.Enums.EffectType.Scp1853, 4);
+            player.MaxHealth = player.Health / 2;
+            player.Health = player.Health / 2;
         }
     }
 }

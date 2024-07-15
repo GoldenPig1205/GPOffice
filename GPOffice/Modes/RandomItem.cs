@@ -24,6 +24,11 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
+            foreach (var player in Player.List)
+            {
+                Spawned(player);
+            }
+
             while (true)
             {
                 foreach (var player in Player.List)
@@ -48,10 +53,15 @@ namespace GPOffice.Modes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            ev.Player.ClearInventory();
+            Spawned(ev.Player);
+        }
 
-            for (int i=1; i<9; i++)
-                Server.ExecuteCommand($"/give {ev.Player.Id} {UnityEngine.Random.Range(0, 55)}");
+        public void Spawned(Player player)
+        {
+            player.ClearInventory();
+
+            for (int i = 1; i < 9; i++)
+                Server.ExecuteCommand($"/give {player.Id} {UnityEngine.Random.Range(0, 55)}");
         }
     }
 }
