@@ -18,7 +18,7 @@ namespace GPOffice.Modes
         public static FreeForAll Instance;
 
         public List<Player> pl = new List<Player>();
-        public string ModeName = GPOffice.GetRandomValue(GPOffice.Instance.Maps.Keys.ToList()).ToString();
+        public string ModeName = Plugin.GetRandomValue(Plugin.Instance.Maps.Keys.ToList()).ToString();
         public List<ItemType> StartupItems = null;
 
         public void OnEnabled()
@@ -41,7 +41,7 @@ namespace GPOffice.Modes
             List<ItemType> CDItems = new List<ItemType>() { ItemType.Medkit, ItemType.Painkillers, ItemType.Radio, ItemType.GrenadeFlash, ItemType.GrenadeHE };
             List<ItemType> Items = new List<ItemType>();
 
-            Items.Add(GPOffice.GetRandomValue(Guns));
+            Items.Add(Plugin.GetRandomValue(Guns));
             
             foreach (var ammo in Ammos)
             {
@@ -95,7 +95,7 @@ namespace GPOffice.Modes
             if (player.Role.Type != PlayerRoles.RoleTypeId.NtfSpecialist && pl.Contains(player))
             {
                 player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
-                player.Position = GPOffice.GetRandomValue(GPOffice.Instance.Maps[ModeName]);
+                player.Position = Plugin.GetRandomValue(Plugin.Instance.Maps[ModeName]);
 
                 player.ClearInventory();
 

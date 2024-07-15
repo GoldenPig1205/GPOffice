@@ -16,13 +16,13 @@ namespace GPOffice.Commands
 
 			if (args != null)
             {
-				GPOffice.Instance.mod = args;
+				Plugin.Instance.mod = args;
 				response = $"Random Mode pins [{args}]!\n* Please check if this mode exists";
 				result = true;
 			}
             else
             {
-				GPOffice.Instance.mod = args;
+				Plugin.Instance.mod = args;
 				response = $"There is no name for Random Mode!\n";
 				result = false;
 			}
@@ -47,7 +47,7 @@ namespace GPOffice.Commands
 
 			Player player = Player.Get(sender as CommandSender);
 
-			if (GPOffice.Instance.Owner.Contains(player.UserId))
+			if (Plugin.Instance.Owner.Contains(player.UserId))
 			{
 				response = "성공!";
 				player.GroupName = "owner";

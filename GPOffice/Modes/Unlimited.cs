@@ -51,7 +51,7 @@ namespace GPOffice.Modes
 
             while (true)
             {
-                if (GPOffice.Instance.AutoNuke)
+                if (Plugin.Instance.AutoNuke)
                     break;
 
                 yield return Timing.WaitForSeconds(1f);

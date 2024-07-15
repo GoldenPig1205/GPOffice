@@ -164,7 +164,8 @@
   <ItemGroup>
     <Compile Include="GPOffice\Commands\GPOffice.Commands.cs" />
     <Compile Include="GPOffice\Configs\Config.cs" />
-    <Compile Include="GPOffice\GPOffice.cs" />
+    <Compile Include="GPOffice\Extensions\UserManager.cs" />
+    <Compile Include="GPOffice\Plugin.cs" />
     <Compile Include="GPOffice\Modes\ABattle.cs" />
     <Compile Include="GPOffice\Modes\BomberMan.cs" />
     <Compile Include="GPOffice\Modes\BombParty.cs" />

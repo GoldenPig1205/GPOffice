@@ -210,7 +210,7 @@ namespace GPOffice.Modes
                         case "강철 껍질": ev.Player.GetEffect(Exiled.API.Enums.EffectType.DamageReduction).Intensity += 1; break;
                         case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 1, 25); break;
                         case "순간이동":
-                            Player target = GPOffice.GetRandomValue(Player.List.Where(x => x != ev.Player).ToList());
+                            Player target = Plugin.GetRandomValue(Player.List.Where(x => x != ev.Player).ToList());
                             ev.Player.Position = target.Position;
                             break;
                         case "랜덤박스":
@@ -224,7 +224,7 @@ namespace GPOffice.Modes
                             break;
                         case "테러리스트의 유품": ev.Player.TryAddCandy(CandyKindID.Pink); break;
                         case "랜덤상자":
-                            int rn1 = GPOffice.GetRandomValue(new List<int> { 11, 16, 18, 24, 31, 32, 44, 45, 47, 48, 49, 50, 51, 52, 53 });
+                            int rn1 = Plugin.GetRandomValue(new List<int> { 11, 16, 18, 24, 31, 32, 44, 45, 47, 48, 49, 50, 51, 52, 53 });
 
                             Server.ExecuteCommand($"/give {ev.Player.Id} {rn1}");
                             if (ev.Player.IsScp)

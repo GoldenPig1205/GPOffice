@@ -29,10 +29,10 @@ namespace GPOffice.Modes
                 int r1 = UnityEngine.Random.Range(1, 10000);
 
                 if (r1 == 1)
-                    Server.ExecuteCommand($"/{GPOffice.GetRandomValue(hard)}");
+                    Server.ExecuteCommand($"/{Plugin.GetRandomValue(hard)}");
 
                 else if (r1 > 9150)
-                    Server.ExecuteCommand($"/{GPOffice.GetRandomValue(normal)}");
+                    Server.ExecuteCommand($"/{Plugin.GetRandomValue(normal)}");
 
                 else
                 {

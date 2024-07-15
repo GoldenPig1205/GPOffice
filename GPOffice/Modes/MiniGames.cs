@@ -41,7 +41,7 @@ namespace GPOffice.Modes
             {
                 bool end = true;
 
-                Server.ExecuteCommand($"/ev run {GPOffice.GetRandomValue(Games)}");
+                Server.ExecuteCommand($"/ev run {Plugin.GetRandomValue(Games)}");
 
                 while (end)
                 {

@@ -27,7 +27,7 @@ namespace GPOffice.Modes
         public IEnumerator<float> OnModeStarted()
         {
             Server.ExecuteCommand("/mp load cell");
-            Player BadLucky = GPOffice.GetRandomValue(Player.List.ToList());
+            Player BadLucky = Plugin.GetRandomValue(Player.List.ToList());
             Player.List.ToList().CopyTo(pl);
 
             yield return Timing.WaitForSeconds(1f);

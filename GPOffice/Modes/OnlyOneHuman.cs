@@ -30,7 +30,7 @@ namespace GPOffice.Modes
         {
             yield return Timing.WaitForSeconds(1f);
 
-            Player One = GPOffice.GetRandomValue(Player.List.ToList());
+            Player One = Plugin.GetRandomValue(Player.List.ToList());
 
             foreach (Player player in Player.List)
             {
@@ -44,7 +44,7 @@ namespace GPOffice.Modes
                         PlayerRoles.RoleTypeId.Scp079, PlayerRoles.RoleTypeId.Scp0492, PlayerRoles.RoleTypeId.Scp3114
                     };
 
-                    player.Role.Set(GPOffice.GetRandomValue(Scps));
+                    player.Role.Set(Plugin.GetRandomValue(Scps));
                 }
             }
         }

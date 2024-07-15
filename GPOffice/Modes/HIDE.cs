@@ -59,7 +59,7 @@ namespace GPOffice.Modes
             Server.ExecuteCommand($"/mp load container");
 
             Player.List.ToList().CopyTo(pl);
-            monster = GPOffice.GetRandomValue(Player.List.ToList());
+            monster = Plugin.GetRandomValue(Player.List.ToList());
 
             try
             {

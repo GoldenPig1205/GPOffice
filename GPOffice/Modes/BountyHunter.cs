@@ -30,7 +30,7 @@ namespace GPOffice.Modes
         {
             yield return Timing.WaitForSeconds(10f);
 
-            target = GPOffice.GetRandomValue(Player.List.Where(x => !x.IsScp).ToList());
+            target = Plugin.GetRandomValue(Player.List.Where(x => !x.IsScp).ToList());
             target.Group = new UserGroup { BadgeColor="red", BadgeText="표적" };
 
             Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=30><b><color=#FF8000>{target.DisplayNickname}</color>(이)가 현상금 수배자입니다.</b></size>\n<size=25>- 위치 정보가 실시간으로 전송됩니다. -</size>"));
