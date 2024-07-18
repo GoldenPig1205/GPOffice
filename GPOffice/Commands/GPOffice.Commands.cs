@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Security.AccessControl;
 using CommandSystem;
+using Discord;
 using Exiled.API.Features;
+using static PlayerList;
 
 namespace GPOffice.Commands
 {
@@ -39,37 +44,82 @@ namespace GPOffice.Commands
 	}
 
 	[CommandHandler(typeof(ClientCommandHandler))]
-	public class Adminme : ICommand
-	{
-		public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
-		{
-			bool result;
+    public class Store : ICommand
+    {
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+            bool result;
+			Dictionary<string, string> Items = Plugin.Instance.Items;
+            string Mark = "\n[ 밀무역자 출신 D계급이 운영하는 상점 ]\n";
+            Player player = Player.Get(sender as CommandSender);
 
-			Player player = Player.Get(sender as CommandSender);
-
-			if (Plugin.Instance.Owner.Contains(player.UserId))
+            try
 			{
-				response = "성공!";
-				player.GroupName = "owner";
+                if (arguments.At(0) == "조회")
+                {
+                    string itemsList = string.Join("\n", Items.Select(item => $"{item.Key}: {item.Value}"));
+                    response = $"{Mark}(아이템 조회)\n" + itemsList;
 
-				result = true;
-				return result;
-			}
-			else
-			{
-				response = "실패!";
+                    result = true;
+                    return result;
+                }
+                else if (arguments.At(0) == "구매")
+                {
+                    if (Items.ContainsKey(arguments.At(1)))
+                    {
+                        string ItemName = arguments.At(1);
 
-				result = true;
-				return result;
-			}
-		}
+                        if (int.Parse(Items[arguments.At(1)].Split('/')[0]) <= int.Parse(UsersManager.CheckUser(player.UserId, 0)))
+                        {
+                            UsersManager.UsersCache[player.UserId][0] = (int.Parse(UsersManager.UsersCache[player.UserId][0]) - int.Parse(Items[arguments.At(1)].Split('/')[0])).ToString();
 
-		public string Command { get; } = "adminme";
+                            response = $"{Mark}(아이템 구매)\n구매에 성공하였습니다!";
 
-		public string[] Aliases { get; } = Array.Empty<string>();
+                            if (ItemName == "인형")
+                                Server.ExecuteCommand($"/ragdoll {player.Id} {UnityEngine.Random.Range(0, 20)} 1");
 
-		public string Description { get; } = "금단의 영역입니다.";
+                            result = true;
+                            return result;
+                        }
+                        else
+                        {
+                            response = $"{Mark}(아이템 구매)\n구매에 필요한 GP가 부족합니다!";
 
-		public bool SanitizeResponse { get; } = true;
-	}
+                            result = false;
+                            return result;
+                        }
+                    }
+                    else
+                    {
+                        response = $"{Mark}(아이템 구매)\n존재하지 않는 아이템 이름입니다.";
+
+                        result = false;
+                        return result;
+                    }
+                }
+                else
+                {
+                    response = $"{Mark}(???)\n알 수 없는 서브 명령어입니다.";
+
+                    result = false;
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                response = $"{Mark}(도움말)\n.상점 조회 - 아이템 목록을 불러옵니다.\n.상점 구매 {{아이템 이름}} - 아이템을 구매합니다.";
+
+                result = false;
+                return result;
+            }
+        }
+
+        public string Command { get; } = "상점";
+
+        public string[] Aliases { get; } = { "store" };
+
+        public string Description { get; } = "상점에서 아이템을 구매할 수 있습니다.";
+
+        public bool SanitizeResponse { get; } = true;
+    }
 }

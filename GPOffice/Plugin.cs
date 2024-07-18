@@ -24,17 +24,18 @@ namespace GPOffice
 
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
             {
-                {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!/RocketLauncher"}, {"무제한", "3F13AB/무제한을 악용하지 않는 것을 추천합니다./Unlimited"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!/SuperStar"},
-                {"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!/FriendlyFire"}, {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!/SpeedWagon"},
+                {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!/RocketLauncher"}, /*{"무제한", "3F13AB/무제한을 악용하지 않는 것을 추천합니다./Unlimited"},*/ {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!/SuperStar"},
+                /*{"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!/FriendlyFire"},*/ {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!/SpeedWagon"},
                 {"무덤", "000000/살아남으려면 뭐라도 해야 합니다./Tomb"}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!/RandomItem"},
                 {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!/SpeedRun"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다../NoSCP"}, {"개인전", "FA58F4/최후의 1인이 되세요!/FreeForAll"},
                 /*{"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird"},*/ {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"},
-                {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, {"고문", "9A2EFE/공을 피해 가장 오래 살아남으세요!/Cell"}, {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"}, 
+                {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, /*{"고문", "9A2EFE/공을 피해 가장 오래 살아남으세요!/Cell"},*/ {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"}, 
                 {"나 홀로 집에", "FA5882/SCP가 점령한 재단 속 한명의 죄수만 남았습니다./OnlyOneHuman"},
                 {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, {"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"}, {"점프맵 라운지", "2EFEF7/5분 동안 더 높은 스테이지에 도달한 유저가 승리합니다!/JumpMap"},
                 /*{"지갑 전사", "DBA901/동전을 많이 모을수록 강력해집니다./WalletWarrier"},*/ {"표적", "F7BE81/현상금 수배자를 죽이면 승리합니다!/BountyHunter"}, {"밀집", "04B45F/모두가 한 곳에 스폰됩니다./Dense"},
-                {"스즈메의 문단속", "00FFFF/문 너머 다른 차원./DoorLock"}, /*{"프리즌 라이프", "FFBF00/5분 동안 교도소 생활을 즐겨보세요./PrisonLife"},*/ {"미니 게임", "6E6E6E/미니 게임 중 하나가 랜덤으로 선택됩니다.\n총 3개의 라운드로 진행됩니다./MiniGames"}
-        };
+                {"스즈메의 문단속", "00FFFF/문 너머 다른 차원./DoorLock"}, /*{"프리즌 라이프", "FFBF00/5분 동안 교도소 생활을 즐겨보세요./PrisonLife"},*/ {"미니 게임", "6E6E6E/미니 게임 중 하나가 랜덤으로 선택됩니다.\n총 3개의 라운드로 진행됩니다./MiniGames"},
+                {"빨간 불 / 초록 불", "D7DF01/빨간 불일때는 절대로 움직이지 마세요, 고개도요!/RedLightGreenLight"}
+            };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
             {
                 {"dust", new List<Vector3>() { new Vector3(53.26172f, 1040.629f, -31.19531f), new Vector3(23.61328f, 1037.999f, -43.21484f), new Vector3(22.21875f, 1037.996f, -58.96875f),
@@ -57,6 +58,10 @@ namespace GPOffice
                                              new Vector3(-0.9101563f, 977.7834f, -92.57813f), new Vector3(16.17963f, 977.7834f, -81.57955f), new Vector3(14.59375f, 977.7834f, -73.18359f),
                                              new Vector3(-5.0625f, 977.7834f, -72.53906f)} }
             };
+        public Dictionary<string, string> Items = new Dictionary<string, string>()
+        {
+            {"인형", "1/자신의 위치에 인형을 소환합니다."}
+        };
         public Dictionary<object, object> Players = new Dictionary<object, object>();
 
         public static object Mode = GetRandomValue(Mods.Keys.ToList());
@@ -76,12 +81,11 @@ namespace GPOffice
             Exiled.Events.Handlers.Player.Verified += OnVerified;
             Exiled.Events.Handlers.Player.Left += OnLeft;
 
+            Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
 
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
-
-            UsersManager.LoadUsers();
         }
 
         public override void OnDisabled()
@@ -89,12 +93,18 @@ namespace GPOffice
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
             Exiled.Events.Handlers.Player.Left -= OnLeft;
 
+            Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded -= OnRoundEnded;
 
             Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
 
             Instance = null;
+        }
+
+        public void OnWaitingForPlayers()
+        {
+            UsersManager.LoadUsers();
         }
 
         public void OnRoundStarted()
@@ -135,11 +145,21 @@ namespace GPOffice
         }
         public async void OnRoundEnded(Exiled.Events.EventArgs.Server.RoundEndedEventArgs ev)
         {
-            // 라운드 종료 시 경험치(exp) 1 지급
-            foreach (var player in Player.List)
-                UsersManager.UsersCache[player.UserId][1] = UsersManager.UsersCache[player.UserId][1] + 1;
+            try
+            {
+                // 라운드 종료 시 경험치(exp) 1 지급
+                foreach (var player in Player.List)
+                {
+                    UsersManager.UsersCache[player.UserId][0] = (int.Parse(UsersManager.UsersCache[player.UserId][0]) + 1).ToString();
+                    UsersManager.UsersCache[player.UserId][1] = (int.Parse(UsersManager.UsersCache[player.UserId][1]) + 1).ToString();
+                }
 
-            UsersManager.SaveUsers();
+                UsersManager.SaveUsers();
+            }
+            catch (Exception ex)
+            {
+                ServerConsole.AddLog(ex.ToString());
+            }
 
             Server.FriendlyFire = true;
 
@@ -186,7 +206,7 @@ namespace GPOffice
 
                     ev.Player.ShowHint($"<align=left><b>——————————————</b>\n<i>Welcome, {ev.Player.DisplayNickname}!</i>\n" +
                         $"GP: {UsersManager.UsersCache[ev.Player.UserId][0]}\n<u>Exp: {UsersManager.UsersCache[ev.Player.UserId][1]}</u>\n" +
-                        $"<b>——————————————</b></align>\n\n\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>\n\n\n\n\n", 3);
+                        $"<b>——————————————</b></align>\n<align=left><size=15>콘솔(~)에서 [.상점] 명령어를 입력해보세요.</size></align>\n\n<align=left><b>아래 모드들 중 하나의 모드가 선택됩니다.</b>\n<size=20>{coloredModes}</size></align>\n\n\n\n\n", 3);
                     await Task.Delay(500);
                     colorIndex = (colorIndex + 1) % modeList.Length;
                 }

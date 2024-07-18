@@ -18,21 +18,25 @@ namespace GPOffice.Modes
 
         public int RoundCount = 0;
         public List<string> Games = new List<string>() { "airstrike", "dm", "escape", "battle", "versus", "cs", "glass", "line", "dodge", "fall", 
-            "football", "gungame", "knives", "chair", "puzzle", "race", "light", "jail", "spleef", "tag", "tdm", "lava", "zombie3", "zombie2", "zombie" };
+            "football", "gungame", "knives", "puzzle", "race", "light", "spleef", "tag", "tdm", "lava", "zombie3", "zombie2", "zombie" };
 
         public void OnEnabled()
         {
             Round.IsLocked = true;
 
             Timing.RunCoroutine(OnModeStarted());
+
+            Server.ExecuteCommand($"/mp load ru");
         }
 
         public IEnumerator<float> OnModeStarted()
         {
+            yield return Timing.WaitForSeconds(1f);
+
             foreach (var player in Player.List)
             {
                 player.Role.Set(PlayerRoles.RoleTypeId.ClassD);
-                player.Position = new Vector3(40.03516f, 1014.11f, -32.02734f);
+                player.Position = new Vector3(-3.09375f, 1003.158f, 33.52344f);
             }
 
             yield return Timing.WaitForSeconds(10f);
@@ -61,6 +65,9 @@ namespace GPOffice.Modes
                 }
 
                 RoundCount += 1;
+
+                foreach (var player in Player.List)
+                    player.Position = new Vector3(-3.09375f, 1003.158f, 33.52344f);
 
                 if (RoundCount != 3)
                 {
