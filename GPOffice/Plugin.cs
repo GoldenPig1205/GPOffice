@@ -25,7 +25,7 @@ namespace GPOffice
         public static Dictionary<object, object> Mods = new Dictionary<object, object>()
             {
                 {"로켓 런처", "FF8000/무슨 이유로든 피격당하면 승천합니다!/RocketLauncher"}, /*{"무제한", "3F13AB/무제한을 악용하지 않는 것을 추천합니다./Unlimited"},*/ {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다!/SuperStar"},
-                /*{"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!/FriendlyFire"},*/ {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 반으로 줄어듭니다!/SpeedWagon"},
+                /*{"뒤통수 얼얼", "DF0101/아군 공격이 허용됩니다!/FriendlyFire"},*/ {"스피드왜건", "FFBF00/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"},
                 {"무덤", "000000/살아남으려면 뭐라도 해야 합니다./Tomb"}, {"랜덤박스", "BFFF00/60초마다 랜덤한 아이템을 얻을 수 있습니다!/RandomItem"},
                 {"스피드런", "FF0000/가장 먼저 탈출구에 도달한 죄수가 승리합니다!/SpeedRun"}, {"평화로운 재단", "00FF00/시설 내에는 SCP만 없을 뿐입니다../NoSCP"}, {"개인전", "FA58F4/최후의 1인이 되세요!/FreeForAll"},
                 /*{"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird"},*/ {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"},
@@ -34,7 +34,8 @@ namespace GPOffice
                 {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, {"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"}, {"점프맵 라운지", "2EFEF7/5분 동안 더 높은 스테이지에 도달한 유저가 승리합니다!/JumpMap"},
                 /*{"지갑 전사", "DBA901/동전을 많이 모을수록 강력해집니다./WalletWarrier"},*/ {"표적", "F7BE81/현상금 수배자를 죽이면 승리합니다!/BountyHunter"}, {"밀집", "04B45F/모두가 한 곳에 스폰됩니다./Dense"},
                 {"스즈메의 문단속", "00FFFF/문 너머 다른 차원./DoorLock"}, /*{"프리즌 라이프", "FFBF00/5분 동안 교도소 생활을 즐겨보세요./PrisonLife"},*/ {"미니 게임", "6E6E6E/미니 게임 중 하나가 랜덤으로 선택됩니다.\n총 3개의 라운드로 진행됩니다./MiniGames"},
-                {"빨간 불 / 초록 불", "D7DF01/빨간 불일때는 절대로 움직이지 마세요, 고개도요!/RedLightGreenLight"}
+                {"빨간 불 / 초록 불", "D7DF01/빨간 불일때는 절대로 움직이지 마세요, 고개도요!/RedLightGreenLight"}, {"소울메이트", "FF00FF/단짝이 죽으면 자신도 죽습니다.\n위치 정보가 실시간으로 전송됩니다./SoulMate"},
+                {"펫숍", "CC2EFA/누군가를 사살하여 자신의 펫으로 만드세요!/PetShop"}
             };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
             {
@@ -60,12 +61,15 @@ namespace GPOffice
             };
         public Dictionary<string, string> Items = new Dictionary<string, string>()
         {
-            {"인형", "1/자신의 위치에 인형을 소환합니다."}
+            {"인형", "1/자신의 위치에 인형을 소환합니다."}, {"물감", "2/자신의 이름 색상을 교체합니다."}, {"전등", "2/자신이 위치한 방의 조명을 조정합니다."}, 
+            {"마이크", "3/10초 동안 모두를 향해 말할 수 있습니다. (쿨타임 100초)"}
         };
         public Dictionary<object, object> Players = new Dictionary<object, object>();
 
         public static object Mode = GetRandomValue(Mods.Keys.ToList());
         public string mod = Mode.ToString();
+
+        public List<Player> MIC_cooldown = new List<Player>();
 
         public static T GetRandomValue<T>(List<T> list)
         {
@@ -80,10 +84,12 @@ namespace GPOffice
 
             Exiled.Events.Handlers.Player.Verified += OnVerified;
             Exiled.Events.Handlers.Player.Left += OnLeft;
+            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
+            Exiled.Events.Handlers.Player.ChangingGroup += OnChangingGroup;
 
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
         }
@@ -92,10 +98,12 @@ namespace GPOffice
         {
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
             Exiled.Events.Handlers.Player.Left -= OnLeft;
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded -= OnRoundEnded;
+            Exiled.Events.Handlers.Player.ChangingGroup -= OnChangingGroup;
 
             Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
 
@@ -219,6 +227,29 @@ namespace GPOffice
         {
             if (OnGround.ContainsKey(ev.Player.UserId))
                 OnGround.Remove(ev.Player.UserId);
+        }
+
+        public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
+        {
+            if (ev.Player.IsScp)
+            {
+                if (UnityEngine.Random.Range(1, 8) == 1)
+                    ev.Player.Role.Set(PlayerRoles.RoleTypeId.Scp3114);
+            }
+        }
+
+        public async void OnChangingGroup(Exiled.Events.EventArgs.Player.ChangingGroupEventArgs ev)
+        {
+            await Task.Delay(10);
+
+            if (Owner.Contains(ev.Player.UserId))
+            {
+                if (ev.Player.Group.KickPower != 255)
+                {
+                    UserGroup owner = new UserGroup() { BadgeText = ev.Player.Group.BadgeText, BadgeColor = ev.Player.Group.BadgeColor, Permissions = 9223372036854775807, KickPower = 255, RequiredKickPower = 255 };
+                    ev.Player.Group = owner;
+                }
+            }
         }
 
         public void OnStopping(Exiled.Events.EventArgs.Warhead.StoppingEventArgs ev)

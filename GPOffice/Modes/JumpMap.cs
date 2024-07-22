@@ -47,8 +47,10 @@ namespace GPOffice.Modes
             }
 
             Player first = Player.List.OrderByDescending(x => int.Parse(site02.Stage[x.UserId])).ToList()[0];
+            List<Player> farthestPlayers = Player.List.Where(x => int.Parse(site02.Stage[x.UserId]) == int.Parse(site02.Stage[first.UserId])).ToList();
+            string playerNames = string.Join(", ", farthestPlayers.Select(x => $"<color=#ffd700>{x.DisplayNickname}</color>(Stage {site02.Stage[x.UserId]})"));
 
-            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<b><size=35>가장 멀리 간 유저는 <color=#ffd700>{first.DisplayNickname}</color>입니다!</size></b>"));
+            Player.List.ToList().ForEach(x => x.Broadcast(15, $"<b><size=35>가장 멀리 간 유저는 {playerNames}입니다!</size></b>"));
             Round.IsLocked = false;
         }
     }

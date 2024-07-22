@@ -41,6 +41,8 @@ namespace GPOffice.Modes
         {
             yield return Timing.WaitForSeconds(300f);
 
+            Round.IsLocked = false;
+
             foreach (var player in Player.List)
             {
                 if (player.IsAlive)

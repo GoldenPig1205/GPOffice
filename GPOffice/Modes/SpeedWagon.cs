@@ -30,8 +30,8 @@ namespace GPOffice.Modes
         {
             player.EnableEffect(Exiled.API.Enums.EffectType.MovementBoost, 255);
             player.EnableEffect(Exiled.API.Enums.EffectType.Scp1853, 4);
-            player.MaxHealth = player.Health / 2;
-            player.Health = player.Health / 2;
+            player.MaxHealth = player.Health / 4;
+            player.Health = player.Health / 4;
         }
     }
 }

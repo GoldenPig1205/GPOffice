@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Threading.Tasks;
 using CommandSystem;
 using Discord;
 using Exiled.API.Features;
+using MEC;
+using UnityEngine;
 using static PlayerList;
 
 namespace GPOffice.Commands
@@ -77,6 +80,34 @@ namespace GPOffice.Commands
 
                             if (ItemName == "인형")
                                 Server.ExecuteCommand($"/ragdoll {player.Id} {UnityEngine.Random.Range(0, 20)} 1");
+
+                            else if (ItemName == "물감")
+                            {
+                                string rc = Plugin.GetRandomValue(new List<string>() { "black", "white", "silver", "yellow", "red", "pink", "pumpkin", "green", "light_green", "lime", "police_blue", "carmine", "nickel", "mint", "army_green", "tomato", "deep_pink" });
+                                player.Group = new UserGroup { BadgeColor = rc, BadgeText = rc };
+                                player.ShowHint($"<size=25><i>당신의 이름 색상은 {rc}(으)로 배정되었습니다.</i></size>", 5);
+                            }
+
+                            else if (ItemName == "전등")
+                                player.CurrentRoom.Color = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+
+                            else if (ItemName == "마이크")
+                            {
+                                if (Plugin.Instance.MIC_cooldown.Contains(player))
+                                    response = $"{Mark}(아이템 구매)\n[마이크] 아이템의 구매 쿨타임이 남았습니다.";
+
+                                else
+                                {
+                                    Plugin.Instance.MIC_cooldown.Add(player);
+
+                                    Server.ExecuteCommand($"/speak {player.Id} enable");
+
+                                    player.ShowHint($"<b><color=red>[ON AIR]</color></b>", 10);
+                                    Timing.CallDelayed(10f, () => Server.ExecuteCommand($"/speak {player.Id} disable"));
+
+                                    Timing.CallDelayed(100f, () => { Plugin.Instance.MIC_cooldown.Remove(player); });
+                                }
+                            }
 
                             result = true;
                             return result;

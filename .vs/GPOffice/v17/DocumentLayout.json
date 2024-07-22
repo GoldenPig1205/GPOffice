@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|c:\\users\\goldenpig1205\\desktop\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\minigames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\minigames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|c:\\users\\goldenpig1205\\desktop\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|c:\\users\\goldenpig1205\\desktop\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\abattle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\abattle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\extensions\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\extensions\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|c:\\users\\goldenpig1205\\desktop\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\bombparty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\bombparty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|c:\\users\\goldenpig1205\\desktop\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,53 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MiniGames.cs",
-              "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\MiniGames.cs",
-              "RelativeDocumentMoniker": "GPOffice\\Modes\\MiniGames.cs",
-              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\MiniGames.cs*",
-              "RelativeToolTip": "GPOffice\\Modes\\MiniGames.cs*",
-              "ViewState": "AQIAABQAAAAAAAAAAADwvyMAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-18T13:00:26.609Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Plugin.cs",
               "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeDocumentMoniker": "GPOffice\\Plugin.cs",
               "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeToolTip": "GPOffice\\Plugin.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAAAEIAAABHAAAA",
+              "ViewState": "AQIAANwAAAAAAAAAAAAgwOYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-10T09:32:24.027Z",
+              "WhenOpened": "2024-07-20T10:54:10.27Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Manager.cs",
-              "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Extensions\\Manager.cs",
-              "RelativeDocumentMoniker": "GPOffice\\Extensions\\Manager.cs",
-              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Extensions\\Manager.cs",
-              "RelativeToolTip": "GPOffice\\Extensions\\Manager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T14:04:23.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "GPOffice.Commands.cs",
               "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Commands\\GPOffice.Commands.cs",
               "RelativeDocumentMoniker": "GPOffice\\Commands\\GPOffice.Commands.cs",
               "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Commands\\GPOffice.Commands.cs",
               "RelativeToolTip": "GPOffice\\Commands\\GPOffice.Commands.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAAwGgAAAAiAAAA",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAgwE0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T13:31:55.144Z",
+              "WhenOpened": "2024-07-21T02:06:39.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ABattle.cs",
+              "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\ABattle.cs",
+              "RelativeDocumentMoniker": "GPOffice\\Modes\\ABattle.cs",
+              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\ABattle.cs*",
+              "RelativeToolTip": "GPOffice\\Modes\\ABattle.cs*",
+              "ViewState": "AQIAAIABAAAAAAAAAAAAAPwAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T15:32:42.167Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BombParty.cs",
+              "DocumentMoniker": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\BombParty.cs",
+              "RelativeDocumentMoniker": "GPOffice\\Modes\\BombParty.cs",
+              "ToolTip": "C:\\Users\\GoldenPig1205\\Desktop\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\BombParty.cs",
+              "RelativeToolTip": "GPOffice\\Modes\\BombParty.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAIwDQAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T03:02:42.284Z",
               "EditorCaption": ""
             }
           ]

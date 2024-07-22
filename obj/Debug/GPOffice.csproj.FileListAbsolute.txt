@@ -224,3 +224,4 @@ C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Deb
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\System.ValueTuple.xml
+C:\Users\GoldenPig1205\Desktop\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\SCPS.dll

@@ -100,6 +100,9 @@
     <Reference Include="Prison Life">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\Prison Life.dll</HintPath>
     </Reference>
+    <Reference Include="SCPS">
+      <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\SCPS.dll</HintPath>
+    </Reference>
     <Reference Include="Site02">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\Site02.dll</HintPath>
     </Reference>
@@ -165,7 +168,10 @@
     <Compile Include="GPOffice\Commands\GPOffice.Commands.cs" />
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\Extensions\Manager.cs" />
+    <Compile Include="GPOffice\Modes\PetShop.cs" />
     <Compile Include="GPOffice\Modes\RedLightGreenLight.cs" />
+    <Compile Include="GPOffice\Modes\ScpA.cs" />
+    <Compile Include="GPOffice\Modes\SoulMate.cs" />
     <Compile Include="GPOffice\Plugin.cs" />
     <Compile Include="GPOffice\Modes\ABattle.cs" />
     <Compile Include="GPOffice\Modes\BomberMan.cs" />
