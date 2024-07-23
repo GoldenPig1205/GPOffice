@@ -68,6 +68,14 @@ namespace GPOffice.Commands
                 }
                 else if (arguments.At(0) == "구매")
                 {
+                    if (!player.IsAlive)
+                    {
+                        response = $"{Mark}(아이템 구매)\n죽은 상태에서는 상점에 방문할 수 없습니다.";
+
+                        result = false;
+                        return result;
+                    }
+
                     if (Items.ContainsKey(arguments.At(1)))
                     {
                         string ItemName = arguments.At(1);

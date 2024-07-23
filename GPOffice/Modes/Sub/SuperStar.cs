@@ -5,21 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
 
-namespace GPOffice.Modes
+namespace GPOffice.SubModes
 {
     class SuperStar
     {
         public static SuperStar Instance;
 
+        Task Works;
+
         public List<string> pl = new List<string>();
 
         public void OnEnabled()
         {
-            Task.WhenAll(
+            Works = Task.WhenAll(
                 OnModeStarted()
                 );
 
             Exiled.Events.Handlers.Player.Left += OnLeft;
+        }
+
+        public void OnDisabled()
+        {
+            Works.Dispose();
+
+            Exiled.Events.Handlers.Player.Left -= OnLeft;
         }
 
         public async Task OnModeStarted()

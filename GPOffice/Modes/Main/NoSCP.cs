@@ -15,11 +15,22 @@ namespace GPOffice.Modes
     {
         public static NoSCP Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public void OnEnabled()
         {
-            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
-            Timing.RunCoroutine(OnModeStarted());
+            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
+
+            
         }
 
         public IEnumerator<float> OnModeStarted()

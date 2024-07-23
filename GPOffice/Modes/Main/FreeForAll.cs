@@ -17,6 +17,8 @@ namespace GPOffice.Modes
     {
         public static FreeForAll Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public List<Player> pl = new List<Player>();
         public string ModeName = Plugin.GetRandomValue(Plugin.Instance.Maps.Keys.ToList()).ToString();
         public List<ItemType> StartupItems = null;
@@ -27,10 +29,18 @@ namespace GPOffice.Modes
             Round.IsLocked = true;
             Respawn.TimeUntilNextPhase = 10000;
 
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Dying += OnDying;
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Dying -= OnDying;
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
         }
 
         public List<ItemType> Items()
@@ -45,7 +55,7 @@ namespace GPOffice.Modes
             
             foreach (var ammo in Ammos)
             {
-                for (int i= 0; i < 10; i++)
+                for (int i= 0; i < 100; i++)
                     Items.Add(ammo);    
             }
 

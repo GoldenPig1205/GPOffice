@@ -18,6 +18,9 @@ namespace GPOffice.Modes
     {
         public static HIDE Instance;
 
+        Task Works;
+        CoroutineHandle timing_OnModeStarted;
+
         public List<Player> pl = new List<Player>();
         public Player monster = null;
         public float invisible = 1f;
@@ -30,14 +33,22 @@ namespace GPOffice.Modes
             Server.ExecuteCommand($"/close **");
             Server.ExecuteCommand($"/lock **");
 
-            Timing.RunCoroutine(OnModeStarted());
-            Task.WhenAll(
+            Works = Task.WhenAll(
                 Timer()
                 );
+
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
         }
 
+        public void OnDisabled()
+        {
+            Works.Dispose();
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Hurting -= OnHurting;
+        }
 
         public async Task Timer()
         {

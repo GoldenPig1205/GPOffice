@@ -15,6 +15,8 @@ namespace GPOffice.Modes
     {
         public static Tomb Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public List<Player> pl = new List<Player>();
 
         public void OnEnabled()
@@ -23,10 +25,18 @@ namespace GPOffice.Modes
             Round.IsLocked = true;
             Respawn.TimeUntilNextPhase = 10000;
 
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Died -= OnDied;
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
         }
 
         public Vector3 RandomPosition()

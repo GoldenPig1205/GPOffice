@@ -15,13 +15,22 @@ namespace GPOffice.Modes
     {
         public static SoulMate Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         private Dictionary<Player, Player> soulMates;
 
         public void OnEnabled()
         {
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Died -= OnDied;
         }
 
         public IEnumerator<float> OnModeStarted()

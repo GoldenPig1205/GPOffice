@@ -16,6 +16,8 @@ namespace GPOffice.Modes
     {
         public static MiniGames Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public int RoundCount = 0;
         public List<string> Games = new List<string>() { "airstrike", "dm", "escape", "battle", "versus", "cs", "glass", "line", "dodge", "fall", 
             "football", "gungame", "knives", "puzzle", "race", "light", "spleef", "tag", "tdm", "lava", "zombie3", "zombie2", "zombie" };
@@ -24,9 +26,14 @@ namespace GPOffice.Modes
         {
             Round.IsLocked = true;
 
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Server.ExecuteCommand($"/mp load ru");
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
         }
 
         public IEnumerator<float> OnModeStarted()

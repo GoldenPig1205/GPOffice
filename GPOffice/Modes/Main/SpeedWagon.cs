@@ -21,6 +21,11 @@ namespace GPOffice.Modes
                 Spawned(player);
         }
 
+        public void OnDisabled()
+        {
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
+        }
+
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
             Spawned(ev.Player);

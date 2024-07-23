@@ -9,7 +9,7 @@ using MEC;
 using Mirror;
 using UnityEngine;
 
-namespace GPOffice.Modes
+namespace GPOffice.SubModes
 {
     class PaperHuman
     {
@@ -20,6 +20,11 @@ namespace GPOffice.Modes
         public void OnEnabled()
         {
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+        }
+
+        public void OnDisabled()
+        {
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
         }
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)

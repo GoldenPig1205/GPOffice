@@ -24,11 +24,16 @@ namespace GPOffice.Modes
     {
         public static ABattle Instance;
 
+        Task Works;
+        CoroutineHandle timing_Spirit;
+
         public Dictionary<string, List<Vector3>> PlayerWorkstation = new Dictionary<string, List<Vector3>>();
         public Dictionary<string, List<string>> PlayerAbilities = new Dictionary<string, List<string>>();
 
         public List<string> BlackOutCooldown = new List<string>();
         public List<ushort> GrapCoinSerials = new List<ushort>();
+
+        public List<Player> spirits = new List<Player>();
 
         public Dictionary<string, string> CommonAbilities = new Dictionary<string, string>()
         {
@@ -74,15 +79,18 @@ namespace GPOffice.Modes
         public Dictionary<string, string> MythicAbilities = new Dictionary<string, string>()
         {
             {"[신화] 해킹", "시설 핵을 즉시 터트립니다."},
-            {"[신화] 로켓 런처", "상대방을 한방에 보내버릴 수 있습니다."}
+            {"[신화] 로켓 런처", "상대방을 한방에 보내버릴 수 있습니다."},
+            {"[신화] 스피릿", "영혼 상태가 됩니다."}
         };
 
         public void OnEnabled()
         {
-            Task.WhenAll(
+            Works = Task.WhenAll(
                 OnModeStarted(),
                 UpgradeBody()
                 );
+
+            timing_Spirit = Timing.RunCoroutine(Spirit());
 
             Exiled.Events.Handlers.Player.Jumping += OnJumping;
             Exiled.Events.Handlers.Player.FlippingCoin += OnFlippingCoin;
@@ -93,6 +101,23 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.DroppedItem += DroppedItem;
             Exiled.Events.Handlers.Player.Hurting += Hurting;
             Exiled.Events.Handlers.Player.ChangingSpectatedPlayer += ChangingSpectatedPlayer;
+        }
+
+        public void OnDisabled()
+        {
+            Works.Dispose();
+
+            Timing.KillCoroutines(timing_Spirit);
+
+            Exiled.Events.Handlers.Player.Jumping -= OnJumping;
+            Exiled.Events.Handlers.Player.FlippingCoin -= OnFlippingCoin;
+            Exiled.Events.Handlers.Player.ChangedItem -= OnChangedItem;
+            Exiled.Events.Handlers.Player.Dying -= OnDying;
+            Exiled.Events.Handlers.Player.InteractingDoor -= InteractingDoor;
+            Exiled.Events.Handlers.Player.InteractingLocker -= InteractingLocker;
+            Exiled.Events.Handlers.Player.DroppedItem -= DroppedItem;
+            Exiled.Events.Handlers.Player.Hurting -= Hurting;
+            Exiled.Events.Handlers.Player.ChangingSpectatedPlayer -= ChangingSpectatedPlayer;
         }
 
         public async Task OnModeStarted()
@@ -144,6 +169,20 @@ namespace GPOffice.Modes
             }
         }
 
+        public IEnumerator<float> Spirit()
+        {
+            while (true)
+            {
+                foreach (var player in Player.List)
+                {
+                    if (spirits.Contains(player))
+                        player.EnableEffect(Exiled.API.Enums.EffectType.Invisible);
+                }
+
+                yield return Timing.WaitForSeconds(1f);
+            }
+        }
+
         public async void OnJumping(Exiled.Events.EventArgs.Player.JumpingEventArgs ev)
         {
             if (Physics.Raycast(ev.Player.Position, Vector3.down, out RaycastHit hit, 5, (LayerMask)1))
@@ -163,7 +202,7 @@ namespace GPOffice.Modes
                         abilityGrade = "[희귀]";
                     else if (grade <= 990)
                         abilityGrade = "[영웅]";
-                    else if (grade <= 999)
+                    else if (grade <= 998)
                         abilityGrade = "[전설]";
                     else
                         abilityGrade = "[신화]";
@@ -190,14 +229,14 @@ namespace GPOffice.Modes
                         {
                             Cassie.Clear();
                             Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 <color=#DF0101>[신화]</color> 업그레이드를 입수하였습니다.");
-                            return LegendAbilities;
+                            return MythicAbilities;
                         }
                     }
 
                     void ApplyGiveAbility(string abilityName)
                     {
                         PlayerAbilities[ev.Player.UserId].Add(abilityName);
-                        string styleName = abilityName.Replace("[신화", "<color=#DF0101>[신화]</color>").Replace("[전설]", "<color=#ffd700>[전설]</color>").Replace("[영웅]", "<color=#FF00FF>[영웅]</color>").Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>").Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
+                        string styleName = abilityName.Replace("[신화]", "<color=#DF0101>[신화]</color>").Replace("[전설]", "<color=#ffd700>[전설]</color>").Replace("[영웅]", "<color=#FF00FF>[영웅]</color>").Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>").Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
                         ev.Player.ClearBroadcasts();
                         ev.Player.Broadcast(8, $"<size=20><b>다음 능력이 추가되었습니다.</b></size>\n<size=30>{styleName}</size>\n<size=25>{AbilityList()[abilityName]}</size>");
                     }
@@ -225,16 +264,16 @@ namespace GPOffice.Modes
                             }
                             break;
                         case "위치 추적":
+                            Player target1 = Plugin.GetRandomValue(Player.List.Where(x => x.IsAlive).ToList());
+
                             for (int i = 1; i < 11; i++)
                             {
-                                Player target1 = Plugin.GetRandomValue(Player.List.Where(x => x.IsAlive).ToList());
-                                ev.Player.ShowHint($"소속이 <color=#{target1.Role.Color.ToHex()}>{target1.Role.Name}</color>인 ???은(는) <b>{target1.CurrentRoom.Name}</b>에 있습니다.", 1.2f);
+                                ev.Player.ShowHint($"소속이 <color={target1.Role.Color.ToHex()}>{target1.Role.Name}</color>인 ???은(는) <b>{target1.CurrentRoom.Name}</b>에 있습니다.", 1.2f);
                                 await Task.Delay(1000);
                             }
                             break;
                         case "층간이동":
-                            Room ChkPoint = Plugin.GetRandomValue(Room.List.Where(x => x.Name.Contains("Checkpoint")).ToList());
-                            ev.Player.Position = ChkPoint.Position;
+                            Server.ExecuteCommand($"/dtp {ev.Player.Id} {Plugin.GetRandomValue(new List<string>() { "CHECKPOINT_LCZ_A", "CHECKPOINT_LCZ_B", "CHECKPOINT_EZ_HCZ_A", "CHECKPOINT_EZ_HCZ_A" })}");
                             break;
                         case "강철 껍질": ev.Player.GetEffect(Exiled.API.Enums.EffectType.DamageReduction).Intensity += 1; break;
                         case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 1, 25); break;
@@ -243,10 +282,10 @@ namespace GPOffice.Modes
                             ev.Player.Position = target.Position;
                             break;
                         case "봄버맨":
-                            var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, Server.Host);
+                            var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, ev.Player);
                             g.FuseTime = 3f;
                             foreach (var player in Player.List)
-                                g.SpawnActive(player.Position, Server.Host);
+                                g.SpawnActive(player.Position, ev.Player);
                             break;
                         case "갈고리":
                             Item gc = ev.Player.AddItem(ItemType.Coin);
@@ -282,7 +321,7 @@ namespace GPOffice.Modes
                             Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 [{mod1}] 모드를 설치했습니다.");
                             break;
                         case "뱀의 손 무전기":
-                            Server.ExecuteCommand($"/fc {ev.Player.Id} Tutorial 3");
+                            Server.ExecuteCommand($"/fc {ev.Player.Id} Tutorial 0");
 
                             List<Player> SnakeHands = Player.List.Where(x => x.IsDead).ToList();
 
@@ -302,6 +341,7 @@ namespace GPOffice.Modes
                                 Server.ExecuteCommand($"/drop {ev.Player.Id} {UnityEngine.Random.Range(1, 55)} 1");
                             break;
                         case "해킹": Warhead.Start(); Warhead.Detonate(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 <b>원격으로 터트렸습니다.</b>"); break;
+                        case "스피릿": spirits.Add(ev.Player); break;
                     }
                 }
             }
@@ -366,9 +406,13 @@ namespace GPOffice.Modes
                 PlayerWorkstation[ev.Player.UserId].Clear();
                 ev.Player.Scale = new Vector3(1, 1, 1);
                 Server.ExecuteCommand($"/speak {ev.Player.Id} disable");
+                ev.Player.IsUsingStamina = true;
 
                 if (BlackOutCooldown.Contains(ev.Player.UserId))
                     BlackOutCooldown.Remove(ev.Player.UserId);
+
+                if (spirits.Contains(ev.Player))
+                    spirits.Remove(ev.Player);
             }
         }
 
@@ -436,10 +480,7 @@ namespace GPOffice.Modes
                 else
                 {
                     string abilitiesText = string.Join(", ", PlayerAbilities[ev.NewTarget.UserId]);
-                    abilitiesText = abilitiesText.Replace("[전설]", "<color=#ffd700>[전설]</color>");
-                    abilitiesText = abilitiesText.Replace("[영웅]", "<color=#FF00FF>[영웅]</color>");
-                    abilitiesText = abilitiesText.Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>");
-                    abilitiesText = abilitiesText.Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
+                    abilitiesText = abilitiesText.Replace("[신화]", "<color=#DF0101>[신화]</color>").Replace("[전설]", "<color=#ffd700>[전설]</color>").Replace("[영웅]", "<color=#FF00FF>[영웅]</color>").Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>").Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
 
                     ev.Player.ShowHint($"<align=left><b><size=25>보유 능력</size></b>\n<size=20>{abilitiesText}</size></align>", 250f);
                 }

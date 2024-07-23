@@ -8,7 +8,7 @@ using UnityEngine;
 using PlayerRoles.FirstPersonControl;
 using MEC;
 
-namespace GPOffice.Modes
+namespace GPOffice.SubModes
 {
     public class Hit
     {
@@ -76,11 +76,18 @@ namespace GPOffice.Modes
         public static FriendlyFire Instance;
         public Gtool gtool;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public void OnEnabled()
         {
             Server.FriendlyFire = true;
 
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
         }
 
         public void OnMelee(Player player)

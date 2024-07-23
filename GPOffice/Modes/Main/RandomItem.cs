@@ -15,11 +15,20 @@ namespace GPOffice.Modes
     {
         public static RandomItem Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public void OnEnabled()
         {
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
         }
 
         public IEnumerator<float> OnModeStarted()

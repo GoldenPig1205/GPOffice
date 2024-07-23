@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomRendering;
 using Exiled.API.Features;
+using MapGeneration.Distributors;
 using MEC;
 using Mirror;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace GPOffice.Modes
     {
         public static SpeedRun Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public List<Player> pl = new List<Player>();
 
         public void OnEnabled()
@@ -22,12 +25,22 @@ namespace GPOffice.Modes
             Round.IsLocked = true;
             Server.FriendlyFire = true;
 
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
             Exiled.Events.Handlers.Player.Dying += OnDying;
             Exiled.Events.Handlers.Player.Escaping += OnEscaping;
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
+            Exiled.Events.Handlers.Player.Dying -= OnDying;
+            Exiled.Events.Handlers.Player.Escaping -= OnEscaping;
+            Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -37,6 +50,9 @@ namespace GPOffice.Modes
             Warhead.Start();
 
             Player.List.ToList().ForEach(x => Spawned(x));
+
+            foreach (var locker in Recontainer.LockedDoors.ToList())
+                locker.IsOpen = true;
 
             yield return 0f;
         }

@@ -15,14 +15,24 @@ namespace GPOffice.Modes
     {
         public static PetShop Instance;
 
+        CoroutineHandle timing_OnModeStarted;
+
         public Dictionary<Player, List<Player>> Pets = new Dictionary<Player, List<Player>>();
 
         public void OnEnabled()
         {
-            Timing.RunCoroutine(OnModeStarted());
+            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
             Exiled.Events.Handlers.Player.Died += OnDied;
+        }
+
+        public void OnDisabled()
+        {
+            Timing.KillCoroutines(timing_OnModeStarted);
+
+            Exiled.Events.Handlers.Player.Hurting -= OnHurting;
+            Exiled.Events.Handlers.Player.Died -= OnDied;
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -53,13 +63,24 @@ namespace GPOffice.Modes
 
         public async void OnDied(Exiled.Events.EventArgs.Player.DiedEventArgs ev)
         {
-            if (ev.Attacker != null && ev.Player != null)
+            Player Attacker()
             {
-                if (Pets.ContainsKey(ev.Attacker))
-                    Pets[ev.Attacker].Add(ev.Player);
+                if (ev.DamageHandler.Type == Exiled.API.Enums.DamageType.PocketDimension)
+                    return Player.List.Where(x => x.Role.Type == PlayerRoles.RoleTypeId.Scp106).ToList()[0];
 
                 else
-                    Pets.Add(ev.Attacker, new List<Player> { ev.Player });
+                    return ev.Attacker;
+            }
+
+            Player at = Attacker();
+
+            if (at != null && ev.Player != null && at != ev.Player)
+            {
+                if (Pets.ContainsKey(at))
+                    Pets[at].Add(ev.Player);
+
+                else
+                    Pets.Add(at, new List<Player> { ev.Player });
 
                 for (int i = 1; i < 6; i++)
                 {
@@ -69,7 +90,7 @@ namespace GPOffice.Modes
 
                 ev.Player.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
                 ev.Player.Scale = new Vector3(0.5f, 0.5f, 0.5f);
-                ev.Player.Group = new UserGroup { BadgeText = $"{ev.Attacker.DisplayNickname}의 펫", BadgeColor = "pink" };
+                ev.Player.Group = new UserGroup { BadgeText = $"{at.DisplayNickname}의 펫", BadgeColor = "pink" };
                 Server.ExecuteCommand($"/god {ev.Player.Id} 1");
             }
         }

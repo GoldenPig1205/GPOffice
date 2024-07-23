@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
+using MEC;
 
 namespace GPOffice.Modes
 {
     class TripleUp
     {
         public static TripleUp Instance;
+
+        Task Works;
 
         public static object Mode1 = Plugin.GetRandomValue(Plugin.Mods.Keys.ToList());
         public static string mod1 = Mode1.ToString();
@@ -26,9 +29,14 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Task.WhenAll(
+            Works = Task.WhenAll(
                 OnModeStarted()
                 );
+        }
+
+        public void OnDisabled()
+        {
+            Works.Dispose();
         }
 
         public async Task OnModeStarted()

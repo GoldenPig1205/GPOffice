@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
 
-namespace GPOffice.Modes
+namespace GPOffice.SubModes
 {
     class Ghost
     {
@@ -16,6 +16,11 @@ namespace GPOffice.Modes
         public void OnEnabled()
         {
             TaskA.Start();
+        }
+
+        public void OnDisabled()
+        {
+            TaskA.Dispose();
         }
 
         public async void OnModeStarted()
