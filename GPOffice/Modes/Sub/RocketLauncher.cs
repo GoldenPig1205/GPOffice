@@ -12,20 +12,11 @@ namespace GPOffice.SubModes
     {
         public static RocketLauncher Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public void OnEnabled()
         {
             Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Hurt += OnHurt;
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-
-            Exiled.Events.Handlers.Player.Hurt -= OnHurt;
         }
 
         public void OnHurt(Exiled.Events.EventArgs.Player.HurtEventArgs ev)

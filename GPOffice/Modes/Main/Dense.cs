@@ -14,18 +14,11 @@ namespace GPOffice.Modes
     {
         public static Dense Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public List<string> pl = new List<string>();
 
         public void OnEnabled()
         {
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
+            Timing.RunCoroutine(OnModeStarted());
         }
 
         public IEnumerator<float> OnModeStarted()

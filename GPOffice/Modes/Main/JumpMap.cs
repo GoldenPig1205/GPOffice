@@ -15,8 +15,6 @@ namespace GPOffice.Modes
 {
     class JumpMap
     {
-        CoroutineHandle timing_OnModeStarted;
-
         site02.site02 site02 = new site02.site02();
 
         public void OnEnabled()
@@ -27,7 +25,7 @@ namespace GPOffice.Modes
 
             Timing.CallDelayed(1f, () =>
             {
-                timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
+                Timing.RunCoroutine(OnModeStarted());
 
                 site02.OnEnabled();
                 site02.OnRoundStarted();
@@ -35,13 +33,6 @@ namespace GPOffice.Modes
                 foreach (var player in Player.List)
                     site02.Verified(player);
             });
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-
-            site02.OnDisabled();
         }
 
         public IEnumerator<float> OnModeStarted()

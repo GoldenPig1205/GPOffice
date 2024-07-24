@@ -16,16 +16,9 @@ namespace GPOffice.Modes
     {
         public static BomberMan Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public void OnEnabled()
         {
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
-        }
-
-        public void ONDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
+            Timing.RunCoroutine(OnModeStarted());
         }
 
         public IEnumerator<float> OnModeStarted()

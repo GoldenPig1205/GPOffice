@@ -16,24 +16,14 @@ namespace GPOffice.Modes
     {
         public static OnlyOneHuman Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public void OnEnabled()
         {
             Respawn.TimeUntilNextPhase = 10000;
 
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
+            Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
             Exiled.Events.Handlers.Player.Escaping += OnEscaping;
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-
-            Exiled.Events.Handlers.Player.Died -= OnDied;
-            Exiled.Events.Handlers.Player.Escaping -= OnEscaping;
         }
 
         public IEnumerator<float> OnModeStarted()

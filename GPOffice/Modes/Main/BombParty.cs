@@ -17,8 +17,6 @@ namespace GPOffice.Modes
     {
         public static BombParty Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public List<Player> pl = new List<Player>();
 
         public void OnEnabled()
@@ -27,21 +25,14 @@ namespace GPOffice.Modes
             Round.IsLocked = true;
             Respawn.TimeUntilNextPhase = 10000;
 
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
+            Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
         }
 
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-
-            Exiled.Events.Handlers.Player.Died -= OnDied;
-        }
-
         public IEnumerator<float> OnModeStarted()
         {
-            yield return Timing.WaitForSeconds(1f);
+            yield return Timing.WaitForSeconds(10f);
 
             Server.ExecuteCommand($"/mp load bp");
 

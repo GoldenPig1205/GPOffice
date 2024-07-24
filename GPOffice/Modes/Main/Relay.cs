@@ -12,8 +12,6 @@ namespace GPOffice.Modes
     {
         public static Relay Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public static object Mode = Plugin.GetRandomValue(Plugin.Mods.Keys.ToList());
         public static string mod = Mode.ToString();
 
@@ -21,12 +19,7 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
+            Timing.RunCoroutine(OnModeStarted());
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -46,16 +39,6 @@ namespace GPOffice.Modes
                 Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=20>다음 모드 주자는..</size>\n<size=25><b>[<color=#{Plugin.Mods[mod].ToString().Split('/')[0]}>{mod}</color>]</b></size>"));
 
                 yield return Timing.WaitForSeconds(120f);
-
-                var currentModeType = Type.GetType($"GPOffice.Modes.{Plugin.Mods[mod].ToString().Split('/')[2].Replace(" ", "")}");
-                if (currentModeType != null)
-                {
-                    var currentModeInstance = Activator.CreateInstance(currentModeType);
-                    var onDisabledMethod = currentModeType.GetMethod("OnDisabled");
-                    onDisabledMethod?.Invoke(currentModeInstance, null);
-
-                    currentModeInstance = null;
-                }
 
                 Mode = Plugin.GetRandomValue(Plugin.Mods.Keys.ToList());
                 mod = Mode.ToString();

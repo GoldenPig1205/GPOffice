@@ -24,9 +24,6 @@ namespace GPOffice.Modes
     {
         public static ABattle Instance;
 
-        Task Works;
-        CoroutineHandle timing_Spirit;
-
         public Dictionary<string, List<Vector3>> PlayerWorkstation = new Dictionary<string, List<Vector3>>();
         public Dictionary<string, List<string>> PlayerAbilities = new Dictionary<string, List<string>>();
 
@@ -85,12 +82,12 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
-            Works = Task.WhenAll(
+            Task.WhenAll(
                 OnModeStarted(),
                 UpgradeBody()
                 );
 
-            timing_Spirit = Timing.RunCoroutine(Spirit());
+            Timing.RunCoroutine(Spirit());
 
             Exiled.Events.Handlers.Player.Jumping += OnJumping;
             Exiled.Events.Handlers.Player.FlippingCoin += OnFlippingCoin;
@@ -101,23 +98,6 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.DroppedItem += DroppedItem;
             Exiled.Events.Handlers.Player.Hurting += Hurting;
             Exiled.Events.Handlers.Player.ChangingSpectatedPlayer += ChangingSpectatedPlayer;
-        }
-
-        public void OnDisabled()
-        {
-            Works.Dispose();
-
-            Timing.KillCoroutines(timing_Spirit);
-
-            Exiled.Events.Handlers.Player.Jumping -= OnJumping;
-            Exiled.Events.Handlers.Player.FlippingCoin -= OnFlippingCoin;
-            Exiled.Events.Handlers.Player.ChangedItem -= OnChangedItem;
-            Exiled.Events.Handlers.Player.Dying -= OnDying;
-            Exiled.Events.Handlers.Player.InteractingDoor -= InteractingDoor;
-            Exiled.Events.Handlers.Player.InteractingLocker -= InteractingLocker;
-            Exiled.Events.Handlers.Player.DroppedItem -= DroppedItem;
-            Exiled.Events.Handlers.Player.Hurting -= Hurting;
-            Exiled.Events.Handlers.Player.ChangingSpectatedPlayer -= ChangingSpectatedPlayer;
         }
 
         public async Task OnModeStarted()
@@ -144,7 +124,7 @@ namespace GPOffice.Modes
                                 string abilitiesText = string.Join(", ", PlayerAbilities[player.UserId]);
                                 abilitiesText = abilitiesText.Replace("[신화]", "<color=#DF0101>[신화]</color>").Replace("[전설]", "<color=#ffd700>[전설]</color>").Replace("[영웅]", "<color=#FF00FF>[영웅]</color>").Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>").Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
 
-                                player.ShowHint($"<align=left><b><size=25>보유 능력</size></b>\n<size=20>{abilitiesText}</size></align>", 1.2f);
+                                player.ShowHint($"<align=left><b><size=25>보유 업그레이드</size></b>\n<size=20>{abilitiesText}</size></align>", 1.2f);
                             }
                         }
                     }
@@ -290,6 +270,9 @@ namespace GPOffice.Modes
                         case "갈고리":
                             Item gc = ev.Player.AddItem(ItemType.Coin);
                             GrapCoinSerials.Add(gc.Serial);
+
+                            if (ev.Player.IsScp)
+                                ev.Player.CurrentItem = gc;
                             break;
                         case "테러리스트의 유품": ev.Player.TryAddCandy(CandyKindID.Pink); break;
                         case "랜덤상자":
@@ -445,7 +428,7 @@ namespace GPOffice.Modes
             if (PlayerAbilities[ev.Player.UserId].Contains("[영웅] 도박꾼"))
             {
                 if (UnityEngine.Random.Range(0, 100) <= 5)
-                    ev.Player.Kill("과도한 욕심은 화를 불러일으킨다구요!");
+                    ev.Player.EnableEffect(Exiled.API.Enums.EffectType.SeveredHands);
 
                 else
                 {
@@ -482,7 +465,7 @@ namespace GPOffice.Modes
                     string abilitiesText = string.Join(", ", PlayerAbilities[ev.NewTarget.UserId]);
                     abilitiesText = abilitiesText.Replace("[신화]", "<color=#DF0101>[신화]</color>").Replace("[전설]", "<color=#ffd700>[전설]</color>").Replace("[영웅]", "<color=#FF00FF>[영웅]</color>").Replace("[희귀]", "<color=#2ECCFA>[희귀]</color>").Replace("[일반]", "<color=#A4A4A4>[일반]</color>");
 
-                    ev.Player.ShowHint($"<align=left><b><size=25>보유 능력</size></b>\n<size=20>{abilitiesText}</size></align>", 250f);
+                    ev.Player.ShowHint($"<align=left><b><size=25>보유 업그레이드</size></b>\n<size=20>{abilitiesText}</size></align>", 250f);
                 }
             }
         }

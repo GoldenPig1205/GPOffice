@@ -15,22 +15,13 @@ namespace GPOffice.Modes
     {
         public static SoulMate Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         private Dictionary<Player, Player> soulMates;
 
         public void OnEnabled()
         {
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
+            Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-
-            Exiled.Events.Handlers.Player.Died -= OnDied;
         }
 
         public IEnumerator<float> OnModeStarted()
@@ -77,6 +68,7 @@ namespace GPOffice.Modes
                     {
                         Player.List.ToList().Where(x => x.IsAlive).ToList().ForEach(x => Server.ExecuteCommand($"/fc {x.Id} Tutorial 1"));
                         Player.List.ToList().ForEach(x => x.Broadcast(15, $"<size=30><b>{(Player.List.ToList().Where(x => x.IsAlive).Count() == 2 ? "<color=#ffd700>소울메이트</color>" : "<color=#BFFF00>외톨이</color>")}</b>({string.Join(", ", Player.List.ToList().Where(x => x.IsAlive).Select(x => x.DisplayNickname))})의 승리입니다!</size>"));
+                        yield return Timing.WaitForSeconds(100f);
                     }
                 }
 

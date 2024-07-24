@@ -11,24 +11,15 @@ namespace GPOffice.SubModes
     {
         public static SuperStar Instance;
 
-        Task Works;
-
         public List<string> pl = new List<string>();
 
         public void OnEnabled()
         {
-            Works = Task.WhenAll(
+           Task.WhenAll(
                 OnModeStarted()
                 );
 
             Exiled.Events.Handlers.Player.Left += OnLeft;
-        }
-
-        public void OnDisabled()
-        {
-            Works.Dispose();
-
-            Exiled.Events.Handlers.Player.Left -= OnLeft;
         }
 
         public async Task OnModeStarted()

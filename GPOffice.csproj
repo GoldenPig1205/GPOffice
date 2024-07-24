@@ -168,6 +168,8 @@
     <Compile Include="GPOffice\Commands\GPOffice.Commands.cs" />
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\Extensions\Manager.cs" />
+    <Compile Include="GPOffice\Modes\Main\AmongUs.cs" />
+    <Compile Include="GPOffice\Modes\Main\HideAndSeek.cs" />
     <Compile Include="GPOffice\Modes\Main\PetShop.cs" />
     <Compile Include="GPOffice\Modes\Main\RedLightGreenLight.cs" />
     <Compile Include="GPOffice\Modes\Main\Relay.cs" />

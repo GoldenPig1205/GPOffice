@@ -15,24 +15,14 @@ namespace GPOffice.Modes
     {
         public static PetShop Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public Dictionary<Player, List<Player>> Pets = new Dictionary<Player, List<Player>>();
 
         public void OnEnabled()
         {
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
+            Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
             Exiled.Events.Handlers.Player.Died += OnDied;
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-
-            Exiled.Events.Handlers.Player.Hurting -= OnHurting;
-            Exiled.Events.Handlers.Player.Died -= OnDied;
         }
 
         public IEnumerator<float> OnModeStarted()

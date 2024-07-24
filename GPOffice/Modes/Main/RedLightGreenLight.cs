@@ -14,26 +14,15 @@ namespace GPOffice.Modes
     {
         public static RedLightGreenLight Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-        CoroutineHandle timing_RecordPlayerInfo;
-        CoroutineHandle timing_CheckRedLight;
-
         public string Light = "Green";
         public Dictionary<Player, Vector3> PlayerPosition = new Dictionary<Player, Vector3>();
         public Dictionary<Player, Quaternion> PlayerRotation = new Dictionary<Player, Quaternion>();
 
         public void OnEnabled()
         {
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
-            timing_RecordPlayerInfo = Timing.RunCoroutine(RecordPlayerInfo());
-            timing_CheckRedLight = Timing.RunCoroutine(CheckRedLight());
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-            Timing.KillCoroutines(timing_RecordPlayerInfo);
-            Timing.KillCoroutines(timing_CheckRedLight);
+            Timing.RunCoroutine(OnModeStarted());
+            Timing.RunCoroutine(RecordPlayerInfo());
+            Timing.RunCoroutine(CheckRedLight());
         }
 
         public IEnumerator<float> OnModeStarted()

@@ -76,18 +76,11 @@ namespace GPOffice.SubModes
         public static FriendlyFire Instance;
         public Gtool gtool;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public void OnEnabled()
         {
             Server.FriendlyFire = true;
 
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
+            Timing.RunCoroutine(OnModeStarted());
         }
 
         public void OnMelee(Player player)

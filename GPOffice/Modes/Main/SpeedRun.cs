@@ -16,8 +16,6 @@ namespace GPOffice.Modes
     {
         public static SpeedRun Instance;
 
-        CoroutineHandle timing_OnModeStarted;
-
         public List<Player> pl = new List<Player>();
 
         public void OnEnabled()
@@ -25,22 +23,12 @@ namespace GPOffice.Modes
             Round.IsLocked = true;
             Server.FriendlyFire = true;
 
-            timing_OnModeStarted = Timing.RunCoroutine(OnModeStarted());
+            Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
             Exiled.Events.Handlers.Player.Dying += OnDying;
             Exiled.Events.Handlers.Player.Escaping += OnEscaping;
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
-        }
-
-        public void OnDisabled()
-        {
-            Timing.KillCoroutines(timing_OnModeStarted);
-
-            Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
-            Exiled.Events.Handlers.Player.Dying -= OnDying;
-            Exiled.Events.Handlers.Player.Escaping -= OnEscaping;
-            Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
         }
 
         public IEnumerator<float> OnModeStarted()
