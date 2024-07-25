@@ -26,6 +26,8 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
+            Server.ExecuteCommand($"/mp load as");
+
             yield return Timing.WaitForSeconds(10f);
 
             int totalPlayers = Player.List.Count;

@@ -36,7 +36,6 @@ namespace GPOffice.Modes
             {
                 player.Role.Set(PlayerRoles.RoleTypeId.ClassD);
                 player.Position = new Vector3(40.46484f, -1013.662f, 140.2266f);
-                player.AddItem(ItemType.Lantern);
             }
 
             for (int i = 1; i < 10; i++)

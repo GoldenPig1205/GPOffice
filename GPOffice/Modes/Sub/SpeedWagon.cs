@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Exiled.API.Features;
 using MEC;
 
-namespace GPOffice.Modes
+namespace GPOffice.SubModes
 {
     class SpeedWagon
     {

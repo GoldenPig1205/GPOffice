@@ -31,6 +31,9 @@ namespace GPOffice.Modes
         public List<ushort> GrapCoinSerials = new List<ushort>();
 
         public List<Player> spirits = new List<Player>();
+        public List<Player> repairs = new List<Player>();
+        public List<Player> magicians = new List<Player>();
+        public List<Player> posions = new List<Player>();
 
         public Dictionary<string, string> CommonAbilities = new Dictionary<string, string>()
         {
@@ -43,7 +46,7 @@ namespace GPOffice.Modes
             {"[일반] 체력 보충", "75AHP를 받습니다."},
             {"[일반] 랜덤박스", "랜덤한 아이템을 지급받습니다."},
             {"[일반] 위치 추적", "10초 간 랜덤한 1인의 위치를 확인합니다."},
-            {"[일반] 층간이동", "랜덤한 체크포인트로 이동합니다."}
+            {"[일반] 광고", "현재 진영 정보를 C.A.S.S.I.E 로 출력합니다."}
         };
         public Dictionary<string, string> RareAbilities = new Dictionary<string, string>()
         {
@@ -53,7 +56,7 @@ namespace GPOffice.Modes
             {"[희귀] 투명 망토", "25초 간 투명 효과를 받습니다."},
             {"[희귀] 흡혈귀", "상대에게 입힌 피해량의 20%만큼 AHP를 받습니다."},
             {"[희귀] 순간이동", "랜덤한 유저의 위치로 순간이동합니다."},
-            {"[희귀] 봄버맨", "모두의 위치에 고폭 수류탄을 투척합니다."},
+            {"[희귀] 봄버맨", "랜덤한 유저의 위치에 고폭 수류탄을 투척합니다."},
             {"[희귀] 갈고리", "지급된 동전을 튕기면 랜덤한 1인을 끌어옵니다."}
         };
         public Dictionary<string, string> EpicAbilities = new Dictionary<string, string>()
@@ -62,16 +65,18 @@ namespace GPOffice.Modes
             {"[영웅] 도박꾼", "아이템을 버리면 새로운 아이템을 받지만, 5% 확률로 손이 잘립니다!"},
             {"[영웅] 랜덤상자", "랜덤하지만 좋은 아이템을 지급받습니다."},
             {"[영웅] 핵 리모컨", "핵 프로세스를 시작합니다."},
-            {"[영웅] 수리 기사", "모든 엘레베이터를 15초 간 고장냅니다."},
+            {"[영웅] 수리 기사", "모든 엘레베이터를 15초 간 고장내고, 모든 잠겨진 문에 액세스할 수 있으며, 테슬라를 작동시키지 않습니다."},
             {"[영웅] 슈퍼 스타", "자신의 마이크가 모두에게 공유됩니다."},
-            {"[영웅] 럭키비키", "이전에 방문했던 워크스테이션에서 다시 한번 더 능력을 획득할 수 있습니다."}
+            {"[영웅] 럭키비키", "이전에 방문했던 워크스테이션에서 다시 한번 더 능력을 획득할 수 있습니다."},
+            {"[영웅] 극독", "누군가에게 죽으면 죽인 자에게 심장 마비 효과를 겁니다."}
         };
         public Dictionary<string, string> LegendAbilities = new Dictionary<string, string>()
         {
             {"[전설] 스피드왜건", "속도가 크게 증가합니다."},
             {"[전설] 뱀의 손 무전기", "즉시 뱀의 손 지원을 부르며, 자신도 뱀의 손 소속이 됩니다."},
             {"[전설] 모드 설치", "다른 모드를 하나 더 불러옵니다."},
-            {"[전설] 랜덤택배", "서버 인원 수 만큼 랜덤한 아이템을 드롭합니다."}
+            {"[전설] 랜덤택배", "서버 인원 수 만큼 랜덤한 아이템을 드롭합니다."},
+            {"[전설] 마술사", "누군가에게 죽으면 죽인 자와 교체됩니다."}
         };
         public Dictionary<string, string> MythicAbilities = new Dictionary<string, string>()
         {
@@ -252,20 +257,17 @@ namespace GPOffice.Modes
                                 await Task.Delay(1000);
                             }
                             break;
-                        case "층간이동":
-                            Server.ExecuteCommand($"/dtp {ev.Player.Id} {Plugin.GetRandomValue(new List<string>() { "CHECKPOINT_LCZ_A", "CHECKPOINT_LCZ_B", "CHECKPOINT_EZ_HCZ_A", "CHECKPOINT_EZ_HCZ_A" })}");
-                            break;
+                        case "광고": Server.ExecuteCommand($"/cassie_sl <b>[<color={ev.Player.Role.Color.ToHex()}>{ev.Player.DisplayNickname},/color>이(가) 출력한 진영 정보]</b>\n <color=red>SCP</color> : {Player.List.Where(x => x.IsScp).Count()} / <color=#088A29>혼돈의 반란</color> : {Player.List.Where(x => x.IsCHI).Count()} / <color=#0080FF>NTF</color> : {Player.List.Where(x => x.IsNTF).Count()}"); break;
                         case "강철 껍질": ev.Player.GetEffect(Exiled.API.Enums.EffectType.DamageReduction).Intensity += 1; break;
                         case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 1, 25); break;
                         case "순간이동":
-                            Player target = Plugin.GetRandomValue(Player.List.Where(x => x != ev.Player).ToList());
+                            Player target = Plugin.GetRandomValue(Player.List.Where(x => x != ev.Player && x.IsAlive).ToList());
                             ev.Player.Position = target.Position;
                             break;
                         case "봄버맨":
                             var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, ev.Player);
                             g.FuseTime = 3f;
-                            foreach (var player in Player.List)
-                                g.SpawnActive(player.Position, ev.Player);
+                            g.SpawnActive(Plugin.GetRandomValue(Player.List.ToList().Where(x => x.IsAlive && x.Role.Team != ev.Player.Role.Team && ev.Player != x).ToList()).Position, ev.Player);
                             break;
                         case "갈고리":
                             Item gc = ev.Player.AddItem(ItemType.Coin);
@@ -286,8 +288,9 @@ namespace GPOffice.Modes
                             break;
                         case "럭키비키": PlayerWorkstation[ev.Player.UserId].Clear(); break;
                         case "핵 리모컨": Warhead.Start(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 <b>원격으로 활성화했습니다.</b>"); break;
-                        case "수리 기사": Server.ExecuteCommand("/el l all"); await Task.Delay(15000); Server.ExecuteCommand("/el u all"); break;
+                        case "수리 기사": Server.ExecuteCommand("/el l all"); ev.Player.IsBypassModeEnabled = true; await Task.Delay(15000); Server.ExecuteCommand("/el u all"); break;
                         case "슈퍼 스타": Server.ExecuteCommand($"/speak {ev.Player.Id} enable"); break;
+                        case "극독": posions.Add(ev.Player); break;
                         case "스피드왜건": ev.Player.GetEffect(Exiled.API.Enums.EffectType.MovementBoost).Intensity += 100; break;
                         case "모드 설치":
                             object Mode1 = Plugin.GetRandomValue(Plugin.Mods.Keys.ToList());
@@ -323,6 +326,7 @@ namespace GPOffice.Modes
                             for (int i = 1; i < Player.List.Count() + 1; i++)
                                 Server.ExecuteCommand($"/drop {ev.Player.Id} {UnityEngine.Random.Range(1, 55)} 1");
                             break;
+                        case "마술사": magicians.Add(ev.Player); break;
                         case "해킹": Warhead.Start(); Warhead.Detonate(); Server.ExecuteCommand($"/cassie_sl {ev.Player.DisplayNickname}(이)가 핵을 <b>원격으로 터트렸습니다.</b>"); break;
                         case "스피릿": spirits.Add(ev.Player); break;
                     }
@@ -390,12 +394,32 @@ namespace GPOffice.Modes
                 ev.Player.Scale = new Vector3(1, 1, 1);
                 Server.ExecuteCommand($"/speak {ev.Player.Id} disable");
                 ev.Player.IsUsingStamina = true;
+                ev.Player.IsBypassModeEnabled = false;
 
                 if (BlackOutCooldown.Contains(ev.Player.UserId))
                     BlackOutCooldown.Remove(ev.Player.UserId);
 
                 if (spirits.Contains(ev.Player))
                     spirits.Remove(ev.Player);
+
+                if (repairs.Contains(ev.Player))
+                    repairs.Remove(ev.Player);
+
+                if (magicians.Contains(ev.Player))
+                {
+                    magicians.Remove(ev.Player);
+
+                    ev.Attacker.Kill($"몸이 교체되는 마술에 당했네요!");
+                    ev.IsAllowed = false;
+                    Server.ExecuteCommand($"/fc {ev.Player.Id} {ev.Attacker.Role.Name} 0");
+                }
+
+                if (posions.Contains(ev.Player))
+                {
+                    posions.Remove(ev.Player);
+
+                    ev.Attacker.EnableEffect(Exiled.API.Enums.EffectType.CardiacArrest);
+                }
             }
         }
 
@@ -421,6 +445,12 @@ namespace GPOffice.Modes
                 else
                     ev.Chamber.IsOpen = true;
             }
+        }
+
+        public void OnTriggeringTesla(Exiled.Events.EventArgs.Player.TriggeringTeslaEventArgs ev)
+        {
+            if (repairs.Contains(ev.Player))
+                ev.IsAllowed = false;
         }
 
         public void DroppedItem(Exiled.Events.EventArgs.Player.DroppedItemEventArgs ev)

@@ -195,7 +195,7 @@
     <Compile Include="GPOffice\Modes\Main\PrisonLife.cs" />
     <Compile Include="GPOffice\Modes\Main\RandomItem.cs" />
     <Compile Include="GPOffice\Modes\Main\SpeedRun.cs" />
-    <Compile Include="GPOffice\Modes\Main\SpeedWagon.cs" />
+    <Compile Include="GPOffice\Modes\Sub\SpeedWagon.cs" />
     <Compile Include="GPOffice\Modes\Sub\FriendlyFire.cs" />
     <Compile Include="GPOffice\Modes\Sub\Ghost.cs" />
     <Compile Include="GPOffice\Modes\Sub\RocketLauncher.cs" />
