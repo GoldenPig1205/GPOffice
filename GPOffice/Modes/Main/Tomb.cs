@@ -26,7 +26,6 @@ namespace GPOffice.Modes
             Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Died += OnDied;
-            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
         }
 
         public Vector3 RandomPosition()
@@ -39,7 +38,7 @@ namespace GPOffice.Modes
             Server.ExecuteCommand($"/mp load plane");
 
             Player Dummy = Player.List.ToList()[0];
-            Player.List.ToList().CopyTo(pl);
+            Player.List.CopyTo(pl);
 
             for (int i=1; i<250; i++)
             {
@@ -68,12 +67,6 @@ namespace GPOffice.Modes
                 if (pl.Count < 2)
                     Round.IsLocked = false;
             }
-        }
-
-        public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
-        {
-            Player.List.ToList().ForEach(x => x.DisableEffect(Exiled.API.Enums.EffectType.FogControl));
-            Timing.CallDelayed(0.1f, () => Player.List.ToList().ForEach(x => x.EnableEffect(Exiled.API.Enums.EffectType.FogControl)));
         }
     }
 }

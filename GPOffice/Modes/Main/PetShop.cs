@@ -81,7 +81,6 @@ namespace GPOffice.Modes
                 ev.Player.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
                 ev.Player.Scale = new Vector3(0.5f, 0.5f, 0.5f);
                 ev.Player.Group = new UserGroup { BadgeText = $"{at.DisplayNickname}의 펫", BadgeColor = "pink" };
-                Server.ExecuteCommand($"/god {ev.Player.Id} 1");
             }
         }
     }

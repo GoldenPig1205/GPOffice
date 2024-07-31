@@ -103,6 +103,9 @@
     <Reference Include="SCPS">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\SCPS.dll</HintPath>
     </Reference>
+    <Reference Include="SCPSLAudioApi">
+      <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\dependencies\SCPSLAudioApi.dll</HintPath>
+    </Reference>
     <Reference Include="Site02">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\Site02.dll</HintPath>
     </Reference>
@@ -169,6 +172,7 @@
     <Compile Include="GPOffice\Configs\Config.cs" />
     <Compile Include="GPOffice\Extensions\Manager.cs" />
     <Compile Include="GPOffice\Modes\Main\AmongUs.cs" />
+    <Compile Include="GPOffice\Modes\Main\GGClub.cs" />
     <Compile Include="GPOffice\Modes\Main\HideAndSeek.cs" />
     <Compile Include="GPOffice\Modes\Main\PetShop.cs" />
     <Compile Include="GPOffice\Modes\Main\RedLightGreenLight.cs" />
@@ -177,7 +181,7 @@
     <Compile Include="GPOffice\Modes\Main\SoulMate.cs" />
     <Compile Include="GPOffice\Plugin.cs" />
     <Compile Include="GPOffice\Modes\Main\ABattle.cs" />
-    <Compile Include="GPOffice\Modes\Main\BomberMan.cs" />
+    <Compile Include="GPOffice\Modes\Sub\BomberMan.cs" />
     <Compile Include="GPOffice\Modes\Main\BombParty.cs" />
     <Compile Include="GPOffice\Modes\Main\BountyHunter.cs" />
     <Compile Include="GPOffice\Modes\Main\Cell.cs" />

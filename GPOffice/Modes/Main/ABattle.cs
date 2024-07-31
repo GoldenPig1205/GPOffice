@@ -257,7 +257,7 @@ namespace GPOffice.Modes
                                 await Task.Delay(1000);
                             }
                             break;
-                        case "광고": Server.ExecuteCommand($"/cassie_sl <b>[<color={ev.Player.Role.Color.ToHex()}>{ev.Player.DisplayNickname},/color>이(가) 출력한 진영 정보]</b>\n <color=red>SCP</color> : {Player.List.Where(x => x.IsScp).Count()} / <color=#088A29>혼돈의 반란</color> : {Player.List.Where(x => x.IsCHI).Count()} / <color=#0080FF>NTF</color> : {Player.List.Where(x => x.IsNTF).Count()}"); break;
+                        case "광고": Server.ExecuteCommand($"/cassie_sl <b>[<color={ev.Player.Role.Color.ToHex()}>{ev.Player.DisplayNickname}</color>이(가) 출력한 진영 정보]</b>\n <color=red>SCP</color> : {Player.List.Where(x => x.IsScp).Count()} / <color=#088A29>혼돈의 반란</color> : {Player.List.Where(x => x.IsCHI).Count()} / <color=#0080FF>NTF</color> : {Player.List.Where(x => x.IsNTF).Count()}"); break;
                         case "강철 껍질": ev.Player.GetEffect(Exiled.API.Enums.EffectType.DamageReduction).Intensity += 1; break;
                         case "투명 망토": ev.Player.EnableEffect(Exiled.API.Enums.EffectType.Invisible, 1, 25); break;
                         case "순간이동":

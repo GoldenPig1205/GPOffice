@@ -37,16 +37,18 @@ namespace GPOffice
             /*{"상습범", "610B21/모두의 손에 제일버드가 쥐어집니다./Jailbird"},*/ {"HIDE", "0489B1/숨 죽이는 그를 사살하십시오./HIDE"}, {"트리플업", "F4FA58/모드 3개가 합쳐집니다!/TripleUp"},
             {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, /*{"고문", "9A2EFE/공을 피해 가장 오래 살아남으세요!/Cell"},*/ {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"}, 
             {"나 홀로 집에", "FA5882/SCP가 점령한 재단 속 한명의 죄수만 남았습니다./OnlyOneHuman"},
-            {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, {"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"}, {"점프맵 라운지", "2EFEF7/5분 동안 더 높은 스테이지에 도달한 유저가 승리합니다!/JumpMap"},
+            {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, /*{"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"},*/ /*{"점프맵 라운지", "2EFEF7/5분 동안 더 높은 스테이지에 도달한 유저가 승리합니다!/JumpMap"},*/
             /*{"지갑 전사", "DBA901/동전을 많이 모을수록 강력해집니다./WalletWarrier"},*/ {"표적", "F7BE81/현상금 수배자를 죽이면 승리합니다!/BountyHunter"}, {"밀집", "04B45F/모두가 한 곳에 스폰됩니다./Dense"},
             /*{"스즈메의 문단속", "00FFFF/문 너머 다른 차원./DoorLock"},*/ /*{"프리즌 라이프", "FFBF00/5분 동안 교도소 생활을 즐겨보세요./PrisonLife"},*/ {"미니 게임", "6E6E6E/미니 게임 중 하나가 랜덤으로 선택됩니다. 총 3개의 라운드로 진행됩니다./MiniGames"},
             {"빨간 불 / 초록 불", "D7DF01/빨간 불일때는 절대로 움직이지 마세요, 고개도요!/RedLightGreenLight"}, {"소울메이트", "FF00FF/단짝이 죽으면 자신도 죽습니다.\n위치 정보가 실시간으로 전송됩니다./SoulMate"},
-            {"펫숍", "CC2EFA/누군가를 사살하여 자신의 펫으로 만드세요!/PetShop"}, {"모드 릴레이", "CEF6EC/2분마다 모드가 추가됩니다./Relay"}, {"숨바꼭질", "E6F8E0/꼭꼭 숨으세요! 사냥개가 당신을 찾을 것입니다. 제한 시간동안 버티세요!/HideAndSeek"}
+            {"펫숍", "CC2EFA/누군가를 사살하여 자신의 펫으로 만드세요!/PetShop"}, {"모드 릴레이", "CEF6EC/2분마다 모드가 추가됩니다./Relay"}, /*{"숨바꼭질", "E6F8E0/꼭꼭 숨으세요! 사냥개가 당신을 찾을 것입니다. 제한 시간동안 버티세요!/HideAndSeek"},*/
+            {"GG 클럽", "C8FE2E/빠르게 황금색 플랫폼을 사수하세요!/GGClub"}
         };
         public static Dictionary<object, object> SubMods = new Dictionary<object, object>()
         {
             {"로켓 런처", "무슨 이유로든 피격당하면 승천합니다./RocketLauncher"}, {"뒤통수 얼얼", "아군 사격이 가능해집니다./FriendlyFire"}, {"슈퍼 스타", "모두의 마이크가 공유됩니다./SuperStar"}, 
-            {"종이 인간", "종이가 되어라!/PaperHuman"}, {"고스트", "시설이 맛 갔습니다./Ghost"}, {"스피드왜건", "모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"}
+            {"종이 인간", "종이가 되어라!/PaperHuman"}, {"고스트", "시설이 맛 갔습니다./Ghost"}, {"스피드왜건", "모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"},
+            /*{"봄버맨", "한시도 편하게 쉴 수 없을 겁니다./BomberMan"}*/
         };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
         {
@@ -72,8 +74,8 @@ namespace GPOffice
         };
         public Dictionary<string, string> Items = new Dictionary<string, string>()
         {
-            {"인형", "1/자신의 위치에 인형을 소환합니다."}, {"물감", "2/자신의 이름 색상을 교체합니다."}, {"전등", "2/자신이 위치한 방의 조명을 조정합니다."}, 
-            {"마이크", "3/10초 동안 모두를 향해 말할 수 있습니다. (쿨타임 100초)"}
+            {"인형", "10/자신의 위치에 인형을 소환합니다."}, {"물감", "20/자신의 이름 색상을 교체합니다."}, {"전등", "20/자신이 위치한 방의 조명을 조정합니다."}, 
+            {"마이크", "30/10초 동안 모두를 향해 말할 수 있습니다. (쿨타임 100초)"}
         };
         public Dictionary<object, object> Players = new Dictionary<object, object>();
 
@@ -83,6 +85,7 @@ namespace GPOffice
         public static object SubMode = GetRandomValue(SubMods.Keys.ToList());
         public string submod = SubMode.ToString();
 
+        public int RemainingPress = 20;
         public bool IsSubModeEnabled = false;
 
         public List<Player> MIC_cooldown = new List<Player>();
@@ -97,26 +100,18 @@ namespace GPOffice
         public override void OnEnabled()
         {
             Instance = this;
-            
-            if (UnityEngine.Random.Range(1, 101) == 1)
-            {
-                SCPS.SCPS scps = new SCPS.SCPS(); 
-                scps.OnEnabled();
-            }
-            else
-            {
-                Exiled.Events.Handlers.Player.Verified += OnVerified;
-                Exiled.Events.Handlers.Player.Left += OnLeft;
-                Exiled.Events.Handlers.Player.Spawned += OnSpawned;
-                Exiled.Events.Handlers.Player.Dying += OnDying;
 
-                Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
-                Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
-                Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
-                Exiled.Events.Handlers.Player.ChangingGroup += OnChangingGroup;
+            Exiled.Events.Handlers.Player.Verified += OnVerified;
+            Exiled.Events.Handlers.Player.Left += OnLeft;
+            Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+            Exiled.Events.Handlers.Player.Hurting += OnHurting;
 
-                Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
-            }
+            Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
+            Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
+            Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
+            Exiled.Events.Handlers.Player.ChangingGroup += OnChangingGroup;
+
+            Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
         }
 
         public override void OnDisabled()
@@ -124,7 +119,7 @@ namespace GPOffice
             Exiled.Events.Handlers.Player.Verified -= OnVerified;
             Exiled.Events.Handlers.Player.Left -= OnLeft;
             Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
-            Exiled.Events.Handlers.Player.Dying -= OnDying;
+            Exiled.Events.Handlers.Player.Hurting -= OnHurting;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
@@ -144,15 +139,41 @@ namespace GPOffice
             Round.IsLobbyLocked = true;
 
             bool ButtonPressed = false;
+            Transform redObject = null;
 
             while (!ButtonPressed)
             {
+                bool pressing = false;
+
                 foreach (var player in Player.List)
                 {
                     if (Physics.Raycast(player.Position, Vector3.down, out RaycastHit hit, 1f, (LayerMask)1))
                     {
                         if (hit.transform.name == "Red")
-                            ButtonPressed = true;
+                        {
+                            if (Player.List.Count() > 1)
+                            {
+                                if (RemainingPress <= 0)
+                                    ButtonPressed = true;
+                            }
+
+                            redObject = hit.transform;
+                            pressing = true;
+
+                            RemainingPress -= 1;
+
+                            redObject.position = new Vector3(redObject.position.x, redObject.position.y - 0.04f, redObject.transform.position.z);
+                        }
+                    }
+                }
+
+                if (!pressing)
+                {
+                    if (RemainingPress < 20)
+                    {
+                        RemainingPress += 1;
+
+                        redObject.position = new Vector3(redObject.transform.position.x, redObject.transform.position.y + 0.04f, redObject.transform.position.z);
                     }
                 }
 
@@ -325,12 +346,10 @@ namespace GPOffice
             }
         }
 
-        public void OnDying(Exiled.Events.EventArgs.Player.DyingEventArgs ev)
+        public void OnHurting(Exiled.Events.EventArgs.Player.HurtingEventArgs ev)
         {
             if (!Round.IsStarted)
-            {
                 ev.IsAllowed = false;
-            }
         }
 
         public async void OnChangingGroup(Exiled.Events.EventArgs.Player.ChangingGroupEventArgs ev)
@@ -387,10 +406,8 @@ namespace GPOffice
                     {
                         if (CurrentRoom[player] == player.CurrentRoom && player.CurrentRoom.Name != "Outside" && player.IsAlive)
                         {
-                            var g = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, player);
-                            g.FuseTime = 3f;
-                            g.SpawnActive(new Vector3(UnityEngine.Random.Range(-9.941405f, 10.92998f), 1004.188f, UnityEngine.Random.Range(-15.76172f, 2.550781f)), player);
-                            player.ShowHint($"<color=red><i><b>당신은 2분 동안 한 방에 있었습니다!!!</b></i></color>", 5);
+                            player.ShowHint($"<color=red><i><b>당신은 2분 동안 한 방에 있었습니다!!!</b></i></color>", 15);
+                            player.EnableEffect(Exiled.API.Enums.EffectType.SeveredHands);
 
                             CurrentRoom[player] = player.CurrentRoom;
                         }

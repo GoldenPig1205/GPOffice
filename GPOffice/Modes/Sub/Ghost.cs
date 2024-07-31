@@ -25,36 +25,56 @@ namespace GPOffice.SubModes
 
             while (true)
             {
-                int r1 = UnityEngine.Random.Range(1, 10000);
-
-                if (r1 == 1)
-                    Server.ExecuteCommand($"/{Plugin.GetRandomValue(hard)}");
-
-                else if (r1 > 9150)
-                    Server.ExecuteCommand($"/{Plugin.GetRandomValue(normal)}");
-
-                else
+                try
                 {
-                    int r2 = UnityEngine.Random.Range(1, 5);
-                    Exiled.API.Features.Doors.Door door = Exiled.API.Features.Doors.Door.Random();
+                    int r1 = UnityEngine.Random.Range(1, 10000);
 
-                    if (r2 == 1)
-                        door.IsOpen = true;
-                    else if (r2 == 2)
-                        door.IsOpen = false;
-                    else if (r2 == 3)
-                        door.Lock(3, Exiled.API.Enums.DoorLockType.AdminCommand);
-                    else if (r2 == 4)
-                        door.Unlock();
-                    else
+                    if (r1 == 1)
+                        Server.ExecuteCommand($"/{Plugin.GetRandomValue(hard)}");
+
+                    else if (r1 > 9150)
+                        Server.ExecuteCommand($"/{Plugin.GetRandomValue(normal)}");
+
+                    else if (r1 > 9000)
                     {
-                        if (UnityEngine.Random.Range(1, 100) == 1)
-                            Server.ExecuteCommand($"/cassie_sl .G{UnityEngine.Random.Range(1, 7)}");
+                        Room room = Plugin.GetRandomValue(Room.List.ToList());
+
+                        room.Color = new UnityEngine.Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
                     }
 
+                    else if (r1 > 8900)
+                    {
+                        Exiled.API.Features.Doors.BreakableDoor door = Exiled.API.Features.Doors.BreakableDoor.Random().As<Exiled.API.Features.Doors.BreakableDoor>();
+
+                        door.Break();
+                    }
+
+                    else
+                    {
+                        int r2 = UnityEngine.Random.Range(1, 6);
+                        Exiled.API.Features.Doors.Door door = Exiled.API.Features.Doors.Door.Random();
+
+                        if (r2 == 1)
+                            door.IsOpen = true;
+                        else if (r2 == 2)
+                            door.IsOpen = false;
+                        else if (r2 == 3)
+                            door.Lock(3, Exiled.API.Enums.DoorLockType.AdminCommand);
+                        else if (r2 == 4)
+                            door.Unlock();
+                        else
+                        {
+                            if (UnityEngine.Random.Range(1, 100) == 1)
+                                Server.ExecuteCommand($"/cassie_sl .G{UnityEngine.Random.Range(1, 8)}");
+                        }
+
+                    }
+                }
+                catch (Exception e)
+                {
                 }
 
-                yield return Timing.WaitForSeconds(0.01f);
+                yield return Timing.WaitForSeconds(0.05f);
             }
         }
     }

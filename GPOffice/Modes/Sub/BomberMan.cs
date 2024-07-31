@@ -10,7 +10,7 @@ using MEC;
 using Mirror;
 using UnityEngine;
 
-namespace GPOffice.Modes
+namespace GPOffice.SubModes
 {
     class BomberMan
     {
@@ -23,6 +23,7 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
+            Timing.WaitForSeconds(10f);
 
             while (true)
             {

@@ -61,8 +61,10 @@ namespace GPOffice.Modes
             {
                 foreach (var player in Player.List)
                 {
+                    /*
                     if (soulMates.ContainsKey(player) && soulMates[player] != null && soulMates[player].IsAlive)
                         player.ShowHint($"당신의 단짝은 <b>{soulMates[player].CurrentRoom.Name}</b>에 있습니다.", 1.2f);
+                    */
 
                     if (Player.List.ToList().Where(x => x.IsAlive).Count() < 3 && player.Role.Type != PlayerRoles.RoleTypeId.Tutorial)
                     {

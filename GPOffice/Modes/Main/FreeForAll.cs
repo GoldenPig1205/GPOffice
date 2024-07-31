@@ -68,7 +68,15 @@ namespace GPOffice.Modes
 
             Player.List.ToList().ForEach(x => Spawned(x));
 
-            yield return 0f;
+            yield return Timing.WaitForSeconds(180f);
+
+            Player BusterCall = Plugin.GetRandomValue(Player.List.Where(x => x.IsAlive).ToList());
+            
+            foreach (var player in Player.List)
+            {
+                player.Position = BusterCall.Position;
+                player.Broadcast(5, "<b><size=30>[<color=yellow>버스터콜</color>]</size></b>\n<size=20>모두가 한자리에 모입니다.</size>");
+            }
         }
 
         public void OnDying(Exiled.Events.EventArgs.Player.DyingEventArgs ev)
