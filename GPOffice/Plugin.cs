@@ -13,6 +13,7 @@ using MapEditorReborn.Events.Handlers;
 using Discord;
 using Exiled.API.Features.Items;
 using System.Windows.Forms;
+using PlayerRoles.FirstPersonControl;
 
 namespace GPOffice
 {
@@ -380,7 +381,7 @@ namespace GPOffice
                 {
                     if (player.IsAlive && OnGround.ContainsKey(player) && !player.IsNoclipPermitted && player.Role.Type != PlayerRoles.RoleTypeId.Scp079)
                     {
-                        if (Physics.Raycast(player.Position, Vector3.down, out RaycastHit hit, 10, (LayerMask)1))
+                        if (FpcExtensionMethods.IsGrounded(player.ReferenceHub))
                             OnGround[player] = 5;
                         else
                         {
