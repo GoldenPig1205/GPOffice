@@ -13,6 +13,7 @@ using MapEditorReborn.Events.Handlers;
 using Discord;
 using Exiled.API.Features.Items;
 using System.Windows.Forms;
+using PlayerRoles.FirstPersonControl;
 
 namespace GPOffice
 {
@@ -38,7 +39,7 @@ namespace GPOffice
             {"스피릿", "CED8F6/죽으면 영혼 상태에 돌입합니다!/Spirit"}, /*{"고문", "9A2EFE/공을 피해 가장 오래 살아남으세요!/Cell"},*/ {"워크스테이션 업그레이드", "00FFFF/워크스테이션에서 업그레이드하세요!/ABattle"}, 
             {"나 홀로 집에", "FA5882/SCP가 점령한 재단 속 한명의 죄수만 남았습니다./OnlyOneHuman"},
             {"폭탄 파티", "FAAC58/버티면 버틸수록 난이도가 올라갑니다./BombParty"}, /*{"봄버맨", "000000/한시도 편하게 쉴 수 없을 겁니다./BomberMan"},*/ /*{"점프맵 라운지", "2EFEF7/5분 동안 더 높은 스테이지에 도달한 유저가 승리합니다!/JumpMap"},*/
-            /*{"지갑 전사", "DBA901/동전을 많이 모을수록 강력해집니다./WalletWarrier"},*/ {"표적", "F7BE81/현상금 수배자를 죽이면 승리합니다!/BountyHunter"}, {"밀집", "04B45F/모두가 한 곳에 스폰됩니다./Dense"},
+            /*{"지갑 전사", "DBA901/동전을 많이 모을수록 강력해집니다./WalletWarrier"},*/ {"표적", "F7BE81/현상금 수배자를 죽이면 승리합니다!/BountyHunter"}, /*{"밀집", "04B45F/모두가 한 곳에 스폰됩니다./Dense"},*/
             /*{"스즈메의 문단속", "00FFFF/문 너머 다른 차원./DoorLock"},*/ /*{"프리즌 라이프", "FFBF00/5분 동안 교도소 생활을 즐겨보세요./PrisonLife"},*/ {"미니 게임", "6E6E6E/미니 게임 중 하나가 랜덤으로 선택됩니다. 총 3개의 라운드로 진행됩니다./MiniGames"},
             {"빨간 불 / 초록 불", "D7DF01/빨간 불일때는 절대로 움직이지 마세요, 고개도요!/RedLightGreenLight"}, {"소울메이트", "FF00FF/단짝이 죽으면 자신도 죽습니다.\n위치 정보가 실시간으로 전송됩니다./SoulMate"},
             {"펫숍", "CC2EFA/누군가를 사살하여 자신의 펫으로 만드세요!/PetShop"}, {"모드 릴레이", "CEF6EC/2분마다 모드가 추가됩니다./Relay"}, /*{"숨바꼭질", "E6F8E0/꼭꼭 숨으세요! 사냥개가 당신을 찾을 것입니다. 제한 시간동안 버티세요!/HideAndSeek"},*/
@@ -380,14 +381,14 @@ namespace GPOffice
                 {
                     if (player.IsAlive && OnGround.ContainsKey(player) && !player.IsNoclipPermitted && player.Role.Type != PlayerRoles.RoleTypeId.Scp079)
                     {
-                        if (Physics.Raycast(player.Position, Vector3.down, out RaycastHit hit, 10, (LayerMask)1))
+                        if (FpcExtensionMethods.IsGrounded(player.ReferenceHub))
                             OnGround[player] = 5;
                         else
                         {
                             OnGround[player] -= 0.1f;
 
                             if (OnGround[player] <= 0)
-                                player.Kill("공허에 빨려들어갔습니다.");
+                                player.Kill("공허에 빨려들어갔습니다. (5초 이상 낙하)");
                         }
                     }
                 }
