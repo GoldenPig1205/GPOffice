@@ -106,6 +106,7 @@ namespace GPOffice
             Exiled.Events.Handlers.Player.Left += OnLeft;
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
+            Exiled.Events.Handlers.Player.InteractingDoor += OnInteractingDoor;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
@@ -121,6 +122,7 @@ namespace GPOffice
             Exiled.Events.Handlers.Player.Left -= OnLeft;
             Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
             Exiled.Events.Handlers.Player.Hurting -= OnHurting;
+            Exiled.Events.Handlers.Player.InteractingDoor -= OnInteractingDoor;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
@@ -345,6 +347,12 @@ namespace GPOffice
                 if (UnityEngine.Random.Range(1, 8) == 1)
                     ev.Player.Role.Set(PlayerRoles.RoleTypeId.Scp3114);
             }
+        }
+
+        public void OnInteractingDoor(Exiled.Events.EventArgs.Player.InteractingDoorEventArgs ev)
+        {
+            if (ev.Player.IsScp && ev.Player.CurrentItem != null && ev.Door.Name.StartsWith("Checkpoint"))
+                ev.Door.IsOpen = true;
         }
 
         public void OnHurting(Exiled.Events.EventArgs.Player.HurtingEventArgs ev)
