@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\",
   "Documents": [
     {
-<<<<<<< Updated upstream
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|c:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\sub\\friendlyfire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\sub\\friendlyfire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|C:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-=======
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\sub\\friendlyfire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\sub\\friendlyfire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
->>>>>>> Stashed changes
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\extensions\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\extensions\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\sub\\friendlyfire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\sub\\friendlyfire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,23 +26,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Plugin.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeDocumentMoniker": "GPOffice\\Plugin.cs",
-              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
-              "RelativeToolTip": "GPOffice\\Plugin.cs",
-<<<<<<< Updated upstream
-              "ViewState": "AQIAAHIAAAAAAAAAAAAAwIYAAAAJAAAA",
-=======
-              "ViewState": "AgIAAC0BAAAAAAAAAAAowDcBAAAZAAAAAAAAAA==",
->>>>>>> Stashed changes
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs*",
+              "RelativeToolTip": "GPOffice\\Plugin.cs*",
+              "ViewState": "AgIAAEsBAAAAAAAAAAAcwGABAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T10:54:10.27Z"
+              "WhenOpened": "2024-08-19T08:16:04.368Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -58,29 +51,33 @@
               "RelativeToolTip": "GPOffice\\Commands\\GPOffice.Commands.cs",
               "ViewState": "AgIAAGoAAAAAAAAAAAAgwBoAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-29T11:19:53.425Z"
+              "WhenOpened": "2024-08-19T08:16:04.409Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FriendlyFire.cs",
-<<<<<<< Updated upstream
-              "DocumentMoniker": "C:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs",
-              "RelativeDocumentMoniker": "GPOffice\\Modes\\Sub\\FriendlyFire.cs",
-              "ToolTip": "C:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
-              "RelativeToolTip": "GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
-              "ViewState": "AQIAABQAAAAAAAAAAADwvyMAAABOAAAA",
+              "DocumentIndex": 1,
+              "Title": "Manager.cs",
+              "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Extensions\\Manager.cs",
+              "RelativeDocumentMoniker": "GPOffice\\Extensions\\Manager.cs",
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Extensions\\Manager.cs",
+              "RelativeToolTip": "GPOffice\\Extensions\\Manager.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAQwCYAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T23:38:00.857Z",
-=======
+              "WhenOpened": "2024-08-19T08:19:39.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FriendlyFire.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs",
               "RelativeDocumentMoniker": "GPOffice\\Modes\\Sub\\FriendlyFire.cs",
-              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
-              "RelativeToolTip": "GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAAAH0AAAAJAAAAAAAAAA==",
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs",
+              "RelativeToolTip": "GPOffice\\Modes\\Sub\\FriendlyFire.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAADwvxsAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T14:10:56.458Z",
->>>>>>> Stashed changes
+              "WhenOpened": "2024-08-19T08:16:04.731Z",
               "EditorCaption": ""
             }
           ]

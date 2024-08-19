@@ -351,7 +351,7 @@ namespace GPOffice
 
         public void OnInteractingDoor(Exiled.Events.EventArgs.Player.InteractingDoorEventArgs ev)
         {
-            if (ev.Player.IsScp && ev.Player.CurrentItem != null && ev.Door.Name.StartsWith("Checkpoint"))
+            if (ev.Player.IsScp && ev.Player.CurrentItem != null && ev.Door.Name.Contains("CHECKPOINT"))
                 ev.Door.IsOpen = true;
         }
 
