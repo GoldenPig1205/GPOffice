@@ -11,6 +11,8 @@ using HarmonyLib;
 using Mirror;
 using PlayerRoles.PlayableScps.Scp049;
 using Utils.Networking;
+using PlayerRoles;
+using PlayerRoles.PlayableScps.Scp106;
 
 namespace GPOffice.SubModes
 {
@@ -24,7 +26,7 @@ namespace GPOffice.SubModes
 
             Timing.RunCoroutine(OnModeStarted());
 
-            Harmony harmony = new Harmony("GPOffice.FriendlyFire");
+            Harmony harmony = new Harmony("HitboxIdentityPatch");
             harmony.PatchAll();
         }
 
@@ -33,12 +35,12 @@ namespace GPOffice.SubModes
             yield return Timing.WaitForSeconds(1f);
         }
 
-        [HarmonyPatch(typeof(HitboxIdentity), nameof(HitboxIdentity.IsEnemy))]
-        public class HitboxIdentityPatch
+        [HarmonyPatch(typeof(HitboxIdentity), nameof(HitboxIdentity.IsEnemy), typeof(Team), typeof(Team))]
+        public class HitboxPatchPostfix
         {
-            public static bool Prefix(HitboxIdentity __instance, NetworkReader reader)
+            public static void Postfix(ref bool __result)
             {
-                return true;
+                __result = true;
             }
         }
     }

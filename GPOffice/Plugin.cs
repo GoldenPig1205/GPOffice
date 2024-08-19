@@ -107,13 +107,15 @@ namespace GPOffice
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
             Exiled.Events.Handlers.Player.InteractingDoor += OnInteractingDoor;
+            Exiled.Events.Handlers.Player.ChangingGroup += OnChangingGroup;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded += OnRoundEnded;
-            Exiled.Events.Handlers.Player.ChangingGroup += OnChangingGroup;
 
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
+
+            Exiled.Events.Handlers.Scp330.EatingScp330 += OnEatingScp330;
         }
 
         public override void OnDisabled()
@@ -123,13 +125,15 @@ namespace GPOffice
             Exiled.Events.Handlers.Player.Spawned -= OnSpawned;
             Exiled.Events.Handlers.Player.Hurting -= OnHurting;
             Exiled.Events.Handlers.Player.InteractingDoor -= OnInteractingDoor;
+            Exiled.Events.Handlers.Player.ChangingGroup -= OnChangingGroup;
 
             Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RoundEnded -= OnRoundEnded;
-            Exiled.Events.Handlers.Player.ChangingGroup -= OnChangingGroup;
 
             Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
+
+            Exiled.Events.Handlers.Scp330.EatingScp330 -= OnEatingScp330;
 
             Instance = null;
         }
@@ -193,7 +197,7 @@ namespace GPOffice
 
             Player.List.ToList().ForEach(x => Server.ExecuteCommand($"/speak {x.Id} disable"));
 
-            if (UnityEngine.Random.Range(1, 6) == 1)
+            if (UnityEngine.Random.Range(1, 6) == 1 || IsSubModeEnabled)
             {
                 submodeType = Type.GetType($"GPOffice.SubModes.{SubMods[submod].ToString().Split('/')[1].Replace(" ", "")}");
                 if (submodeType != null)
@@ -207,7 +211,7 @@ namespace GPOffice
             }
 
             // 선택된 모드의 설명을 모두에게 띄워줍니다.
-            string subModeMessage = IsSubModeEnabled ? $"<size=15><i>서브 모드로 추가되었습니다. [{SubMode}]</i></size>" : "";
+            string subModeMessage = IsSubModeEnabled ? $"<size=15><i>서브 모드로 추가되었습니다. [{submod}]</i></size>" : "";
             Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>\n{subModeMessage}"));
             ServerConsole.AddLog($"다음 모드가 선택되었습니다. [{mod}]", color: ConsoleColor.Blue);
 
@@ -342,7 +346,7 @@ namespace GPOffice
         {
             ev.Player.EnableEffect(Exiled.API.Enums.EffectType.FogControl);
 
-            if (ev.Player.IsScp && ev.Player.Role.Type != PlayerRoles.RoleTypeId.Scp0492)
+            if (ev.Player.IsScp && ev.Reason == Exiled.API.Enums.SpawnReason.RoundStart)
             {
                 if (UnityEngine.Random.Range(1, 8) == 1)
                     ev.Player.Role.Set(PlayerRoles.RoleTypeId.Scp3114);
@@ -379,6 +383,15 @@ namespace GPOffice
         {
             if (AutoNuke)
                 ev.IsAllowed = false;
+        }
+
+        public void OnEatingScp330(Exiled.Events.EventArgs.Scp330.EatingScp330EventArgs ev)
+        {
+            if (UnityEngine.Random.Range(1, 8) == 1)
+            {
+                ev.IsAllowed = false;
+                ev.Player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Pink);
+            }
         }
 
         public IEnumerator<float> IsFallDown()

@@ -30,7 +30,6 @@ namespace GPOffice.Commands
 			}
             else
             {
-				Plugin.Instance.mod = args;
 				response = $"There is no name for Random Mode!\n";
 				result = false;
 			}
@@ -46,7 +45,40 @@ namespace GPOffice.Commands
 		public bool SanitizeResponse { get; } = true;
 	}
 
-	[CommandHandler(typeof(ClientCommandHandler))]
+    [CommandHandler(typeof(RemoteAdminCommandHandler))]
+    public class ForceSubMode : ICommand
+    {
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+            bool result;
+
+            string args = string.Join(" ", arguments).Trim();
+
+            if (args != null)
+            {
+                Plugin.Instance.submod = args;
+                response = $"Random Sub Mode pins [{args}]!\n* Please check if this sub mode exists";
+                result = true;
+                Plugin.Instance.IsSubModeEnabled = true;
+            }
+            else
+            {
+                response = $"There is no name for Random Sub Mode!\n";
+                result = false;
+            }
+            return result;
+        }
+
+        public string Command { get; } = "forcesubmode";
+
+        public string[] Aliases { get; } = { "fsm" };
+
+        public string Description { get; } = "이번 라운드의 서브 모드를 강제합니다.";
+
+        public bool SanitizeResponse { get; } = true;
+    }
+
+    [CommandHandler(typeof(ClientCommandHandler))]
     public class Store : ICommand
     {
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
