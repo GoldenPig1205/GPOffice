@@ -8,6 +8,12 @@ using Exiled.API.Features;
 
 namespace GPOffice
 {
+    public class User
+    {
+        int gp;
+        int exp;
+    }
+
     public static class FileManager
     {
         public static string FolderPath => Path.Combine(Paths.Configs, "GPOffice");
