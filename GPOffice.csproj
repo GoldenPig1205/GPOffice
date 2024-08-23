@@ -41,6 +41,9 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\SCPSL\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
+    <Reference Include="Assembly-CSharp-Publicized">
+      <HintPath>..\..\SCPSL\SCPSL_Data\Managed\Assembly-CSharp-Publicized.dll</HintPath>
+    </Reference>
     <Reference Include="AudioPlayer">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\AudioPlayer.dll</HintPath>
     </Reference>
