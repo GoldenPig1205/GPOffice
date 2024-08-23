@@ -479,7 +479,6 @@ D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\GPOffice.dll.config
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\GPOffice.dll
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\GPOffice.pdb
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Assembly-CSharp-firstpass.dll
-D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Assembly-CSharp.dll
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\CommandSystem.Core.dll
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -592,3 +591,4 @@ D:\GoldenPig1205\Visual Studio 2022\GPOffice\obj\Debug\GPOffice.csproj.CoreCompi
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\obj\Debug\GPOffice.csproj.Up2Date
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\obj\Debug\GPOffice.dll
 D:\GoldenPig1205\Visual Studio 2022\GPOffice\obj\Debug\GPOffice.pdb
+D:\GoldenPig1205\Visual Studio 2022\GPOffice\bin\Debug\Assembly-CSharp-Publicized.dll
