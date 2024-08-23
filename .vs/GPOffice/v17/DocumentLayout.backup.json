@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "GPOffice\\Plugin.cs",
               "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeToolTip": "GPOffice\\Plugin.cs",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAvwG0AAABLAAAAAAAAAA==",
+              "ViewState": "AgIAAFUBAAAAAAAAAAAAAGUBAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T08:16:04.368Z",
               "EditorCaption": ""
@@ -51,8 +51,7 @@
               "RelativeToolTip": "GPOffice\\Commands\\GPOffice.Commands.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAswDoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T08:16:04.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-19T08:16:04.409Z"
             },
             {
               "$type": "Document",
@@ -62,7 +61,7 @@
               "RelativeDocumentMoniker": "GPOffice\\Extensions\\Manager.cs",
               "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Extensions\\Manager.cs",
               "RelativeToolTip": "GPOffice\\Extensions\\Manager.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwCYAAABDAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T08:19:39.387Z",
               "EditorCaption": ""
@@ -73,9 +72,9 @@
               "Title": "FriendlyFire.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs",
               "RelativeDocumentMoniker": "GPOffice\\Modes\\Sub\\FriendlyFire.cs",
-              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs",
-              "RelativeToolTip": "GPOffice\\Modes\\Sub\\FriendlyFire.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAlwC8AAAAAAAAAAAAAAA==",
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
+              "RelativeToolTip": "GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
+              "ViewState": "AgIAACwAAAAAAAAAAAAswEsAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T08:16:04.731Z",
               "EditorCaption": ""
