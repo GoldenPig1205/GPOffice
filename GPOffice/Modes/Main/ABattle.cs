@@ -528,18 +528,25 @@ namespace GPOffice.Modes
 
         public void Hurting(Exiled.Events.EventArgs.Player.HurtingEventArgs ev)
         {
-            if (PlayerAbilities[ev.Player.UserId].Contains("[일반] 단련"))
+            try
             {
-                int count = PlayerAbilities.Values.Count(list => list.Contains("[일반] 단련"));
+                if (PlayerAbilities[ev.Player.UserId].Contains("[일반] 단련"))
+                {
+                    int count = PlayerAbilities.Values.Count(list => list.Contains("[일반] 단련"));
 
-                ev.DamageHandler.Damage = (int)(ev.DamageHandler.Damage * (1 + (0.2 * count)));
+                    ev.DamageHandler.Damage = (int)(ev.DamageHandler.Damage * (1 + (0.2 * count)));
+                }
+
+                if (PlayerAbilities[ev.Attacker.UserId].Contains("[희귀] 흡혈귀"))
+                    ev.Attacker.AddAhp(20 * (ev.DamageHandler.Damage / 100));
+
+                if (PlayerAbilities[ev.Attacker.UserId].Contains("[신화] 로켓 런처"))
+                    Server.ExecuteCommand($"/rocket {ev.Player.Id} 1");
             }
-
-            if (PlayerAbilities[ev.Attacker.UserId].Contains("[희귀] 흡혈귀"))
-                ev.Attacker.AddAhp(20 * (ev.DamageHandler.Damage / 100));
-
-            if (PlayerAbilities[ev.Attacker.UserId].Contains("[신화] 로켓 런처"))
-                Server.ExecuteCommand($"/rocket {ev.Player.Id} 1");
+            catch (Exception ex)
+            {
+                
+            }
         }
 
         public void ChangingSpectatedPlayer(Exiled.Events.EventArgs.Player.ChangingSpectatedPlayerEventArgs ev)
