@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Exiled.API.Features;
 using MEC;
 using Mirror;
+using PlayerRoles;
 using UnityEngine;
 
 namespace GPOffice.Modes
@@ -52,6 +53,9 @@ namespace GPOffice.Modes
                 {
                     if (ev.Attacker != null)
                         return ev.Attacker.DisplayNickname;
+
+                    else if (ev.DamageHandler.Type == Exiled.API.Enums.DamageType.PocketDimension)
+                        return Player.List.Where(x => x.Role == RoleTypeId.Scp106).ToList()[0].DisplayNickname;
 
                     else
                         return "알 수 없음";
