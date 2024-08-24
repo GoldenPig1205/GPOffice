@@ -156,7 +156,7 @@ namespace GPOffice.SubModes
 
         public async void OnLunging(Exiled.Events.EventArgs.Scp939.LungingEventArgs ev)
         {
-            for (float i=0; i<0.85f; i += 0.01f)
+            for (float i=0; i<0.7f; i += 0.01f)
             {
                 if (Physics.Raycast(ev.Player.ReferenceHub.PlayerCameraReference.position + ev.Player.ReferenceHub.PlayerCameraReference.forward * 0.2f, ev.Player.ReferenceHub.PlayerCameraReference.forward, out RaycastHit hit, 1.5f, InventorySystem.Items.Firearms.Modules.StandardHitregBase.HitregMask) &&
                 hit.collider.TryGetComponent<IDestructible>(out IDestructible destructible))
