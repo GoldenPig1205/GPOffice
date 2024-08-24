@@ -278,7 +278,7 @@ namespace GPOffice
 
             Server.FriendlyFire = true;
 
-            await Task.Delay(9000);
+            await Task.Delay(18000);
             Server.ExecuteCommand($"sr");
         }
 
