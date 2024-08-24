@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "GPOffice\\Plugin.cs",
               "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeToolTip": "GPOffice\\Plugin.cs",
-              "ViewState": "AgIAAFUBAAAAAAAAAAAAAGUBAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAEIBAAAAAAAAAAAgwGEBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T08:16:04.368Z",
               "EditorCaption": ""
@@ -63,8 +63,7 @@
               "RelativeToolTip": "GPOffice\\Extensions\\Manager.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAYwC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T08:19:39.387Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-19T08:19:39.387Z"
             },
             {
               "$type": "Document",
@@ -74,7 +73,7 @@
               "RelativeDocumentMoniker": "GPOffice\\Modes\\Sub\\FriendlyFire.cs",
               "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
               "RelativeToolTip": "GPOffice\\Modes\\Sub\\FriendlyFire.cs*",
-              "ViewState": "AgIAACwAAAAAAAAAAAAswEsAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAtwIYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T08:16:04.731Z",
               "EditorCaption": ""

@@ -36,7 +36,9 @@ namespace GPOffice.SubModes
 
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
             Exiled.Events.Handlers.Player.TogglingNoClip += OnTogglingNoClip;
-            
+
+            Exiled.Events.Handlers.Scp173.Blinking += OnBlinking;
+
             Exiled.Events.Handlers.Scp939.Lunging += OnLunging;
 
             Harmony harmony = new Harmony("HitboxIdentityPatch");
@@ -80,7 +82,7 @@ namespace GPOffice.SubModes
 
             else if (ev.Player.Role.Type == RoleTypeId.Scp173)
             {
-                if (Physics.Raycast(ev.Player.ReferenceHub.PlayerCameraReference.position + ev.Player.ReferenceHub.PlayerCameraReference.forward * 0.2f, ev.Player.ReferenceHub.PlayerCameraReference.forward, out RaycastHit hit, 1.5f, InventorySystem.Items.Firearms.Modules.StandardHitregBase.HitregMask) &&
+                if (Physics.Raycast(ev.Player.ReferenceHub.PlayerCameraReference.position + ev.Player.ReferenceHub.PlayerCameraReference.forward * 0.2f, ev.Player.ReferenceHub.PlayerCameraReference.forward, out RaycastHit hit, 1.2f, InventorySystem.Items.Firearms.Modules.StandardHitregBase.HitregMask) &&
                     hit.collider.TryGetComponent<IDestructible>(out IDestructible destructible))
                 {
                     if (ev.Player.Role is Exiled.API.Features.Roles.Scp173Role scp173)
@@ -92,7 +94,7 @@ namespace GPOffice.SubModes
                             if (ev.Player != player && player.IsScp)
                             {
                                 Hitmarker.SendHitmarkerDirectly(ev.Player.ReferenceHub, 1.2f);
-                                Server.ExecuteCommand($"/cassie SCP-173이(가) {player.Role.Name}의 뒷통수를 쳤습니다.");
+                                Server.ExecuteCommand($"/cassie {ev.Player.Role.Name}이(가) {player.Role.Name}의 뒷통수를 쳤습니다.");
                                 player.Hurt(-1, Exiled.API.Enums.DamageType.Scp173);
                             }
                         }
@@ -134,6 +136,24 @@ namespace GPOffice.SubModes
             }
         }
 
+        public async void OnBlinking(Exiled.Events.EventArgs.Scp173.BlinkingEventArgs ev)
+        {
+            await Task.Delay(20);
+
+            if (Physics.Raycast(ev.Player.ReferenceHub.PlayerCameraReference.position + ev.Player.ReferenceHub.PlayerCameraReference.forward * 0.2f, ev.Player.ReferenceHub.PlayerCameraReference.forward, out RaycastHit hit, 1.5f, InventorySystem.Items.Firearms.Modules.StandardHitregBase.HitregMask) &&
+            hit.collider.TryGetComponent<IDestructible>(out IDestructible destructible))
+            {
+                var player = Player.Get(hit.collider.GetComponentInParent<ReferenceHub>());
+
+                if (ev.Player != player && player.IsScp)
+                {
+                    Hitmarker.SendHitmarkerDirectly(ev.Player.ReferenceHub, 1.5f);
+                    Server.ExecuteCommand($"/cassie {ev.Player.Role.Name}이(가) {player.Role.Name}의 뒷통수를 쳤습니다.");
+                    player.Hurt(-1, Exiled.API.Enums.DamageType.Scp173);
+                }
+            }
+        }
+
         public async void OnLunging(Exiled.Events.EventArgs.Scp939.LungingEventArgs ev)
         {
             for (float i=0; i<0.85f; i += 0.01f)
@@ -146,7 +166,7 @@ namespace GPOffice.SubModes
                     if (ev.Player != player && player.IsScp)
                     {
                         Hitmarker.SendHitmarkerDirectly(ev.Player.ReferenceHub, 1.5f);
-                        Server.ExecuteCommand($"/cassie SCP-939이(가) {player.Role.Name}의 뒷통수를 쳤습니다.");
+                        Server.ExecuteCommand($"/cassie {ev.Player.Role.Name}이(가) {player.Role.Name}의 뒷통수를 쳤습니다.");
                         player.Hurt(-1, Exiled.API.Enums.DamageType.Scp939);
                     }
                 }
