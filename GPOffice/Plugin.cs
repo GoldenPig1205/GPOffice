@@ -212,7 +212,7 @@ namespace GPOffice
             }
 
             // 선택된 모드의 설명을 모두에게 띄워줍니다.
-            string subModeMessage = IsSubModeEnabled ? $"<size=15><i>⟬<color=#{SubMods[submod].ToString().Split('/')[0]}>{submod}</color>⟭ : {SubMods[submod].ToString().Split('/')[1]}</i></size>" : "";
+            string subModeMessage = IsSubModeEnabled ? $"<size=15><i>〔<color=#{SubMods[submod].ToString().Split('/')[0]}>{submod}</color>〕: {SubMods[submod].ToString().Split('/')[1]}</i></size>" : "";
             Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>\n{subModeMessage}"));
             ServerConsole.AddLog($"다음 모드가 선택되었습니다. [{mod}]", color: ConsoleColor.Blue);
 
@@ -291,7 +291,7 @@ namespace GPOffice
 
             if (Round.IsStarted)
             {
-                string subModeMessage = IsSubModeEnabled ? $"<size=15><i>⟬<color=#{SubMods[submod].ToString().Split('/')[0]}>{submod}</color>⟭ : {SubMods[submod].ToString().Split('/')[1]}</i></size>" : "";
+                string subModeMessage = IsSubModeEnabled ? $"<size=15><i>〔<color=#{SubMods[submod].ToString().Split('/')[0]}>{submod}</color>〕: {SubMods[submod].ToString().Split('/')[1]}</i></size>" : "";
                 ev.Player.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>\n{subModeMessage}");
             }
 
@@ -308,16 +308,17 @@ namespace GPOffice
                 {
                     string[] modeList = modes.Split(',');
                     StringBuilder coloredModes = new StringBuilder();
+                    List<string> coloredSubModes = new List<string>();
 
                     for (int i = 0; i < modeList.Length; i++)
                     {
                         if (i % modeList.Length == colorIndex)
                         {
-                            coloredModes.Append($"<color=yellow>{modeList[i]}</color>");
+                            coloredModes.Append($"<b><color=yellow>{modeList[i]}</color></b>");
                         }
                         else
                         {
-                            coloredModes.Append(modeList[i]);
+                            coloredModes.Append($"<color=#{Mods[modeList[i].Trim()].ToString().Split('/')[0]}>{modeList[i]}</color>");
                         }
 
                         if (i != modeList.Length - 1)
@@ -326,13 +327,18 @@ namespace GPOffice
                         }
                     }
 
+                    foreach (var sm in SubMods.Keys)
+                    {
+                        coloredSubModes.Add($"<color=#{SubMods[sm].ToString().Split('/')[0]}>{sm}</color>");
+                    }
+
                     if (Physics.Raycast(ev.Player.Position, Vector3.down, out RaycastHit hit, 50, (LayerMask)1))
                     {
                         if (hit.transform != null && new List<string>() { "ModeComment", "Red", "BottomCase", "Glass" }.Contains(hit.collider.name))
                         {
                             ev.Player.ShowHint($"<align=left><b>——————————————</b>\n<i>Welcome, {ev.Player.DisplayNickname}!</i>\n" +
                                                 $"GP: {UsersManager.UsersCache[ev.Player.UserId][0]}\n<u>Exp: {UsersManager.UsersCache[ev.Player.UserId][1]}</u>\n" +
-                                                $"<b>——————————————</b></align>\n<align=left><size=15>콘솔(~)에서 [.상점] 명령어를 입력해보세요.</size></align>\n\n<align=left><b>메인 모드 중 하나가 반드시 선택되고 서브 모드가 추가로 등장할 수 있습니다.</b>\n\n<size=25><b>[<color=#FA5858>메인 모드</color>]</b></size>\n<size=20>{coloredModes}</size>\n\n<size=25><b>[<color=#FAAC58>서브 모드</color>]</b></size>\n<size=20>{string.Join(", ", SubMods.Keys)}</size>\n</align>", 0.55f);
+                                                $"<b>——————————————</b></align>\n<align=left><size=15>콘솔(~)에서 [.상점] 명령어를 입력해보세요.</size></align>\n\n<align=left><b>메인 모드 중 하나가 반드시 선택되고 서브 모드가 추가로 등장할 수 있습니다.</b>\n\n<size=25><b>[<color=#FA5858>메인 모드</color>]</b></size>\n<size=20>{coloredModes}</size>\n\n<size=25><b>[<color=#FAAC58>서브 모드</color>]</b></size>\n<size=20>{string.Join(",", coloredSubModes)}</size>\n</align>", 0.55f);
                             colorIndex = (colorIndex + 1) % modeList.Length;
                         }
                         else
