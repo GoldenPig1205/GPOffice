@@ -50,7 +50,7 @@ namespace GPOffice
         {
             {"로켓 런처", "FA8258/무슨 이유로든 피격당하면 승천합니다./RocketLauncher"}, {"뒤통수 얼얼", "F7D358/아군 사격이 가능해집니다./FriendlyFire"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다./SuperStar"}, 
             {"종이 인간", "D8D8D8/종이가 되어라!/PaperHuman"}, {"고스트", "8258FA/시설이 맛 갔습니다./Ghost"}, {"스피드왜건", "F7FE2E/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"},
-            /*{"봄버맨", "한시도 편하게 쉴 수 없을 겁니다./BomberMan"}*/
+            /*{"봄버맨", "한시도 편하게 쉴 수 없을 겁니다./BomberMan"}*/, {"역전 세계", "819FF7/반전된 세계입니다!/ReversedHuman"}
         };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
         {
