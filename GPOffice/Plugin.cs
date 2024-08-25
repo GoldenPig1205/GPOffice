@@ -48,8 +48,8 @@ namespace GPOffice
         };
         public static Dictionary<object, object> SubMods = new Dictionary<object, object>()
         {
-            {"로켓 런처", "무슨 이유로든 피격당하면 승천합니다./RocketLauncher"}, {"뒤통수 얼얼", "아군 사격이 가능해집니다./FriendlyFire"}, {"슈퍼 스타", "모두의 마이크가 공유됩니다./SuperStar"}, 
-            {"종이 인간", "종이가 되어라!/PaperHuman"}, {"고스트", "시설이 맛 갔습니다./Ghost"}, {"스피드왜건", "모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"},
+            {"로켓 런처", "FA8258/무슨 이유로든 피격당하면 승천합니다./RocketLauncher"}, {"뒤통수 얼얼", "F7D358/아군 사격이 가능해집니다./FriendlyFire"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다./SuperStar"}, 
+            {"종이 인간", "D8D8D8/종이가 되어라!/PaperHuman"}, {"고스트", "8258FA/시설이 맛 갔습니다./Ghost"}, {"스피드왜건", "F7FE2E/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"},
             /*{"봄버맨", "한시도 편하게 쉴 수 없을 겁니다./BomberMan"}*/
         };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
@@ -200,7 +200,7 @@ namespace GPOffice
 
             if (UnityEngine.Random.Range(1, 6) == 1 || IsSubModeEnabled)
             {
-                submodeType = Type.GetType($"GPOffice.SubModes.{SubMods[submod].ToString().Split('/')[1].Replace(" ", "")}");
+                submodeType = Type.GetType($"GPOffice.SubModes.{SubMods[submod].ToString().Split('/')[2].Replace(" ", "")}");
                 if (submodeType != null)
                 {
                     var modeInstance = Activator.CreateInstance(submodeType);
@@ -212,7 +212,7 @@ namespace GPOffice
             }
 
             // 선택된 모드의 설명을 모두에게 띄워줍니다.
-            string subModeMessage = IsSubModeEnabled ? $"<size=15><i>서브 모드로 추가되었습니다. [{submod}]</i></size>" : "";
+            string subModeMessage = IsSubModeEnabled ? $"<size=15><i>⟬<color=#{SubMods[submod].ToString().Split('/')[0]}>{submod}</color>⟭ : {SubMods[submod].ToString().Split('/')[1]}</i></size>" : "";
             Player.List.ToList().ForEach(x => x.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>\n{subModeMessage}"));
             ServerConsole.AddLog($"다음 모드가 선택되었습니다. [{mod}]", color: ConsoleColor.Blue);
 
@@ -291,7 +291,7 @@ namespace GPOffice
 
             if (Round.IsStarted)
             {
-                string subModeMessage = IsSubModeEnabled ? $"<size=15><i>서브 모드로 추가되었습니다. [{SubMode}]</i></size>" : "";
+                string subModeMessage = IsSubModeEnabled ? $"<size=15><i>⟬<color=#{SubMods[submod].ToString().Split('/')[0]}>{submod}</color>⟭ : {SubMods[submod].ToString().Split('/')[1]}</i></size>" : "";
                 ev.Player.Broadcast(10, $"<size=30>⌈<color=#{Mods[mod].ToString().Split('/')[0]}><b>{mod}</b></color>⌋</size>\n<size=25>{Mods[mod].ToString().Split('/')[1]}</size>\n{subModeMessage}");
             }
 
