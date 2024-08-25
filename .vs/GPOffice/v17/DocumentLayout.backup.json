@@ -7,7 +7,11 @@
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\main\\bountyhunter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\main\\tripleup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\main\\tripleup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\modes\\main\\bountyhunter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\main\\bountyhunter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -34,16 +38,16 @@
               "Title": "Plugin.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeDocumentMoniker": "GPOffice\\Plugin.cs",
-              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
-              "RelativeToolTip": "GPOffice\\Plugin.cs",
-              "ViewState": "AgIAAP4AAAAAAAAAAADwvxMBAAAxAAAAAAAAAA==",
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs*",
+              "RelativeToolTip": "GPOffice\\Plugin.cs*",
+              "ViewState": "AgIAAB0AAAAAAAAAAADwv9EAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T08:16:04.368Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GPOffice.Commands.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Commands\\GPOffice.Commands.cs",
               "RelativeDocumentMoniker": "GPOffice\\Commands\\GPOffice.Commands.cs",
@@ -55,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Manager.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Extensions\\Manager.cs",
               "RelativeDocumentMoniker": "GPOffice\\Extensions\\Manager.cs",
@@ -67,7 +71,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "BountyHunter.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\BountyHunter.cs",
               "RelativeDocumentMoniker": "GPOffice\\Modes\\Main\\BountyHunter.cs",
@@ -75,7 +79,19 @@
               "RelativeToolTip": "GPOffice\\Modes\\Main\\BountyHunter.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAIwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T05:35:20.372Z",
+              "WhenOpened": "2024-08-24T05:35:20.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TripleUp.cs",
+              "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\TripleUp.cs",
+              "RelativeDocumentMoniker": "GPOffice\\Modes\\Main\\TripleUp.cs",
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\TripleUp.cs*",
+              "RelativeToolTip": "GPOffice\\Modes\\Main\\TripleUp.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T13:49:56.562Z",
               "EditorCaption": ""
             }
           ]
