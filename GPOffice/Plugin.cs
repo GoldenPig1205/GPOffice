@@ -49,7 +49,7 @@ namespace GPOffice
         public static Dictionary<object, object> SubMods = new Dictionary<object, object>()
         {
             {"로켓 런처", "FA8258/무슨 이유로든 피격당하면 승천합니다./RocketLauncher"}, {"뒤통수 얼얼", "F7D358/아군 사격이 가능해집니다./FriendlyFire"}, {"슈퍼 스타", "FE2EF7/모두의 마이크가 공유됩니다./SuperStar"}, 
-            {"종이 인간", "D8D8D8/종이가 되어라!/PaperHuman"}, {"고스트", "8258FA/시설이 맛 갔습니다./Ghost"}, {"스피드왜건", "F7FE2E/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"},
+            {"종이 인간", "D8D8D8/종이가 되어라!/PaperHuman"}, {"고스트", "8258FA/시설이 맛 갔습니다./Ghost"}, {"스피드왜건", "F7FE2E/모두의 속도가 최대값으로 올라가는 대신에\n최대 체력이 4분의 1이 됩니다!/SpeedWagon"}
             /*{"봄버맨", "한시도 편하게 쉴 수 없을 겁니다./BomberMan"}*/, {"역전 세계", "819FF7/반전된 세계입니다!/ReversedHuman"}
         };
         public Dictionary<string, List<Vector3>> Maps = new Dictionary<string, List<Vector3>>()
@@ -338,12 +338,12 @@ namespace GPOffice
                         {
                             ev.Player.ShowHint($"<align=left><b>——————————————</b>\n<i>Welcome, {ev.Player.DisplayNickname}!</i>\n" +
                                                 $"GP: {UsersManager.UsersCache[ev.Player.UserId][0]}\n<u>Exp: {UsersManager.UsersCache[ev.Player.UserId][1]}</u>\n" +
-                                                $"<b>——————————————</b></align>\n<align=left><size=15>콘솔(~)에서 [.상점] 명령어를 입력해보세요.</size></align>\n\n<align=left><b>메인 모드 중 하나가 반드시 선택되고 서브 모드가 추가로 등장할 수 있습니다.</b>\n\n<size=25><b>[<color=#FA5858>메인 모드</color>]</b></size>\n<size=20>{coloredModes}</size>\n\n<size=25><b>[<color=#FAAC58>서브 모드</color>]</b></size>\n<size=20>{string.Join(",", coloredSubModes)}</size>\n</align>", 0.55f);
+                                                $"<b>——————————————</b></align>\n<align=left><size=15>콘솔(~)에서 [.상점] 명령어를 입력해보세요.</size></align>\n\n<align=left><b>메인 모드 중 하나가 반드시 선택되고 서브 모드가 추가로 등장할 수 있습니다.</b>\n\n<size=25><b>[<color=#FA5858>메인 모드</color>]</b></size>\n<size=20>{coloredModes}</size>\n\n<size=25><b>[<color=#FAAC58>서브 모드</color>]</b></size>\n<size=20>{string.Join(",", coloredSubModes)}</size>\n</align>", 1f);
                             colorIndex = (colorIndex + 1) % modeList.Length;
                         }
                         else
                         {
-                            ev.Player.ShowHint($"\n<b><b><i><color=#FFFF00>G</color><color=#FAFA00>o</color><color=#F5F500>l</color><color=#F0F000>d</color><color=#EBEB00>e</color><color=#E6E600>n</color><color=#E1E100>P</color><color=#DCDC00>i</color><color=#D8D800>g</color><color=#D3D300>1</color><color=#CECE00>2</color><color=#C9C900>0</color><color=#C4C400>5</color><color=#BFBF00>'</color><color=#BABA00>s</color> <color=#B1B100>O</color><color=#ACAC00>f</color><color=#A7A700>f</color><color=#A2A200>i</color><color=#9D9D00>c</color><color=#989800>e</color></i></b>에 오신 것을 환영합니다!<b>", 0.55f);
+                            ev.Player.ShowHint($"\n<b><b><i><color=#FFFF00>G</color><color=#FAFA00>o</color><color=#F5F500>l</color><color=#F0F000>d</color><color=#EBEB00>e</color><color=#E6E600>n</color><color=#E1E100>P</color><color=#DCDC00>i</color><color=#D8D800>g</color><color=#D3D300>1</color><color=#CECE00>2</color><color=#C9C900>0</color><color=#C4C400>5</color><color=#BFBF00>'</color><color=#BABA00>s</color> <color=#B1B100>O</color><color=#ACAC00>f</color><color=#A7A700>f</color><color=#A2A200>i</color><color=#9D9D00>c</color><color=#989800>e</color></i></b>에 오신 것을 환영합니다!<b>", 1f);
                         }
                     }
 
