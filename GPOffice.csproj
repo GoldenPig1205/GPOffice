@@ -178,6 +178,7 @@
     <Compile Include="GPOffice\Modes\Main\AmongUs.cs" />
     <Compile Include="GPOffice\Modes\Main\GGClub.cs" />
     <Compile Include="GPOffice\Modes\Main\HideAndSeek.cs" />
+    <Compile Include="GPOffice\Modes\Main\Juggernaut.cs" />
     <Compile Include="GPOffice\Modes\Main\PetShop.cs" />
     <Compile Include="GPOffice\Modes\Main\RedLightGreenLight.cs" />
     <Compile Include="GPOffice\Modes\Main\Relay.cs" />
