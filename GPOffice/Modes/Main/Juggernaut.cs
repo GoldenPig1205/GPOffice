@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CustomRendering;
 using Exiled.API.Features;
 using MEC;
@@ -18,6 +19,9 @@ namespace GPOffice.Modes
 
         public void OnEnabled()
         {
+            Server.FriendlyFire = true;
+            Round.IsLocked = true;
+
             Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.SearchingPickup += OnSearchingPickup;
@@ -39,10 +43,31 @@ namespace GPOffice.Modes
             juggernaut.Health = juggernaut.MaxHealth;
             juggernaut.EnableEffect(Exiled.API.Enums.EffectType.SinkHole);
             juggernaut.Broadcast(10, "<b><size=30>당신은 <color=#298A08>저거너트</color>입니다.</size></b>\n<size=25><i>본인을 제외한 모두를 사살하십시오.</i></size>");
+            // 저거너트 위치
             
             List<ItemType> Items = new List<ItemType>() { ItemType.GunLogicer };
             foreach (var Item in Items)
                 juggernaut.AddItem(Item);
+
+            bool IsEnd = false;
+            while (!IsEnd)
+            {
+                if (juggernaut.IsAlive)
+                {
+                    if (Player.List.Count <= 1)
+                    {
+                        Player.List.ToList().ForEach(x => x.Broadcast(20, "<color=#298A08>저거너트</color>의 승리입니다."));
+                        IsEnd = true;
+                    }
+                }
+                else
+                {
+                    Player.List.ToList().ForEach(x => x.Broadcast(20, "<b>Site-76 구성원</b>들의 승리입니다."));
+                    IsEnd = true;
+                }
+            }
+
+            Round.IsLocked = false;
         }
 
         public void OnSearchingPickup(Exiled.Events.EventArgs.Player.SearchingPickupEventArgs ev)
@@ -79,12 +104,17 @@ namespace GPOffice.Modes
                     {
                         ev.DamageHandler.Damage = ev.DamageHandler.Damage * 3;
                     }
+                    else if (ev.Attacker != juggernaut && ev.Player == juggernaut)
+                    {
+                        if (ev.DamageHandler.Damage == -1 || ev.DamageHandler.Damage > 300)
+                            ev.DamageHandler.Damage = 300;
+                    }   
                 }
                 else
                 {
                     ev.IsAllowed = false;
                 }
             }
-        } 
+        }
     }
 }

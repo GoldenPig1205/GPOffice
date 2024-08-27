@@ -18,7 +18,6 @@ namespace GPOffice.Modes
         public static FreeForAll Instance;
 
         public List<Player> pl = new List<Player>();
-        public string ModeName = Plugin.GetRandomValue(Plugin.Instance.Maps.Keys.ToList()).ToString();
         public List<ItemType> StartupItems = null;
 
         public void OnEnabled()
@@ -26,6 +25,7 @@ namespace GPOffice.Modes
             Server.FriendlyFire = true;
             Round.IsLocked = true;
             Respawn.TimeUntilNextPhase = 10000;
+            Exiled.API.Features.Doors.Door.List.ToList().ForEach(x => x.Lock(1205, Exiled.API.Enums.DoorLockType.Lockdown079));
 
             Timing.RunCoroutine(OnModeStarted());
 
@@ -62,10 +62,7 @@ namespace GPOffice.Modes
         {
             StartupItems = Items();
 
-            Server.ExecuteCommand($"/mp load {ModeName}");
-
             Player.List.ToList().CopyTo(pl);
-
             Player.List.ToList().ForEach(x => Spawned(x));
 
             yield return Timing.WaitForSeconds(180f);
@@ -103,7 +100,7 @@ namespace GPOffice.Modes
             if (player.Role.Type != PlayerRoles.RoleTypeId.NtfSpecialist && pl.Contains(player))
             {
                 player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
-                player.Position = Plugin.GetRandomValue(Plugin.Instance.Maps[ModeName]);
+                player.Position = Plugin.GetRandomValue(Room.List.ToList()).Position;
 
                 player.ClearInventory();
 
