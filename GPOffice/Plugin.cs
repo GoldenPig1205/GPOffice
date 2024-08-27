@@ -176,6 +176,21 @@ namespace GPOffice
 
             Player.List.ToList().ForEach(x => Server.ExecuteCommand($"/speak {x.Id} disable"));
 
+            if (UnityEngine.Random.Range(1, 11) == 1) // 시작 카오스(10%) or 시작 좀비 (1%)
+            {
+                foreach (var player in Player.List.Where(x => x.Role.Type == PlayerRoles.RoleTypeId.FacilityGuard))
+                {
+                    if (UnityEngine.Random.Range(1, 11) == 1)
+                    {
+                        player.Role.Set(PlayerRoles.RoleTypeId.Scp0492);
+                    }
+                    else
+                    {
+                        player.Role.Set(PlayerRoles.RoleTypeId.ChaosRifleman);
+                    }
+                }
+            }
+
             if (UnityEngine.Random.Range(1, 6) == 1 || IsSubModeEnabled)
             {
                 submodeType = Type.GetType($"GPOffice.SubModes.{SubMods[submod].ToString().Split('/')[2].Replace(" ", "")}");
@@ -292,7 +307,7 @@ namespace GPOffice
                     {
                         if (i % modeList.Length == colorIndex)
                         {
-                            coloredModes.Append($"<b><color=yellow>{modeList[i]}</color></b>");
+                            coloredModes.Append($"<b>{modeList[i]}</b>");
                         }
                         else
                         {
@@ -344,7 +359,7 @@ namespace GPOffice
 
             if (ev.Player.IsScp && ev.Reason == Exiled.API.Enums.SpawnReason.RoundStart)
             {
-                if (UnityEngine.Random.Range(1, 8) == 1)
+                if (UnityEngine.Random.Range(1, 14) == 1)
                     ev.Player.Role.Set(PlayerRoles.RoleTypeId.Scp3114);
             }
         }

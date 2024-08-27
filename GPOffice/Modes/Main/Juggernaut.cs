@@ -9,6 +9,8 @@ using Exiled.API.Features;
 using MEC;
 using Mirror;
 using UnityEngine;
+using Exiled.API.Features.Items;
+using System.Runtime.InteropServices;
 
 namespace GPOffice.Modes
 {
@@ -33,9 +35,9 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
-            yield return Timing.WaitForSeconds(1f);
+            yield return Timing.WaitForSeconds(10);
 
-            Player juggernaut = Plugin.GetRandomValue(Player.List.ToList());
+            juggernaut = Plugin.GetRandomValue(Player.List.ToList());
 
             juggernaut.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
             juggernaut.Scale = new Vector3(1.5f, 1.15f, 1.2f);
@@ -43,7 +45,7 @@ namespace GPOffice.Modes
             juggernaut.Health = juggernaut.MaxHealth;
             juggernaut.EnableEffect(Exiled.API.Enums.EffectType.SinkHole);
             juggernaut.Broadcast(10, "<b><size=30>당신은 <color=#298A08>저거너트</color>입니다.</size></b>\n<size=25><i>본인을 제외한 모두를 사살하십시오.</i></size>");
-            // 저거너트 위치
+            juggernaut.Position = new Vector3(123.8387f, 988.7921f, 25.39412f);
             
             List<ItemType> Items = new List<ItemType>() { ItemType.GunLogicer };
             foreach (var Item in Items)
@@ -54,7 +56,7 @@ namespace GPOffice.Modes
             {
                 if (juggernaut.IsAlive)
                 {
-                    if (Player.List.Count <= 1)
+                    if (Player.List.Count() <= 1)
                     {
                         Player.List.ToList().ForEach(x => x.Broadcast(20, "<color=#298A08>저거너트</color>의 승리입니다."));
                         IsEnd = true;
@@ -65,6 +67,8 @@ namespace GPOffice.Modes
                     Player.List.ToList().ForEach(x => x.Broadcast(20, "<b>Site-76 구성원</b>들의 승리입니다."));
                     IsEnd = true;
                 }
+
+                yield return Timing.WaitForSeconds(1f);
             }
 
             Round.IsLocked = false;
@@ -85,13 +89,15 @@ namespace GPOffice.Modes
         public void OnShooting(Exiled.Events.EventArgs.Player.ShootingEventArgs ev)
         {
             if (ev.Player == juggernaut)
-                ev.Player.CurrentItem.As<Exiled.API.Features.Items.Firearm>().Ammo += 250;
+                ev.Player.CurrentItem.As<Firearm>().Ammo = 250;
         }
 
         public void OnChangingItem(Exiled.Events.EventArgs.Player.ChangingItemEventArgs ev)
         {
             if (ev.Player == juggernaut)
-                ev.IsAllowed = false;
+            {
+                ev.Player.CurrentItem = Item.Get(92);
+            }
         }
 
         public void OnHurting(Exiled.Events.EventArgs.Player.HurtingEventArgs ev)
