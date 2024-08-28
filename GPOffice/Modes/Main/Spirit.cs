@@ -28,17 +28,6 @@ namespace GPOffice.Modes
         public IEnumerator<float> OnModeStarted()
         {
             yield return Timing.WaitForSeconds(1f);
-
-            while (true)
-            {
-                foreach (var player in Player.List)
-                {
-                    if (spirits.Contains(player))
-                        player.EnableEffect(Exiled.API.Enums.EffectType.Invisible);
-                }
-
-                yield return Timing.WaitForSeconds(1f);
-            }
         }
 
         public async void OnDied(Exiled.Events.EventArgs.Player.DiedEventArgs ev)
@@ -46,7 +35,6 @@ namespace GPOffice.Modes
             if (spirits.Contains(ev.Player))
             {
                 ev.Player.ShowHint($"성불했습니다..", 3);
-                Server.ExecuteCommand($"/speak {ev.Player.Id} disable");
                 spirits.Remove(ev.Player);
             }
             else
@@ -56,11 +44,18 @@ namespace GPOffice.Modes
                     ev.Player.ShowHint($"{6 - i}초 뒤 영혼 상태에 돌입합니다.", 1.2f);
                     await Task.Delay(1000);
                 }
-
-                Server.ExecuteCommand($"/speak {ev.Player.Id} enable");
                 spirits.Add(ev.Player);
 
                 Server.ExecuteCommand($"/fc {ev.Player.Id} Tutorial 1");
+
+                foreach (Player player in Player.List)
+                {
+                    Server.SendSpawnMessage.Invoke(null, new object[]
+                    {
+                        ev.Player.ReferenceHub.netIdentity,
+                        player.Connection
+                    });
+                }
             }
         }
 
