@@ -12,6 +12,7 @@ namespace GPOffice
     {
         int gp;
         int exp;
+        int won;
     }
 
     public static class FileManager
@@ -53,7 +54,7 @@ namespace GPOffice
             return null;
         }
 
-        public static bool AddUser(string UserId, List<string> UserInfo) // gp, exp
+        public static bool AddUser(string UserId, List<string> UserInfo) // gp, exp, won
         {
             UsersCache[UserId] = UserInfo;
 
@@ -62,7 +63,7 @@ namespace GPOffice
 
         public static void SaveUsers()
         {
-            var text = string.Join("\n", UsersCache.Select(x => $"{x.Key};{x.Value[0]};{x.Value[1]}"));
+            var text = string.Join("\n", UsersCache.Select(x => $"{x.Key};{x.Value[0]};{x.Value[1]};{x.Value[2]}"));
 
             FileManager.WriteFile(UsersFileName, text);
         }
@@ -80,10 +81,10 @@ namespace GPOffice
             {
                 var parts = line.Split(';');
 
-                if (parts.Length != 3)
+                if (parts.Length != 4)
                     continue;
 
-                UsersCache.Add(parts[0], new List<string>() { parts[1], parts[2] });
+                UsersCache.Add(parts[0], new List<string>() { parts[1], parts[2], parts[3] });
             }
         }
     }

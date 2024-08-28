@@ -58,13 +58,13 @@ namespace GPOffice.Modes
                 {
                     if (Player.List.Count() <= 1)
                     {
-                        Player.List.ToList().ForEach(x => x.Broadcast(20, "<color=#298A08>저거너트</color>의 승리입니다."));
+                        Player.List.ToList().ForEach(x => x.Broadcast(20, "<size=25>더 이상 저지할 수 있는 <b>Site-76 구성원</b>이 없습니다.</size>\n<color=#298A08>저거너트</color>의 승리입니다."));
                         IsEnd = true;
                     }
                 }
                 else
                 {
-                    Player.List.ToList().ForEach(x => x.Broadcast(20, "<b>Site-76 구성원</b>들의 승리입니다."));
+                    Player.List.ToList().ForEach(x => x.Broadcast(20, "<size=25><color=#298A08>저거너트</color>가 사망했습니다.</size>\n<b>Site-76 구성원</b>들의 승리입니다."));
                     IsEnd = true;
                 }
 
