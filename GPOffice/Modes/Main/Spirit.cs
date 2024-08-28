@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomRendering;
 using Exiled.API.Features;
+using Exiled.API.Features.Roles;
 using MEC;
 using Mirror;
 using UnityEngine;
@@ -48,14 +49,8 @@ namespace GPOffice.Modes
 
                 Server.ExecuteCommand($"/fc {ev.Player.Id} Tutorial 1");
 
-                foreach (Player player in Player.List)
-                {
-                    Server.SendSpawnMessage.Invoke(null, new object[]
-                    {
-                        ev.Player.ReferenceHub.netIdentity,
-                        player.Connection
-                    });
-                }
+                if (ev.Player.Role is FpcRole fpc)
+                    fpc.IsInvisible = true;
             }
         }
 
