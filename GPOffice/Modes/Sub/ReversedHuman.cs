@@ -24,6 +24,8 @@ namespace GPOffice.SubModes
 
         public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
+            await Task.Delay(100);
+
             ev.Player.Scale = new Vector3(-1f, -1f, -1f);
         }
     }
