@@ -278,7 +278,7 @@ namespace GPOffice
         public async void OnVerified(Exiled.Events.EventArgs.Player.VerifiedEventArgs ev)
         {
             if (!UsersManager.UsersCache.ContainsKey(ev.Player.UserId))
-                UsersManager.AddUser(ev.Player.UserId, new List<string>() { "0", "0" });
+                UsersManager.AddUser(ev.Player.UserId, new List<string>() { "0", "0", "0" });
 
             OnGround.Add(ev.Player, 5);
 
@@ -330,7 +330,7 @@ namespace GPOffice
                         if (hit.transform != null && new List<string>() { "ModeComment", "Red", "BottomCase", "Glass" }.Contains(hit.collider.name))
                         {
                             ev.Player.ShowHint($"<align=left><b>——————————————</b>\n" +
-                                                $"GP: {UsersManager.UsersCache[ev.Player.UserId][0]}\n<u>Exp: {UsersManager.UsersCache[ev.Player.UserId][1]}</u>\nWon(₩): {UsersManager.UsersCache[ev.Player.UserId][2]}" +
+                                                $"GP: {UsersManager.UsersCache[ev.Player.UserId][0]}\n<u>Exp: {UsersManager.UsersCache[ev.Player.UserId][1]}</u>\n<b>Won(₩): {UsersManager.UsersCache[ev.Player.UserId][2]}</b>\n" +
                                                 $"<b>——————————————</b></align>\n<align=left><size=15>콘솔(~)에서 [.상점] 명령어를 입력해보세요.</size></align>\n\n<align=left><b>메인 모드 중 하나가 반드시 선택되고 서브 모드가 추가로 등장할 수 있습니다.</b>\n\n<size=25><b>[<color=#FA5858>메인 모드</color>]</b></size>\n<size=20>{coloredModes}</size>\n\n<size=25><b>[<color=#FAAC58>서브 모드</color>]</b></size>\n<size=20>{string.Join(", ", coloredSubModes)}</size>\n</align>", 1f);
                             colorIndex = (colorIndex + 1) % modeList.Length;
                         }
