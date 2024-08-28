@@ -7,6 +7,7 @@ using CustomPlayerEffects;
 using CustomRendering;
 using Exiled.API.Features;
 using Exiled.API.Features.Roles;
+using MapEditorReborn.API.Features.Objects;
 using MEC;
 using Mirror;
 using PlayerRoles;
@@ -20,7 +21,6 @@ namespace GPOffice.Modes
 
         public List<Player> pl = new List<Player>();
         public Player monster = null;
-        public float invisible = 1f;
 
 
         public void OnEnabled()
@@ -37,6 +37,7 @@ namespace GPOffice.Modes
             Timing.RunCoroutine(OnModeStarted());
 
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
+            Exiled.Events.Handlers.Player.Jumping += OnJumping;
         }
 
         public async Task Timer()
@@ -75,6 +76,9 @@ namespace GPOffice.Modes
                     monster.Health = health;
                     monster.IsUsingStamina = false;
 
+                    if (monster.Role is FpcRole fpc)
+                        fpc.IsInvisible = true;
+
                     foreach (var player in Player.List)
                     {
                         if (player != monster)
@@ -94,16 +98,11 @@ namespace GPOffice.Modes
 
             while (true)
             {
-                if (invisible > 0)
+                foreach (var obj in MapEditorReborn.API.API.SpawnedObjects)
                 {
-                    invisible -= 0.1f;
-
-                    monster.DisableEffect(Exiled.API.Enums.EffectType.Invisible);
+                    if (obj.name == "CustomSchematic-MonsterCapsule")
+                        obj.Position = monster.Position;
                 }
-
-                else
-                    monster.EnableEffect(Exiled.API.Enums.EffectType.Invisible);
-
                 yield return Timing.WaitForSeconds(0.1f);
             }
         }
@@ -111,12 +110,25 @@ namespace GPOffice.Modes
         public void OnHurting(Exiled.Events.EventArgs.Player.HurtingEventArgs ev)
         {
             if (ev.Player == monster || ev.Attacker == monster)
-            {
-                invisible = 1f;
                 monster.HumeShield = 0;
-            }
+
             if (ev.Attacker.IsScp && ev.DamageHandler.Type != Exiled.API.Enums.DamageType.Strangled)
                 ev.DamageHandler.Damage += 15;
+        }
+
+        public async void OnJumping(Exiled.Events.EventArgs.Player.JumpingEventArgs ev)
+        {
+            if (ev.Player == monster)
+            {
+                for (int i=1; i<11; i++)
+                {
+                    if (Physics.Raycast(monster.Position, Vector3.up, out RaycastHit hit, 1, (LayerMask)1))
+                        break;
+
+                    ev.Player.Position += new Vector3(0, 0.3f, 0);
+                    await Task.Delay(10);
+                }
+            }
         }
     }
 }
