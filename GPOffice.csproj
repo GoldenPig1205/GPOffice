@@ -184,6 +184,7 @@
     <Compile Include="GPOffice\Modes\Main\Relay.cs" />
     <Compile Include="GPOffice\Modes\Main\ScpA.cs" />
     <Compile Include="GPOffice\Modes\Main\SoulMate.cs" />
+    <Compile Include="GPOffice\Modes\Main\TroubleinTerroristTown.cs" />
     <Compile Include="GPOffice\Modes\Sub\ReversedHuman.cs" />
     <Compile Include="GPOffice\Plugin.cs" />
     <Compile Include="GPOffice\Modes\Main\ABattle.cs" />
