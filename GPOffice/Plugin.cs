@@ -94,7 +94,7 @@ namespace GPOffice
 
             Exiled.Events.Handlers.Warhead.Stopping += OnStopping;
 
-            Exiled.Events.Handlers.Scp330.EatingScp330 += OnEatingScp330;
+            Exiled.Events.Handlers.Scp330.InteractingScp330 += OnInteractingScp330;
         }
 
         public override void OnDisabled()
@@ -112,7 +112,7 @@ namespace GPOffice
 
             Exiled.Events.Handlers.Warhead.Stopping -= OnStopping;
 
-            Exiled.Events.Handlers.Scp330.EatingScp330 -= OnEatingScp330;
+            Exiled.Events.Handlers.Scp330.InteractingScp330 -= OnInteractingScp330;
 
             Instance = null;
         }
@@ -396,9 +396,9 @@ namespace GPOffice
                 ev.IsAllowed = false;
         }
 
-        public void OnEatingScp330(Exiled.Events.EventArgs.Scp330.EatingScp330EventArgs ev)
+        public void OnInteractingScp330(Exiled.Events.EventArgs.Scp330.InteractingScp330EventArgs ev)
         {
-            if (UnityEngine.Random.Range(1, 8) == 1)
+            if (UnityEngine.Random.Range(1, 14) == 1)
             {
                 ev.IsAllowed = false;
                 ev.Player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Pink);
