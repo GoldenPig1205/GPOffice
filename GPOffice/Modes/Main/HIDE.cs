@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomPlayerEffects;
 using CustomRendering;
+using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.API.Features.Roles;
 using MapEditorReborn.API.Features.Objects;
