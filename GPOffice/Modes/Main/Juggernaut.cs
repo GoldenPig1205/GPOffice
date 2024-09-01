@@ -29,7 +29,6 @@ namespace GPOffice.Modes
             Exiled.Events.Handlers.Player.SearchingPickup += OnSearchingPickup;
             Exiled.Events.Handlers.Player.DroppingItem += OnDroppingItem;
             Exiled.Events.Handlers.Player.Shooting += OnShooting;
-            Exiled.Events.Handlers.Player.ChangingItem += OnChangingItem;
             Exiled.Events.Handlers.Player.Hurting += OnHurting;
         }
 
@@ -40,11 +39,12 @@ namespace GPOffice.Modes
             juggernaut = Plugin.GetRandomValue(Player.List.ToList());
 
             juggernaut.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
-            juggernaut.Scale = new Vector3(1.5f, 1.05f, 1.2f);
+            juggernaut.Scale = new Vector3(1.2f, 1.2f, 1.2f);
             juggernaut.MaxHealth = 200 * (Player.List.Count() - 1);
             juggernaut.Health = juggernaut.MaxHealth;
             juggernaut.IsBypassModeEnabled = true; 
             juggernaut.EnableEffect(Exiled.API.Enums.EffectType.SinkHole);
+            juggernaut.EnableEffect(Exiled.API.Enums.EffectType.DamageReduction, 10);
             juggernaut.Broadcast(10, "<b><size=30>당신은 <color=#298A08>저거너트</color>입니다.</size></b>\n<size=25><i>본인을 제외한 모두를 사살하십시오.</i></size>");
             juggernaut.Position = new Vector3(123.8387f, 988.7921f, 25.39412f);
             
@@ -92,15 +92,6 @@ namespace GPOffice.Modes
             if (ev.Player == juggernaut)
                 ev.Player.CurrentItem.As<Firearm>().Ammo = 250;
         }
-
-        public void OnChangingItem(Exiled.Events.EventArgs.Player.ChangingItemEventArgs ev)
-        {
-            if (ev.Player == juggernaut)
-            {
-                ev.Player.CurrentItem = Item.Get(92);
-            }
-        }
-
         public void OnHurting(Exiled.Events.EventArgs.Player.HurtingEventArgs ev)
         {
             if (ev.Attacker != null)
