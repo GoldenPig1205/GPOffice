@@ -71,7 +71,7 @@ namespace GPOffice.Modes
                     monster.Position = new Vector3(-15.84375f, 1001.957f, 49.89063f);
                     Server.ExecuteCommand($"/open ESCAPE_PRIMARY");
 
-                    float health = 150 * Player.List.Count + 50 * Player.List.Count;
+                    float health = 100 * Player.List.Count + 20 * Player.List.Count;
                     monster.MaxHealth = health;
                     monster.Health = health;
                     monster.IsUsingStamina = false;
