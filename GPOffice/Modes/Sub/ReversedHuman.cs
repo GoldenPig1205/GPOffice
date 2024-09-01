@@ -22,7 +22,7 @@ namespace GPOffice.SubModes
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
         }
 
-        public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
+        public async void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
             await Task.Delay(100);
 

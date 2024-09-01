@@ -40,9 +40,10 @@ namespace GPOffice.Modes
             juggernaut = Plugin.GetRandomValue(Player.List.ToList());
 
             juggernaut.Role.Set(PlayerRoles.RoleTypeId.Tutorial);
-            juggernaut.Scale = new Vector3(1.5f, 1.15f, 1.2f);
+            juggernaut.Scale = new Vector3(1.5f, 1.05f, 1.2f);
             juggernaut.MaxHealth = 200 * (Player.List.Count() - 1);
             juggernaut.Health = juggernaut.MaxHealth;
+            juggernaut.IsBypassModeEnabled = true; 
             juggernaut.EnableEffect(Exiled.API.Enums.EffectType.SinkHole);
             juggernaut.Broadcast(10, "<b><size=30>당신은 <color=#298A08>저거너트</color>입니다.</size></b>\n<size=25><i>본인을 제외한 모두를 사살하십시오.</i></size>");
             juggernaut.Position = new Vector3(123.8387f, 988.7921f, 25.39412f);

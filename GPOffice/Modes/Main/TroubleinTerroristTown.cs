@@ -9,7 +9,7 @@ using Exiled.API.Features;
 using Exiled.API.Features.Roles;
 using Exiled.API.Features.Doors;
 using MapEditorReborn.API.Features.Objects;
-using MEC;위협하는
+using MEC;
 using Mirror;
 using PlayerRoles;
 using UnityEngine;
@@ -83,6 +83,8 @@ namespace GPOffice.Modes
 
         public IEnumerator<float> OnModeStarted()
         {
+            yield return 0f;
+
             foreach (var Elevator in ElevatorDoor.List)
                 Elevator.Lock(1205, Exiled.API.Enums.DoorLockType.Lockdown079);
 
