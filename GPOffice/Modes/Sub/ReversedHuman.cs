@@ -20,13 +20,19 @@ namespace GPOffice.SubModes
         public void OnEnabled()
         {
             Exiled.Events.Handlers.Player.Spawned += OnSpawned;
+
+            foreach (var player in Player.List)
+                Spawned(player);
         }
 
-        public async void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
+        public void OnSpawned(Exiled.Events.EventArgs.Player.SpawnedEventArgs ev)
         {
-            await Task.Delay(100);
+            Spawned(ev.Player);
+        }
 
-            ev.Player.Scale = new Vector3(-1f, -1f, -1f);
+        public void Spawned(Player player)
+        {
+            player.Scale = new Vector3(-1f, -1f, -1f);
         }
     }
 }

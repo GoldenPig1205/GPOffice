@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomRendering;
 using Exiled.API.Features;
+using Exiled.API.Features.Doors;
 using HarmonyLib;
 using MEC;
 using Mirror;
@@ -19,13 +20,14 @@ namespace GPOffice.Modes
 
         public List<Player> pl = new List<Player>();
         public List<ItemType> StartupItems = null;
+        public Door door = Plugin.GetRandomValue(Door.List.ToList());
 
         public void OnEnabled()
         {
             Server.FriendlyFire = true;
             Round.IsLocked = true;
             Respawn.TimeUntilNextPhase = 10000;
-            Exiled.API.Features.Doors.Door.List.ToList().ForEach(x => x.Lock(1205, Exiled.API.Enums.DoorLockType.Lockdown079));
+            Door.List.ToList().ForEach(x => x.Lock(1205, Exiled.API.Enums.DoorLockType.Lockdown079));
 
             Timing.RunCoroutine(OnModeStarted());
 
@@ -100,7 +102,7 @@ namespace GPOffice.Modes
             if (player.Role.Type != PlayerRoles.RoleTypeId.NtfSpecialist && pl.Contains(player))
             {
                 player.Role.Set(PlayerRoles.RoleTypeId.NtfSpecialist);
-                player.Position = Plugin.GetRandomValue(Room.List.ToList()).Position;
+                player.Position = new Vector3(door.Position.x, door.Position.y + 2, door.Position.z);
 
                 player.ClearInventory();
 
