@@ -91,13 +91,13 @@ namespace GPOffice.Modes
             foreach (var Checkpoint in CheckpointDoor.List)
                 Checkpoint.Lock(1205, Exiled.API.Enums.DoorLockType.Lockdown079);
 
-            foreach (var player in Player.List)
-                player.Position = Plugin.GetRandomValue(Room.List.Where(x => x.Name.Contains("Hcz")).ToList()).Position;
-
             Shuffle(pl);
 
             foreach (var player in pl)
             {
+                RoleTypeId role = Plugin.GetRandomValue(new List<RoleTypeId>() { RoleTypeId.ClassD, RoleTypeId.Scientist, RoleTypeId.FacilityGuard, RoleTypeId.NtfSpecialist, RoleTypeId.ChaosConscript });
+                player.Role.Set(role);
+
                 Door door = Plugin.GetRandomValue(Door.List.Where(x => x.Zone == Exiled.API.Enums.ZoneType.LightContainment && !x.IsPartOfCheckpoint).ToList());
                 player.Position = new Vector3(door.Position.x, door.Position.y + 2, door.Position.z);
 
