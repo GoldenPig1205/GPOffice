@@ -98,6 +98,15 @@ namespace GPOffice.Modes
 
             foreach (var player in pl)
             {
+                Door door = Plugin.GetRandomValue(Door.List.Where(x => x.Zone == Exiled.API.Enums.ZoneType.LightContainment && !x.IsPartOfCheckpoint).ToList());
+                player.Position = new Vector3(door.Position.x, door.Position.y + 2, door.Position.z);
+
+                List<ItemType> DefaultItem = new List<ItemType>() {
+                    Plugin.GetRandomValue(new List<ItemType>() { ItemType.GunA7, ItemType.GunFSP9, ItemType.GunE11SR, ItemType.GunCrossvec, ItemType.GunAK, ItemType.GunShotgun }),
+                    Plugin.GetRandomValue(new List<ItemType>() { ItemType.GunCom45, ItemType.GunCOM18, ItemType.GunCOM15 }),
+                    ItemType.Medkit, ItemType.Painkillers
+                };
+
                 string Role = Queue[pl.IndexOf(player)];
                 string RoleColor = Roles[Role].Split('/')[0];
                 string RoleDescription = Roles[Role].Split('/')[1];
@@ -108,7 +117,24 @@ namespace GPOffice.Modes
                 player.ShowHint($"<size=30>당신은 <color={RoleColor}>{Role}</color>입니다.</size>\n<i><size=25>{RoleDescription}</size></i>");
 
                 if (CoolInnocentRoles.Contains(Role))
+                {
                     player.Group = new UserGroup { BadgeText = Role, BadgeColor = RoleColor };
+                }
+
+                if (Role == "탐정")
+                    DefaultItem.Add(ItemType.GunFRMG0);
+                else if (Role == "경찰")
+                    DefaultItem.Add(ItemType.Flashlight);
+                else if (Role == "형사")
+                    DefaultItem.Add(ItemType.ArmorLight);
+                else if (Role == "배신자")
+                {
+                    DefaultItem.Add(ItemType.SCP207);
+                    DefaultItem.Add(ItemType.SCP1853);
+                }
+
+                foreach (var Item in DefaultItem)
+                    player.AddItem(Item);
             }
         }
 
@@ -121,7 +147,7 @@ namespace GPOffice.Modes
             ev.Player.Group = new UserGroup { BadgeText=Role, BadgeColor=RoleColor };
         }
 
-        public async void IsRoundEnd()
+        public async void OnRoundEnd()
         {
             while (true)
             {
