@@ -72,6 +72,7 @@ namespace GPOffice.Modes
                 yield return Timing.WaitForSeconds(1f);
             }
 
+            Player.List.ToList().ForEach(x => x.Role.Set(PlayerRoles.RoleTypeId.Tutorial, PlayerRoles.RoleSpawnFlags.All));
             Round.IsLocked = false;
         }
 
