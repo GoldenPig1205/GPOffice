@@ -104,7 +104,7 @@ namespace GPOffice.Modes
                     if (obj.name == "CustomSchematic-MonsterCapsule")
                         obj.Position = monster.Position;
                 }
-                yield return Timing.WaitForSeconds(0.1f);
+                yield return Timing.WaitForSeconds(0.01f);
             }
         }
 

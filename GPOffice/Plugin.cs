@@ -172,7 +172,8 @@ namespace GPOffice
 
         public async void OnRoundStarted()
         {
-            Server.ExecuteCommand($"/mp load Sky");
+            List<string> RandomMap = new List<string>() { "Sky" };
+            MapEditorReborn.API.Features.ObjectSpawner.SpawnSchematic($"{GetRandomValue(RandomMap)}", new Vector3(0, 1000, 0), isStatic: true);
 
             Player.List.ToList().ForEach(x => Server.ExecuteCommand($"/speak {x.Id} disable"));
 
