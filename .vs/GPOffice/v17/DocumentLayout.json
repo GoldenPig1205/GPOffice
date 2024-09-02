@@ -38,9 +38,15 @@
               "Title": "Juggernaut.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\Juggernaut.cs",
               "RelativeDocumentMoniker": "GPOffice\\Modes\\Main\\Juggernaut.cs",
+<<<<<<< Updated upstream
               "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\Juggernaut.cs*",
               "RelativeToolTip": "GPOffice\\Modes\\Main\\Juggernaut.cs*",
               "ViewState": "AgIAACQAAAAAAAAAAAAIwEgAAAANAAAAAAAAAA==",
+=======
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\Juggernaut.cs",
+              "RelativeToolTip": "GPOffice\\Modes\\Main\\Juggernaut.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAIwD4AAAAlAAAAAAAAAA==",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-02T12:32:35.328Z",
               "EditorCaption": ""

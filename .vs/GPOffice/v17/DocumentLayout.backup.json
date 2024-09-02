@@ -67,12 +67,21 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< Updated upstream
               "Title": "TroubleinTerroristTown.cs",
               "DocumentMoniker": "C:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\TroubleinTerroristTown.cs",
               "RelativeDocumentMoniker": "GPOffice\\Modes\\Main\\TroubleinTerroristTown.cs",
               "ToolTip": "C:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\TroubleinTerroristTown.cs",
               "RelativeToolTip": "GPOffice\\Modes\\Main\\TroubleinTerroristTown.cs",
               "ViewState": "AgIAAG8AAAAAAAAAAADwv4gAAAApAAAAAAAAAA==",
+=======
+              "Title": "HIDE.cs",
+              "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\HIDE.cs",
+              "RelativeDocumentMoniker": "GPOffice\\Modes\\Main\\HIDE.cs",
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\HIDE.cs",
+              "RelativeToolTip": "GPOffice\\Modes\\Main\\HIDE.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAQwGgAAAAvAAAAAAAAAA==",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-02T01:50:33.663Z",
               "EditorCaption": ""
