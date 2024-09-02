@@ -44,7 +44,7 @@ namespace GPOffice
             /*{"스즈메의 문단속", "00FFFF/문 너머 다른 차원./DoorLock"},*/ /*{"프리즌 라이프", "FFBF00/5분 동안 교도소 생활을 즐겨보세요./PrisonLife"},*/ {"미니 게임", "6E6E6E/미니 게임 중 하나가 랜덤으로 선택됩니다. 총 3개의 라운드로 진행됩니다./MiniGames"},
             {"빨간 불 / 초록 불", "D7DF01/빨간 불일때는 절대로 움직이지 마세요, 고개도요!/RedLightGreenLight"}, {"소울메이트", "FF00FF/단짝이 죽으면 자신도 죽습니다.\n위치 정보가 실시간으로 전송됩니다./SoulMate"},
             {"펫숍", "CC2EFA/누군가를 사살하여 자신의 펫으로 만드세요!/PetShop"}, {"모드 릴레이", "CEF6EC/2분마다 모드가 추가됩니다./Relay"}, /*{"숨바꼭질", "E6F8E0/꼭꼭 숨으세요! 사냥개가 당신을 찾을 것입니다. 제한 시간동안 버티세요!/HideAndSeek"},*/
-            {"GG 클럽", "C8FE2E/빠르게 황금색 플랫폼을 사수하세요!/GGClub"}, {"저거너트", "8A0808/저거너트가 모두를 죽이기 전에 힘을 합쳐 저거너트를 잡아내세요!/Juggernaut"}
+            {"GG 클럽", "C8FE2E/빠르게 황금색 플랫폼을 사수하세요!/GGClub"}, {"저거너트", "8A0808/저거너트가 모두를 죽이기 전에 힘을 합쳐 저거너트를 잡아내세요!/Juggernaut"}, {"테러리스트 타운의 갈등", "FE9A2E/배신자를 색출해내세요!/TroubleinTerroristTown"}
         };
         public static Dictionary<object, object> SubMods = new Dictionary<object, object>()
         {
