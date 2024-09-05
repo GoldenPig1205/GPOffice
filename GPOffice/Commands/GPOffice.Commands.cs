@@ -9,7 +9,6 @@ using Discord;
 using Exiled.API.Features;
 using MEC;
 using UnityEngine;
-using static PlayerList;
 
 namespace GPOffice.Commands
 {
