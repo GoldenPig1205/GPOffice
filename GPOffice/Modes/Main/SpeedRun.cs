@@ -21,7 +21,6 @@ namespace GPOffice.Modes
         public void OnEnabled()
         {
             Round.IsLocked = true;
-            Server.FriendlyFire = true;
 
             Timing.RunCoroutine(OnModeStarted());
 

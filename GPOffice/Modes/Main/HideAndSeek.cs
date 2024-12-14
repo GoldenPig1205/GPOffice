@@ -38,12 +38,12 @@ namespace GPOffice.Modes
                 player.Position = new Vector3(40.46484f, -1013.662f, 140.2266f);
             }
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < 11; i++)
             {
                 foreach (var player in Player.List)
                 {
                     player.ClearBroadcasts();
-                    player.Broadcast(2, $"<size=25><b><color=red>{10 - i}초 뒤 술래가 출몰합니다.</color></b></size>");
+                    player.Broadcast(2, $"<size=25><b><color=red>{11 - i}초 뒤 술래가 출몰합니다.</color></b></size>");
                 }
 
                 yield return Timing.WaitForSeconds(1f);

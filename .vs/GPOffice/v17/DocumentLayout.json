@@ -3,11 +3,15 @@
   "WorkspaceRootPath": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\modes\\main\\minigames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\modes\\main\\minigames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|d:\\goldenpig1205\\visual studio 2022\\gpoffice\\gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07414A0B-A0D8-4086-A721-3CC5D46973B9}|GPOffice.csproj|solutionrelative:gpoffice\\commands\\gpoffice.commands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,33 +22,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MiniGames.cs",
+              "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\MiniGames.cs",
+              "RelativeDocumentMoniker": "GPOffice\\Modes\\Main\\MiniGames.cs",
+              "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Modes\\Main\\MiniGames.cs",
+              "RelativeToolTip": "GPOffice\\Modes\\Main\\MiniGames.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAYwFkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T13:59:42.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Plugin.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeDocumentMoniker": "GPOffice\\Plugin.cs",
               "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Plugin.cs",
               "RelativeToolTip": "GPOffice\\Plugin.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAAB0AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAC0AAAClAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T08:16:04.368Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "GPOffice.Commands.cs",
               "DocumentMoniker": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Commands\\GPOffice.Commands.cs",
               "RelativeDocumentMoniker": "GPOffice\\Commands\\GPOffice.Commands.cs",
               "ToolTip": "D:\\GoldenPig1205\\Visual Studio 2022\\GPOffice\\GPOffice\\Commands\\GPOffice.Commands.cs",
               "RelativeToolTip": "GPOffice\\Commands\\GPOffice.Commands.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAgwBoAAABRAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwBoAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T14:17:42.354Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-04T14:17:42.354Z"
             }
           ]
         }

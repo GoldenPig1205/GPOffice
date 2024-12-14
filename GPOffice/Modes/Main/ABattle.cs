@@ -39,7 +39,7 @@ namespace GPOffice.Modes
 
         public Dictionary<string, string> CommonAbilities = new Dictionary<string, string>()
         {
-            {"[일반] 운동", "25HP만큼 최대 체력을 추가합니다."},
+            {"[일반] 운동", "25%만큼 최대 체력을 추가합니다."},
             {"[일반] 경공", "이동 속도가 25% 증가합니다."},
             {"[일반] 진화", "몸의 크기가 12% 작아집니다."},
             {"[일반] 단련", "공격력이 20% 추가됩니다."},
@@ -227,7 +227,7 @@ namespace GPOffice.Modes
 
             switch (aT)
             {
-                case "운동": player.MaxHealth += 25; player.Health += 25; break;
+                case "운동": player.MaxHealth = player.MaxHealth * 125/100; player.Health = player.MaxHealth; break;
                 case "경공": player.GetEffect(Exiled.API.Enums.EffectType.MovementBoost).Intensity += 10; break;
                 case "진화": player.Scale = new Vector3(player.Scale.x - 0.12f, player.Scale.y - 0.12f, player.Scale.z - 0.12f); break;
                 case "체력 보충": player.ArtificialHealth += 75; break;

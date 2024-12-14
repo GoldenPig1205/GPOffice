@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomRendering;
 using Exiled.API.Features;
+using Exiled.API.Features.Items;
 using MEC;
 using Mirror;
 using UnityEngine;
@@ -34,14 +35,14 @@ namespace GPOffice.Modes
 
             players.ShuffleList();
 
-            for (int i=0; i<players.Count; i+=2)
+            for (int i = 0; i < players.Count; i += 2)
             {
                 if (i + 1 < players.Count)
                 {
                     soulMates.Add(players[i], players[i + 1]);
                     soulMates.Add(players[i + 1], players[i]);
 
-                    for (int n=i; n<i+2; n++)
+                    for (int n = i; n < i + 2; n++)
                         players[n].ShowHint($"당신의 단짝이 존재하나 누군지 모릅니다..", 5);
                 }
                 else
